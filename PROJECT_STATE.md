@@ -1,22 +1,22 @@
 # PROJECT_STATE
 
 ## CURRENT PHASE
-Sprint 1 — Reproducción científica
+Sprint 2 — DSU-S
 
 ## CURRENT SPRINT
-S1
+S2
 
 ## CURRENT TASK
-S1-T03 — Comparar formalmente la reproducción con el baseline, según ROADMAP.
+S2-T01 — Cerrar la especificación matemática y computacional de DSU-S antes de implementarla.
 
 ## LAST COMPLETED TASK
-S1-T02: PASS. Reproducción PyTorch Fashion-MNIST vANN/dANN-R (D=4, S=128), 25 épocas × 3 trials; 10 tests pasan. Resultados R-002 en `docs/RESULTS.md`. Sprint 1 continúa con S1-T03 y S1-T04.
+S1-T03/S1-T04: PASS. Comparación formal N=5 de vANN/dANN-R y documentación de divergencias en R-003; gate REPRODUCTION_001 = REPRODUCED y gate Sprint 1 = PASS. 10 tests pasan.
 
 ## LAST RESULT
-R-002, N=3 propio: dANN-R test loss 0.358398 ± 0.004885, accuracy 87.237 ± 0.235 %; vANN loss 0.373826 ± 0.002666, accuracy 89.433 ± 0.006 %. La dirección de menor loss dANN-R se observó en las tres seeds; menor diferencia que en el archivo N=5. Máscara con 8192 conexiones de entrada, 512 de cable y 10634 parámetros efectivos; ambos modelos almacenan 468874. JSON locales en `runs/reproduction_001/`. Referencia archivada y límites en `docs/RESULTS.md`.
+R-003, N=5 propio: dANN-R test loss 0.358606 ± 0.003586, accuracy 87.216 ± 0.187 %; vANN loss 0.374481 ± 0.014621, accuracy 89.322 ± 0.180 %. Deltas pareados dANN-R − vANN: loss −0.015874 ± 0.014078, accuracy −2.106 ± 0.211 puntos porcentuales. Seed 4 invierte la dirección de loss individual. dANN-R tiene 10634 parámetros efectivos frente a 468874 de vANN, pero ambos almacenan 468874. JSON locales y resumen N=5 en `runs/reproduction_001/`; detalles y referencia oficial en `docs/RESULTS.md`.
 
 ## CURRENT BEST MODEL
-No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija se evaluó en época 25.
+No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija se evaluó en época 25. DSU-S aún no está especificada ni implementada.
 
 ## CURRENT BASELINE
 Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Para reproducción Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros. Hardware de R-002: AMD Ryzen 5 5600G, Windows 11, CPU float32, PyTorch 2.14.1+cpu. La pareja tiene la misma anchura oculta, no igual presupuesto de conexiones efectivas.
@@ -43,15 +43,15 @@ Una unidad con agregación dendrítica estructurada puede alcanzar calidad compa
 - RAM pico de CPU no medida; la interfaz deja el campo en null.
 - Los experimentos de cierre usan subconjuntos pequeños y no demuestran calidad final ni comparabilidad estadística.
 - La latencia CPU mostró variación entre procesos; no usarla como comparación de rendimiento entre arquitecturas.
-- R-002 N=3 difiere numéricamente del archivo Keras N=5; inicialización, shuffle y detalles de Adam no son bit a bit equivalentes. La pérdida mantiene la dirección esperada.
-- El tiempo de entrenamiento de R-002 incluye validación por época; `samples_per_second` divide muestras train por ese tiempo combinado. No se guardan pesos de checkpoints, sólo métricas y selección `final_epoch_25`.
+- R-003 N=5 difiere numéricamente del archivo Keras N=5; inicialización, shuffle y detalles de Adam no son bit a bit equivalentes. La pérdida media mantiene la dirección esperada, con inversión individual en seed 4. La pequeña DE inicial de accuracy vANN no provino de redondeo prematuro; N=5 presenta mayor dispersión.
+- El tiempo de entrenamiento de R-002/R-003 incluye validación por época; `samples_per_second` divide muestras train por ese tiempo combinado. No se guardan pesos de checkpoints, sólo métricas y selección `final_epoch_25`.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S1-T03 — Comparar formalmente R-002 con el baseline/referencia fija y separar calidad, conexiones efectivas, almacenamiento y rendimiento físico. Después S1-T04 documentará divergencias; Sprint 1 todavía no está cerrado.
+S2-T01 — Cerrar la especificación matemática y computacional de DSU-S antes de implementarla. No se inició la implementación.
 
 ## LAST UPDATE
 2026-10-05

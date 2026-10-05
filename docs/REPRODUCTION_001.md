@@ -2,7 +2,7 @@
 
 ## Identificación y alcance
 
-**TASK ID:** S1-T01 (protocolo) y S1-T02 (implementación). **Estado:** S1-T02 PASS con tres trials completos; ver R-002 en `docs/RESULTS.md`.
+**TASK ID:** S1-T01 (protocolo), S1-T02 (implementación), S1-T03 (comparación) y S1-T04 (informe y gate). **Estado:** REPRODUCED para la pareja fija D=4, S=128 con N=5; ver R-003 en `docs/RESULTS.md`.
 
 **Referencia:** Chavlis, S. y Poirazi, P. (2025), “Dendrites endow artificial neural networks with accurate, robust and parameter-efficient learning”, *Nature Communications* 16, 943. [DOI](https://doi.org/10.1038/s41467-025-56297-9), [texto completo](https://pmc.ncbi.nlm.nih.gov/articles/PMC11754790/), [repositorio oficial](https://github.com/Poirazi-Lab/dendritic_anns/tree/fadc3846174bc7a67b284a76b0989ed2cef2767e). Código inspeccionado en `fadc3846174bc7a67b284a76b0989ed2cef2767e`; datos en `DATA.zip` de esa revisión. La tabla fija de datos permite una comparación numérica concreta, aunque el ZIP no incluye una garantía verificable de la revisión exacta que generó cada ejecución.
 
@@ -94,3 +94,21 @@ El campo `training.duration_seconds` del harness incluye las evaluaciones de val
 ### Auditoría de ejecución N=3
 
 Las seis corridas registradas en `runs/reproduction_001/` tienen 25 filas de historia. Cada pareja usa hashes idénticos de índices train y validation y máscaras distintas entre trials. Las tres máscaras tienen exactamente 8192 conexiones de entrada, 512 de cable y 10634 parámetros efectivos incluyendo sesgos y salida. La pérdida de test de dANN-R es menor en las tres parejas. El resultado cuantitativo completo y las divergencias de referencia están en R-002. El objetivo primario se cumple para N=3, sin afirmar equivalencia estadística con los cinco trials archivados.
+
+## Cierre S1-T03/S1-T04 — N=5
+
+Se ejecutaron **sólo** seeds 4 y 5 con la misma configuración y el mismo comando de S1-T02, cambiando únicamente `--seeds 4 5`. Los seis JSON de seeds 1–3 no se reentrenaron. `runs/reproduction_001/summary_n3.json` conserva el agregado anterior y `summary.json` contiene ahora el agregado N=5 con deltas pareados. Ambos son artefactos locales ignorados por Git. La tabla completa por trial, los agregados y la comparación con la referencia están en R-003 de `docs/RESULTS.md`.
+
+### Auditoría de seeds y precisión
+
+- `seed_everything(seed)` fija `random.seed`, `np.random.seed`, `torch.manual_seed` y CUDA cuando está disponible; estas corridas CPU registran CUDA como `null`. Split y máscara usan sendos `np.random.default_rng(seed)`; el `DataLoader` de train recibe `torch.Generator().manual_seed(seed)` y baraja cada época. La inicialización Glorot usa el generador de PyTorch después de fijar la seed.
+- Prueba directa sin entrenamiento con secuencia **1, 2, 1**: las muestras de Python, NumPy global, `default_rng`, PyTorch, los pesos iniciales de ambos modelos, la máscara y los primeros 12 índices barajados cambiaron entre 1 y 2 y fueron idénticos al repetir 1. Los hashes de pesos iniciales vANN fueron `a1f71a3b5308d16d` y `9e1f0480450ecd1b`; los de máscara, `7472cbf6a53e0d10` y `f4d4c849b2ad2386`. Los primeros 12 índices del DataLoader fueron `[24,78,89,4,15,61,29,94,48,22,56,63]` y `[1,55,90,66,22,2,70,10,86,26,39,33]`.
+- En los diez JSON: cinco hashes distintos de train, cinco de validation y cinco de máscara; los hashes de train/validation coinciden dentro de cada pareja. Cada historia tiene 25 épocas y `final_epoch_25`; split 54000/6000/10000, 25×54000 ejemplos vistos, parámetros y configuración esperados. `test.accuracy` se guarda como cociente de aciertos sobre 10000, sin redondeo previo. En N=3, vANN registró 8943, 8943 y 8944 aciertos: su DE de **0.006 puntos porcentuales** se debe a esos conteos cercanos, no a pérdida de precisión en JSON. Su loss sí varió entre seeds; no se ha determinado una causa adicional de la baja variación de accuracy.
+
+### Gate de reproducción
+
+**REPRODUCED** para esta configuración y el comportamiento cualitativo: arquitectura y protocolo suficientemente fieles, cinco trials completos, rango de rendimiento comparable, dANN-R con menor test loss **en promedio**, menor accuracy en las cinco parejas y 44.09× menos parámetros/conexiones efectivos. La diferencia de loss individual se invierte en seed 4 (`+0.002618` dANN-R menos vANN); se conserva como resultado negativo. No hay discrepancia grave conocida en arquitectura, máscara, split o criterio de evaluación. La dirección media coincide con el archivo oficial, pero el tamaño de la ventaja de loss es menor y las medias no son idénticas. N=5 sólo permite una lectura descriptiva, no una afirmación fuerte de significancia.
+
+**Diferencias conocidas con Keras y el paper:** el paper dice 20 épocas y 16 entradas por dendrita, mientras que los resultados oficiales de esta fila usan 25 épocas y 16 entradas **en promedio** por máscara global. PyTorch y TensorFlow no generan los mismos pesos con igual número de seed; `DataLoader` y `tf.data.Dataset.shuffle` producen órdenes distintos. Adam y la cross-entropy sobre logits pueden diferir numéricamente de la implementación Keras con softmax y pérdida sobre probabilidades. El ZIP oficial no garantiza qué revisión exacta produjo cada trial. Estas diferencias ayudan a explicar la divergencia numérica, sin aislar causalmente cada contribución.
+
+**Demostrado:** reducción de conectividad y parámetros efectivos de dANN-R frente a vANN de igual anchura y la dirección de loss/accuracy para esta pareja fija de Fashion-MNIST. **No demostrado:** superioridad de DSU, ventaja general frente a MLP, reducción de memoria física, FLOPs, latencia o energía, ni rendimiento de una futura arquitectura. Ambos modelos almacenan 468874 parámetros densos; 10634 sólo cuenta entradas activas y sesgos de dANN-R.
