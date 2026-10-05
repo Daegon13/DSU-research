@@ -89,3 +89,18 @@ Facultad, empleo y proyectos de portfolio tienen prioridad práctica inmediata.
 
 ### Consequence
 El diseño documental debe permitir pausar y retomar sin pérdida de contexto.
+
+---
+
+## ADR-007 — Baseline de Sprint 0
+
+**Status:** ACCEPTED
+
+### Decision
+Usar un MLP denso 784→128→10 con ReLU, Adam y CrossEntropy sobre MNIST, sin normalización adicional. Un JSON estricto configura la ejecución. El smoke test utiliza prefijos fijos de los splits oficiales, con orden de entrenamiento determinado por la seed.
+
+### Reason
+Es un pipeline pequeño y público que se descarga automáticamente, permite tests rápidos y evita introducir dependencias de orquestación o decisiones de arquitectura DSU.
+
+### Consequence
+El smoke test comprueba funcionamiento, no compara arquitecturas ni estima calidad final. Versiones exactas se fijan en `uv.lock`; las métricas incluyen configuración y entorno. RAM pico en CPU queda sin medir por ahora.

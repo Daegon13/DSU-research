@@ -62,8 +62,39 @@ Ablación
 Decisión
 ```
 
-## Próximo paso
+## Sprint 0: ejecutar el baseline
 
-Ejecutar `S0-T01`: inicializar el repositorio usando esta documentación como base.
+Requiere Python 3.10+ y conexión para la primera descarga de MNIST. Con `uv`:
 
-Después, continuar con el Sprint 0 sin implementar todavía la neurona DSU.
+```powershell
+uv sync --extra test
+uv run pytest -q
+uv run dsu-run --config experiments/configs/mnist_mlp_smoke.json
+```
+
+Alternativa con `pip`:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install -e ".[test]"
+.venv\Scripts\python -m pytest -q
+.venv\Scripts\dsu-run --config experiments/configs/mnist_mlp_smoke.json
+```
+
+Cada ejecución escribe un JSON con timestamp UTC en `runs/` (ignorado por Git). Para una ruta fija, agregar `--output runs/mi_experimento.json`. El config, la seed y el comando permiten repetir el experimento. Para repetir con las mismas versiones, usar el `uv.lock` con `uv sync --locked --extra test`. El dataset se guarda automáticamente en `data/`.
+
+El smoke test usa los primeros 1024 ejemplos del split oficial de entrenamiento y los primeros 256 del split oficial de test de MNIST. Son subconjuntos fijos de diagnóstico, sin validation ni búsqueda de hiperparámetros; no se debe inferir calidad final de ellos. El orden de entrenamiento depende de la seed. La latencia usa batch 1, 5 warm-ups y 20 repeticiones. Los tiempos dependen del hardware; el modo determinista puede reducir velocidad.
+
+Estructura funcional:
+
+```text
+experiments/configs/        configuración versionada
+src/dsu_research/config.py  carga y validación
+src/dsu_research/data.py    dataset y splits
+src/dsu_research/model.py   baseline MLP/ReLU
+src/dsu_research/harness.py entrenamiento, evaluación y métricas
+src/dsu_research/run.py     CLI y exportación JSON
+tests/                      verificaciones sin red
+```
+
+Sprint 0 sigue abierto hasta revisar sus gates; no hay DSU implementada.

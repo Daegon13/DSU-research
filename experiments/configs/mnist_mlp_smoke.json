@@ -1,0 +1,12 @@
+{
+  "model": "mlp_relu",
+  "dataset": "mnist",
+  "seed": 42,
+  "epochs": 1,
+  "batch_size": 64,
+  "learning_rate": 0.001,
+  "device": "cpu",
+  "hidden_dim": 128,
+  "train_samples": 1024,
+  "test_samples": 256
+}
