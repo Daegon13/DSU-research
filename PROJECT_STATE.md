@@ -7,19 +7,19 @@ Sprint 1 — Reproducción científica
 S1
 
 ## CURRENT TASK
-S1-T02 — Implementar la reproducción mínima vANN vs dANN-R en Fashion-MNIST.
+S1-T03 — Comparar formalmente la reproducción con el baseline, según ROADMAP.
 
 ## LAST COMPLETED TASK
-S1-T01: PASS. Paper Chavlis y Poirazi (2025) y pareja fija Fashion-MNIST vANN/dANN-R (D=4, S=128) documentados en `docs/REPRODUCTION_001.md`. Gate S0 previo: PASS.
+S1-T02: PASS. Reproducción PyTorch Fashion-MNIST vANN/dANN-R (D=4, S=128), 25 épocas × 3 trials; 10 tests pasan. Resultados R-002 en `docs/RESULTS.md`. Sprint 1 continúa con S1-T03 y S1-T04.
 
 ## LAST RESULT
-S1-T01 fijó para la reproducción 25 épocas según código/datos oficiales (el paper dice 20): en `DATA.zip`, N=5, dANN-R D=4/S=128 obtuvo test loss 0.365028 ± 0.003595 y accuracy 86.830 ± 0.184 %; vANN de igual anchura, loss 0.401243 ± 0.020207 y accuracy 89.112 ± 0.621 %. Son datos originales, no resultados propios. Gate S0 y sus mediciones permanecen en `docs/RESULTS.md`.
+R-002, N=3 propio: dANN-R test loss 0.358398 ± 0.004885, accuracy 87.237 ± 0.235 %; vANN loss 0.373826 ± 0.002666, accuracy 89.433 ± 0.006 %. La dirección de menor loss dANN-R se observó en las tres seeds; menor diferencia que en el archivo N=5. Máscara con 8192 conexiones de entrada, 512 de cable y 10634 parámetros efectivos; ambos modelos almacenan 468874. JSON locales en `runs/reproduction_001/`. Referencia archivada y límites en `docs/RESULTS.md`.
 
 ## CURRENT BEST MODEL
-Ninguno. Todavía no hay implementación.
+No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija se evaluó en época 25.
 
 ## CURRENT BASELINE
-MLP/ReLU convencional 784→128→10; Adam, lr 0.001; MNIST sin normalización adicional. Hardware de la última ejecución válida: AMD Ryzen 5 5600G (6 núcleos, 12 hilos), 33.69 GB RAM física, Windows 11, CPU float32, PyTorch 2.14.1+cpu. Última ejecución válida: `runs/s0_gate_convergence.json`, 2026-10-05T20:27:02Z, seed 42, 3 épocas, 1024 train / 256 test.
+Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Para reproducción Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros. Hardware de R-002: AMD Ryzen 5 5600G, Windows 11, CPU float32, PyTorch 2.14.1+cpu. La pareja tiene la misma anchura oculta, no igual presupuesto de conexiones efectivas.
 
 ## IMPORTANT NUMBERS
 - Dedicación objetivo: 2–4 h/semana.
@@ -43,13 +43,15 @@ Una unidad con agregación dendrítica estructurada puede alcanzar calidad compa
 - RAM pico de CPU no medida; la interfaz deja el campo en null.
 - Los experimentos de cierre usan subconjuntos pequeños y no demuestran calidad final ni comparabilidad estadística.
 - La latencia CPU mostró variación entre procesos; no usarla como comparación de rendimiento entre arquitecturas.
+- R-002 N=3 difiere numéricamente del archivo Keras N=5; inicialización, shuffle y detalles de Adam no son bit a bit equivalentes. La pérdida mantiene la dirección esperada.
+- El tiempo de entrenamiento de R-002 incluye validación por época; `samples_per_second` divide muestras train por ese tiempo combinado. No se guardan pesos de checkpoints, sólo métricas y selección `final_epoch_25`.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S1-T02 — Implementar la reproducción mínima vANN vs dANN-R en Fashion-MNIST, según `docs/REPRODUCTION_001.md`.
+S1-T03 — Comparar formalmente R-002 con el baseline/referencia fija y separar calidad, conexiones efectivas, almacenamiento y rendimiento físico. Después S1-T04 documentará divergencias; Sprint 1 todavía no está cerrado.
 
 ## LAST UPDATE
 2026-10-05

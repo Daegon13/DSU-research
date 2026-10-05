@@ -2,7 +2,7 @@
 
 ## Identificación y alcance
 
-**TASK ID:** S1-T01. **Estado:** especificación cerrada; no se han implementado ni ejecutado modelos de Sprint 1.
+**TASK ID:** S1-T01 (protocolo) y S1-T02 (implementación). **Estado:** S1-T02 PASS con tres trials completos; ver R-002 en `docs/RESULTS.md`.
 
 **Referencia:** Chavlis, S. y Poirazi, P. (2025), “Dendrites endow artificial neural networks with accurate, robust and parameter-efficient learning”, *Nature Communications* 16, 943. [DOI](https://doi.org/10.1038/s41467-025-56297-9), [texto completo](https://pmc.ncbi.nlm.nih.gov/articles/PMC11754790/), [repositorio oficial](https://github.com/Poirazi-Lab/dendritic_anns/tree/fadc3846174bc7a67b284a76b0989ed2cef2767e). Código inspeccionado en `fadc3846174bc7a67b284a76b0989ed2cef2767e`; datos en `DATA.zip` de esa revisión. La tabla fija de datos permite una comparación numérica concreta, aunque el ZIP no incluye una garantía verificable de la revisión exacta que generó cada ejecución.
 
@@ -26,7 +26,7 @@ En el **texto** del paper, cada dendrita recibe 16 entradas. En el **código** d
 - vANN: `(784+1)×512 + (512+1)×128 + (128+1)×10 = 468874` pesos y sesgos almacenados y entrenables.
 - dANN-R: `(8192+512) + (512+128) + (128+1)×10 = 10634` conexiones y sesgos **efectivos entrenables**, 44.09× menos que vANN. El modelo Keras oficial almacena **468874** entradas en sus matrices densas, incluidas las enmascaradas; la cifra 10634 no representa su memoria física ni sus FLOPs reales.
 
-La inicialización de las capas `keras.layers.Dense` carece de argumentos explícitos: por defecto **Glorot uniform** para kernels y **ceros** para sesgos; la máscara pone los pesos no conectados a cero y los gradientes correspondientes se enmascaran antes de Adam. Los pesos de cable son libres, sin normalización ni restricción de signo. Una futura implementación compacta en PyTorch deberá preservar conexiones, función y protocolo, y registrar que su inicialización numérica no equivale automáticamente a Glorot/Keras sobre la matriz densa de origen.
+La inicialización de las capas `keras.layers.Dense` carece de argumentos explícitos: por defecto **Glorot uniform** para kernels y **ceros** para sesgos; la máscara pone los pesos no conectados a cero y los gradientes correspondientes se enmascaran antes de Adam. Los pesos de cable son libres, sin normalización ni restricción de signo. La implementación PyTorch de S1-T02 aplica Glorot uniform explícitamente sobre matrices densas, aunque no reproduce las mismas muestras aleatorias que Keras.
 
 ## Dataset y entrenamiento
 
@@ -64,7 +64,7 @@ La pérdida de dANN-R es 0.036215 menor (≈9.0 %) a pesar de tener menos parám
 
 **Criterio S1-T02:** `PASS` si la implementación y datos cumplen la especificación, las tres ejecuciones completan 25 épocas con métricas válidas, los conteos coinciden y la media de test loss de dANN-R es menor que la de vANN; reportar magnitud y divergencia numérica frente al archivo oficial, sin atribuir equivalencia estadística a N=3. `PARTIAL` si el protocolo se ejecuta y los conteos coinciden pero la dirección del efecto no se sostiene; investigar y registrar, sin tuning oportunista. `FAIL` si no se logra una ejecución válida o la arquitectura/split/protocolo difieren materialmente. Extender a N=5 antes de reclamar reproducción completa del valor publicado.
 
-**Comando futuro previsto:** `uv run dsu-run --config experiments/configs/reproduction_001_fmnist.json --output runs/reproduction_001/` (interfaz **propuesta**, aún no existe; S1-T02 debe fijar el comando real). El harness actual de Sprint 0 no admite todavía validation, este dataset o ambos modelos. No ejecutar este comando ahora.
+**Comando real de S1-T02:** ver la sección de implementación abajo. El harness se extendió para admitir validation y Fashion-MNIST sin cambiar el recorrido del baseline de Sprint 0.
 
 **Coste estimado:** seis entrenamientos de 25 épocas × 54000 ejemplos = 8.1 millones de ejemplos vistos para tres trials. En vANN, sólo el forward denso equivale aproximadamente a `3×25×54000×(784×512+512×128+128×10) ≈ 1.9×10¹²` MAC; backward, evaluación y la implementación concreta agregan coste. Es un **cálculo de operaciones**, no una medición de tiempo, RAM, FLOPs exactos o energía en el Ryzen 5 5600G CPU. Medir antes de prometer duración; el código oficial dANN-R ejecuta matrices densas y máscaras, así que su coste físico no cae 44×.
 
@@ -80,3 +80,17 @@ La pérdida de dANN-R es 0.036215 menor (≈9.0 %) a pesar de tener menos parám
 | Split y semillas | 90/10 y 5 inicializaciones | Split barajado con `default_rng(trial)`; trials 1–5; train shuffle sin seed explícita | Repetir split por trial y documentar aleatoriedad restante. |
 
 **Fuentes de código inspeccionadas:** `codes_/main.py`, `codes_/run_all_fig2.sh`, `codes_/opt.py` (`get_data`, `make_masks`, `get_model`, `custom_train_loop`), `codes_/receptive_fields.py` (`random_connectivity`, `connectivity`), `codes_/utils.py` (`num_trainable_params`), `codes_/analysis_model_evaluation.py`, `codes_/figure_2.py`; todas en la revisión enlazada. La documentación S1-T01 no modifica baselines ni resultados de Sprint 0.
+
+## Implementación S1-T02
+
+Comando real: `.venv/Scripts/python.exe -m dsu_research.run --config experiments/configs/reproduction_001_fmnist.json --output runs/reproduction_001 --seeds 1 2 3`. La lista de seeds admite luego `1 2 3 4 5` sin modificar código. Cada pareja por seed usa exactamente el mismo split. Los JSON individuales y el agregado se guardan en `runs/reproduction_001/` (ignorado por Git). El test usa siempre los pesos al final de la época 25; se registra el mínimo de validation sólo como diagnóstico.
+
+`VanillaANN` y `DendriticANNRandom` almacenan 468874 parámetros. La segunda conserva matrices densas para reproducir la semántica original. Su máscara de entrada elige 8192 posiciones sin reemplazo con `np.random.default_rng(seed).choice(784*512, 8192, replace=False)` en orden input-major, y la máscara del cable conecta cuatro dendritas contiguas a cada soma. La máscara vive como buffer no entrenable; los pesos inactivos se ponen a cero al inicializar y el forward vuelve a multiplicar por ella, por lo que los gradientes inactivos son cero. El conteo efectivo se obtiene sumando las máscaras y los sesgos y pesos de salida; no se sustituye el conteo de PyTorch.
+
+Ambas capas `Linear` reciben inicialización Glorot uniform y sesgos cero explícitos. La primera diferencia inevitable es que, aun con la misma seed numérica, el generador aleatorio de PyTorch no produce los mismos pesos que TensorFlow/Keras. La segunda es que el shuffle por época usa un `torch.Generator` explícito y DataLoader, mientras que el original usa `tf.data.Dataset.shuffle` sin seed local explícita. Se fijan Adam beta1=0.9, beta2=0.999, epsilon=1e-7 y weight decay=0 para acercarse a los defaults de Keras; el detalle numérico de implementación de Adam puede diferir entre frameworks. PyTorch devuelve logits y usa cross-entropy directa; Keras devuelve softmax y usa SparseCategoricalCrossentropy sobre probabilidades. Matemáticamente son equivalentes salvo diferencias de redondeo y clipping interno.
+
+El campo `training.duration_seconds` del harness incluye las evaluaciones de validation al final de cada época y excluye test y benchmark de inferencia. Por ello `training.samples_per_second` divide sólo muestras de train por un tiempo que incluye validation; sirve como throughput del protocolo completo, no como velocidad pura del paso de entrenamiento. El benchmark de inferencia es batch 1, cinco warm-ups y 20 repeticiones, igual al harness S0. La RAM pico de CPU y el tamaño de checkpoint siguen sin medirse; la configuración no guarda pesos de checkpoints, pero sí registra `final_epoch_25` como estado usado en test.
+
+### Auditoría de ejecución N=3
+
+Las seis corridas registradas en `runs/reproduction_001/` tienen 25 filas de historia. Cada pareja usa hashes idénticos de índices train y validation y máscaras distintas entre trials. Las tres máscaras tienen exactamente 8192 conexiones de entrada, 512 de cable y 10634 parámetros efectivos incluyendo sesgos y salida. La pérdida de test de dANN-R es menor en las tres parejas. El resultado cuantitativo completo y las divergencias de referencia están en R-002. El objetivo primario se cumple para N=3, sin afirmar equivalencia estadística con los cinco trials archivados.

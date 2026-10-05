@@ -1,6 +1,10 @@
 """Official MNIST train/test split with deterministic prefix subsets for smoke runs."""
 
 from pathlib import Path
+import hashlib
+
+import numpy as np
+import torch
 
 import torchvision
 from torch.utils.data import DataLoader, Subset
@@ -36,3 +40,31 @@ def load_mnist(config: ExperimentConfig, data_dir: str | Path = "data"):
         "transform": "ToTensor() scales uint8 pixels to float32 [0,1]",
     }
     return train_loader, test_loader, metadata
+
+
+def load_fashion_mnist(config: ExperimentConfig, data_dir: str | Path = "data"):
+    """Official train/test with the original trial-specific 54k/6k split."""
+    if config.train_samples is not None or config.test_samples is not None:
+        raise ValueError("The reproduction requires full Fashion-MNIST splits")
+    transform = transforms.ToTensor()
+    source = torchvision.datasets.FashionMNIST(root=data_dir, train=True, download=True, transform=transform)
+    test = torchvision.datasets.FashionMNIST(root=data_dir, train=False, download=True, transform=transform)
+    indices = np.arange(len(source))
+    np.random.default_rng(config.seed).shuffle(indices)
+    train_indices, val_indices = indices[:-6000], indices[-6000:]
+    train = Subset(source, train_indices.tolist())
+    validation = Subset(source, val_indices.tolist())
+    generator = torch.Generator().manual_seed(config.seed)
+    train_loader = DataLoader(train, batch_size=config.batch_size, shuffle=True, generator=generator)
+    val_loader = DataLoader(validation, batch_size=config.batch_size, shuffle=False)
+    test_loader = DataLoader(test, batch_size=config.batch_size, shuffle=False)
+    metadata = {
+        "name": "Fashion-MNIST", "source": "torchvision.datasets.FashionMNIST",
+        "source_version": torchvision.__version__,
+        "splits": {"train": len(train), "validation": len(validation), "test": len(test)},
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": hashlib.sha256(train_indices.astype("<i8").tobytes()).hexdigest(),
+        "validation_indices_sha256": hashlib.sha256(val_indices.astype("<i8").tobytes()).hexdigest(),
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization",
+    }
+    return train_loader, val_loader, test_loader, metadata

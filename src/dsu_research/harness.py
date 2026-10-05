@@ -87,9 +87,17 @@ def run_experiment(
         raise RuntimeError("CUDA was requested but is unavailable")
     device = torch.device(config.device)
     seeds = seed_everything(config.seed)
-    train_loader, test_loader, dataset_metadata = dataset_loader(config)
+    dataset = dataset_loader(config)
+    if len(dataset) == 4:
+        train_loader, val_loader, test_loader, dataset_metadata = dataset
+    else:
+        train_loader, test_loader, dataset_metadata = dataset
+        val_loader = None
     model = model_factory(config).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+    reproduction = val_loader is not None
+    adam_epsilon = 1e-7 if reproduction else 1e-8
+    optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate,
+                                 betas=(0.9, 0.999), eps=adam_epsilon)
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(device)
     history = []
@@ -113,7 +121,10 @@ def run_experiment(
         if count == 0:
             raise ValueError("Training split is empty")
         total_seen += count
-        history.append({"epoch": epoch + 1, "loss": loss_sum / count, "accuracy": correct / count})
+        epoch_metrics = {"epoch": epoch + 1, "loss": loss_sum / count, "accuracy": correct / count}
+        if val_loader is not None:
+            epoch_metrics["validation"] = evaluate(model, val_loader, device)
+        history.append(epoch_metrics)
     synchronize(device)
     train_seconds = time.perf_counter() - train_start
     test_metrics = evaluate(model, test_loader, device)
@@ -127,14 +138,15 @@ def run_experiment(
         "cpu_peak_ram_bytes": None,
         "note": "CPU peak RAM is not measured in Sprint 0; CUDA peak is allocator memory, not whole-process VRAM.",
     }
-    return {
+    result = {
         "config": config.to_dict(),
         "seeds": seeds,
         "dataset": dataset_metadata,
         "model": {"name": config.model, "architecture": str(model)},
         "parameters": count_parameters(model),
         "training": {
-            "optimizer": "Adam", "weight_decay": 0.0, "scheduler": None,
+            "optimizer": "Adam", "adam_betas": [0.9, 0.999], "adam_epsilon": adam_epsilon,
+            "weight_decay": 0.0, "scheduler": None,
             "gradient_clipping": None, "mixed_precision": False, "early_stopping": False,
             "history": history, "duration_seconds": train_seconds,
             "samples_seen": total_seen, "samples_per_second": total_seen / train_seconds,
@@ -151,3 +163,16 @@ def run_experiment(
             "numpy": np.__version__,
         },
     }
+    if reproduction:
+        stored = result["parameters"]["total"]
+        trainable = result["parameters"]["trainable"]
+        result["parameters"].update({
+            "stored_parameters": stored,
+            "trainable_stored_parameters": trainable,
+            "effective_parameters": model.effective_parameters() if hasattr(model, "effective_parameters") else trainable,
+        })
+        result["mask_statistics"] = model.connectivity_metrics() if hasattr(model, "connectivity_metrics") else None
+        result["training"]["checkpoint_selected"] = f"final_epoch_{config.epochs}"
+        result["training"]["validation_best_epoch_diagnostic"] = min(
+            history, key=lambda item: item["validation"]["loss"])["epoch"]
+    return result
