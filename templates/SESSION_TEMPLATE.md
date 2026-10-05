@@ -1,0 +1,27 @@
+# SESSION REPORT
+
+**Date:**  
+**Duration:**  
+**Sprint:**  
+**Task:**
+
+## WHAT CHANGED
+
+## RESULT
+
+PASS / FAIL / INCONCLUSIVE
+
+## IMPORTANT NUMBERS
+
+## PROBLEMS FOUND
+
+## DECISIONS
+
+## FILES CHANGED
+
+## COMMIT
+
+## NEXT TASK
+
+## PROJECT_STATE UPDATE REQUIRED?
+YES / NO
