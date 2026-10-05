@@ -7,13 +7,13 @@ Sprint 1 — Reproducción científica
 S1
 
 ## CURRENT TASK
-S1-T01 — Seleccionar y fijar el paper/experimento dendrítico principal a reproducir.
+S1-T02 — Implementar la reproducción mínima vANN vs dANN-R en Fashion-MNIST.
 
 ## LAST COMPLETED TASK
-S0-T01 a S0-T04 y auditoría Gate S0: PASS. Instalación aislada con `uv sync --locked --extra test`, 6/6 tests, baseline reproducible y harness reutilizable con otro modelo y otra forma de entrada.
+S1-T01: PASS. Paper Chavlis y Poirazi (2025) y pareja fija Fashion-MNIST vANN/dANN-R (D=4, S=128) documentados en `docs/REPRODUCTION_001.md`. Gate S0 previo: PASS.
 
 ## LAST RESULT
-Gate S0 PASS. MNIST CPU, seed 42, 1 época, 1024 train / 256 test: train loss 1.940615, accuracy 0.566406; test loss 1.614402, accuracy 0.691406; 101770 parámetros entrenables y totales. Segunda ejecución con seed 42: métricas de calidad idénticas; seed 43: test loss 1.616367, accuracy 0.679688. Tres épocas con seed 42: train loss 1.940615 → 1.168307 → 0.728188; test accuracy 0.8125. Detalle en `docs/RESULTS.md`; JSON locales en `runs/`.
+S1-T01 fijó para la reproducción 25 épocas según código/datos oficiales (el paper dice 20): en `DATA.zip`, N=5, dANN-R D=4/S=128 obtuvo test loss 0.365028 ± 0.003595 y accuracy 86.830 ± 0.184 %; vANN de igual anchura, loss 0.401243 ± 0.020207 y accuracy 89.112 ± 0.621 %. Son datos originales, no resultados propios. Gate S0 y sus mediciones permanecen en `docs/RESULTS.md`.
 
 ## CURRENT BEST MODEL
 Ninguno. Todavía no hay implementación.
@@ -34,7 +34,7 @@ H-001:
 Una unidad con agregación dendrítica estructurada puede alcanzar calidad comparable a una capa densa usando menos parámetros.
 
 ## OPEN QUESTIONS
-- ¿Qué dataset mínimo usaremos para reproducir primero una arquitectura dendrítica publicada?
+- ¿Cuánto difiere la reproducción PyTorch compacta de la semántica Keras de inicialización, máscara y shuffle?
 - ¿Qué topología de grupos dendríticos será más eficiente en PyTorch?
 - ¿La ventaja paramétrica se convierte en ventaja real de memoria y latencia?
 - ¿El estado temporal por dendrita aporta capacidad suficiente para justificar su coste?
@@ -49,7 +49,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S1-T01 — Seleccionar y fijar el paper/experimento dendrítico principal a reproducir.
+S1-T02 — Implementar la reproducción mínima vANN vs dANN-R en Fashion-MNIST, según `docs/REPRODUCTION_001.md`.
 
 ## LAST UPDATE
 2026-10-05

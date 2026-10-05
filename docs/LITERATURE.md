@@ -31,16 +31,23 @@ Que copiar más biología mejore automáticamente una IA.
 
 ## 2. Chavlis & Poirazi — Dendritic artificial neural networks
 
-**Tema:** dendritas artificiales y eficiencia paramétrica.
+**Referencia:** Spyridon Chavlis y Panayiota Poirazi, “Dendrites endow artificial neural networks with accurate, robust and parameter-efficient learning”, *Nature Communications* **16**, 943 (2025), DOI [10.1038/s41467-025-56297-9](https://doi.org/10.1038/s41467-025-56297-9). [Texto completo](https://pmc.ncbi.nlm.nih.gov/articles/PMC11754790/); [código y datos oficiales](https://github.com/Poirazi-Lab/dendritic_anns), revisión `fadc3846174bc7a67b284a76b0989ed2cef2767e` inspeccionada para S1-T01.
 
-### Relevancia
-Demuestra que conectividad dendrítica estructurada puede igualar o superar redes convencionales en algunos benchmarks usando muchos menos parámetros.
+**Tema:** conectividad dendrita→soma y muestreo restringido de entradas en clasificación de imágenes.
 
-### Uso para DSU
-Principal baseline conceptual de DSU-S.
+### Pregunta y método
 
-### Pregunta abierta
-¿Puede la ventaja convertirse en velocidad y menor tráfico de memoria en hardware convencional?
+¿Mejora la calidad y la eficiencia en parámetros una red con dendritas frente a una red completamente conectada de las mismas dimensiones ocultas? Para Fashion-MNIST, la dANN-R toma entradas aleatorias y conecta cada dendrita sólo a su soma. La vANN conecta todas las entradas a la primera capa y todos los nodos de la primera capa a la segunda. Ambas tienen dos capas ocultas, activaciones LeakyReLU (pendiente 0.1) y salida softmax. El paper compara también otras variantes que quedan fuera de S1-T01.
+
+### Resultados publicados relevantes
+
+La Fig. 2 muestra pérdida y accuracy de test frente a parámetros efectivos, con cinco inicializaciones por configuración. Su leyenda declara intervalos de confianza del 95 %. La Tabla 1 reporta los **mejores modelos de cada familia** en Fashion-MNIST, no la pareja fija de nuestra reproducción: dANN-R, accuracy **89.612 ± 0.0870 %** y pérdida **0.3245 ± 0.0028**; vANN, **89.288 ± 0.3654 %** y **0.4040 ± 0.0066** (media ± desviación estándar, N=5). No usar esos números como objetivo numérico de una configuración distinta.
+
+El archivo oficial `DATA.zip`, `DATA/results_fmnist_1_layer/output_all_final.pkl`, contiene para la pareja fija **D=4 dendritas/soma, S=128 somas**: dANN-R **86.830 ± 0.184 %** y pérdida **0.365028 ± 0.003595**, vANN **89.112 ± 0.621 %** y pérdida **0.401243 ± 0.020207** (media ± desviación estándar muestral, N=5; accuracy convertido a porcentaje). Corresponden a las cinco pruebas etiquetadas 1–5 y 25 épocas almacenadas. La comparación esperada para esta pareja es **menor pérdida** de dANN-R, no mayor accuracy.
+
+### Qué reutilizamos y qué no demuestra
+
+Reutilizamos la comparación controlada vANN/dANN-R, el dataset y el protocolo de entrenamiento. La cifra de parámetros de dANN-R cuenta conexiones activas; el código oficial materializa matrices densas enmascaradas, así que la reducción de parámetros efectivos no demuestra reducción de memoria, FLOPs, latencia ni energía. Tampoco demuestra ninguna propiedad de DSU. Las diferencias entre artículo y código, y la configuración reproducible exacta, están en [REPRODUCTION_001.md](REPRODUCTION_001.md).
 
 ---
 
