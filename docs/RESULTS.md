@@ -1,6 +1,6 @@
 # RESULTS
 
-Existen resultados diagnósticos de Sprint 0 y una reproducción N=5 de Sprint 1; R-002 conserva el corte intermedio N=3.
+Existen resultados diagnósticos de Sprint 0, una reproducción N=5 de Sprint 1 y el primer benchmark de aprendizaje de DSU-S v0; R-002 conserva el corte intermedio N=3.
 
 Gate S0 auditado el 2026-10-05: **PASS**. Evidencia de cierre en R-001.
 
@@ -24,6 +24,7 @@ No borrar resultados por no coincidir con la hipótesis.
 | R-001 | MLP/ReLU | MNIST, 1024 train / 256 test | 101770 | seed 42: accuracy test 0.6914 (1 época), 0.8125 (3 épocas) | 0.0516 ms/batch 1 (primera repetición de 1 época) | RAM CPU no medida | COMPLETE (gate S0) |
 | R-002 | vANN / dANN-R | Fashion-MNIST, 54000/6000/10000, N=3 | 468874 almacenados ambos; efectivos 468874 / 10634 | test loss 0.373826 / 0.358398; accuracy 89.433 / 87.237 % | batch 1 por trial abajo | RAM CPU no medida | COMPLETE (S1-T02 PASS) |
 | R-003 | vANN / dANN-R | Fashion-MNIST, 54000/6000/10000, N=5 | 468874 almacenados ambos; efectivos 468874 / 10634 | test loss 0.374481 / 0.358606; accuracy 89.322 / 87.216 % | no se infiere aceleración | RAM CPU no medida | COMPLETE (REPRODUCED; Sprint 1 PASS) |
+| R-005 | DSU-S v0 | Fashion-MNIST, 54000/6000/10000, N=3 | 10634 almacenados y efectivos | test loss 0.357825 ± 0.002485; accuracy 87.253 ± 0.277 % | batch 1 automático, sin comparación controlada | 108072 bytes de tensores; RAM CPU no medida | COMPLETE (S2-T04 PASS; señal FUERTE) |
 
 ---
 
@@ -145,4 +146,18 @@ El archivo oficial presenta Δ medio loss dANN-R − vANN = **−0.036215** y Δ
 
 `DSUSv0` tiene 10634 parámetros almacenados, entrenables y efectivos; float32 ocupa 42536 bytes de payload. `G` es un buffer `int64` de shape `[128,4,16]`: 8192 índices y 65536 bytes. No existe una matriz persistente de entrada→dendrita con 784 columnas; los seis tensores entrenables tienen shapes `[128,4,16]`, `[128,4]`, `[128,4]`, `[128]`, `[10,128]` y `[10]`. Los MAC principales teóricos por muestra son 8192 + 512 + 1280 = 9984. Estos conteos no son medidas de RAM, checkpoint, FLOPs totales, latencia o energía.
 
-La suite estructural verifica fan-in exacto, unicidad, rango, semillas separadas, conectividad semántica, cálculo matemático del forward, gradientes finitos, serialización de `G`, compatibilidad CPU y paso sintético por el harness. CUDA queda omitido en hosts sin GPU. Gate S2-T02: **PASS**. Gate S2-T03: **PASS**. S2-T04 sigue pendiente.
+La suite estructural verifica fan-in exacto, unicidad, rango, semillas separadas, conectividad semántica, cálculo matemático del forward, gradientes finitos, serialización de `G`, compatibilidad CPU y paso sintético por el harness. CUDA queda omitido en hosts sin GPU. Gate S2-T02: **PASS**. Gate S2-T03: **PASS**. El aprendizaje posterior de S2-T04 consta en R-005.
+
+---
+
+## R-005 — Primer benchmark de aprendizaje DSU-S v0 (S2-T04)
+
+**Status: COMPLETE. Gate técnico S2-T04: PASS. Señal científica: FUERTE.** Fecha 2026-10-06. Tres seeds con `training_seed=topology_seed=1,2,3` como campos independientes; 25 épocas cada una, test del estado final, mismos splits por seed que vANN y dANN-R. Baselines originales reutilizados sin reentrenamiento. Configuración, comandos, hashes, historia completa, resultados por seed, deltas pareados, estabilidad, tamaño y límites: [EXPERIMENT_001_DSU_S_LEARNING.md](EXPERIMENT_001_DSU_S_LEARNING.md). JSON originales DSU-S locales en `runs/dsu_s_v0_s2_t04/`.
+
+| Modelo N=3 | Stored | Effective | Test loss media ± DE muestral | Test accuracy media ± DE muestral |
+|---|---:|---:|---:|---:|
+| vANN | 468874 | 468874 | 0.373826 ± 0.002666 | 89.433 ± 0.006 % |
+| dANN-R | 468874 | 10634 | 0.358398 ± 0.004885 | 87.237 ± 0.235 % |
+| DSU-S v0 | 10634 | 10634 | **0.357825 ± 0.002485** | **87.253 ± 0.277 %** |
+
+DSU-S − dANN-R: loss **−0.000574 ± 0.002440**, accuracy **+0.017 ± 0.117 pp**. DSU-S − vANN: loss **−0.016001 ± 0.003214**, accuracy **−2.180 ± 0.282 pp**. Seed 2 empeora el loss frente a dANN-R en +0.002073. Train+validation total **556.30 s**. Tensores entrenables **42536 bytes**, índices **65536 bytes**, suma **108072 bytes**; `state_dict` serializado de una instancia recién inicializada **111508 bytes**. RAM pico CPU no medida. Las tres corridas muestran aprendizaje estable según loss y métricas finitas; no se registraron normas de gradientes ni predicciones por clase. H-001: **SUPPORTED** dentro de esta comparación estrecha; H-002 permanece **UNTESTED** para eficiencia física/latencia. Siguiente tarea: **S2-T05 — Comparar DSU-S v0 contra un MLP aproximadamente igualado por parámetros**.

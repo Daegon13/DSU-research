@@ -12,7 +12,7 @@ Estados permitidos:
 
 ## H-001 — Eficiencia espacial dendrítica
 
-**Status:** UNTESTED
+**Status:** SUPPORTED
 
 ### Statement
 Una arquitectura dendrítica compacta puede mantener rendimiento comparable al baseline dANN-R de igual anchura usando muchos menos parámetros físicamente almacenados; comparaciones posteriores con MLP de presupuestos igualados evaluarán la ventaja más general.
@@ -24,7 +24,10 @@ Cada dendrita procesa sólo un subconjunto de las entradas y realiza agregación
 S2-T04: comparar vANN, dANN-R dense-mask y DSU-S v0 compact en Fashion-MNIST con el mismo split y protocolo cuando sea posible, inicialmente N=3 seeds. S2-T05/T06: comparaciones posteriores igualadas por parámetros y por calidad.
 
 ### Prediction
-DSU-S almacenará 10634 parámetros entrenables frente a 468874 de dANN-R y vANN; la similitud de calidad sigue por probar. El coste de índices se reportará aparte.
+DSU-S almacenaría 10634 parámetros entrenables frente a 468874 de dANN-R y vANN, manteniendo calidad cercana. El coste de índices se reportaría aparte.
+
+### Resultado S2-T04 (2026-10-06)
+En Fashion-MNIST N=3, DSU-S obtuvo test loss **0.357825 ± 0.002485** y accuracy **87.253 ± 0.277 %**; dANN-R obtuvo **0.358398 ± 0.004885** y **87.237 ± 0.235 %**. Deltas pareados DSU-S − dANN-R: **−0.000574 ± 0.002440** de loss y **+0.017 ± 0.117 pp** de accuracy. Tres entrenamientos estables y 10634 parámetros almacenados frente a 468874 de dANN-R satisfacen la señal fuerte predefinida para esta comparación. `SUPPORTED` se limita a este benchmark de igual anchura; N=3 no aísla fan-in/topología/inicialización ni demuestra ventaja general frente a MLP igualado. Detalles en [EXPERIMENT_001_DSU_S_LEARNING.md](EXPERIMENT_001_DSU_S_LEARNING.md).
 
 ---
 
@@ -39,10 +42,13 @@ Una estructura compacta de fan-in fijo puede convertir la sparsity dendrítica e
 DSU-S v0 almacena sólo pesos conectados y 16 índices por dendrita; dANN-R almacena matrices densas enmascaradas. La indexación puede añadir coste y debe medirse.
 
 ### Experiment
-S2-T04: medir bytes de parámetros, bytes de topología, bytes de checkpoint, RAM y latencia reales frente a dANN-R dense-mask, junto con calidad. La comparación de distintas topologías y kernels queda para Sprint 3/5, con variables controladas.
+S2-T04: medir bytes de parámetros, bytes de topología y `state_dict` de DSU-S junto con calidad. RAM pico CPU y latencia controlada frente a dANN-R quedan pendientes; la comparación de distintas topologías y kernels queda para Sprint 3/5, con variables controladas.
 
 ### Prediction
 DSU-S reducirá almacenamiento de pesos entrenables; el resultado de latencia queda abierto. Menos parámetros o MAC teóricos no garantizan aceleración.
+
+### Evidencia parcial S2-T04
+DSU-S almacena 42536 bytes de tensores entrenables más 65536 bytes de índices; un `state_dict` representativo ocupa 111508 bytes. Esto confirma tamaño tensorial compacto, pero H-002 sigue **UNTESTED** en cuanto a eficiencia física/latencia de ejecución: no se midió RAM pico CPU ni una comparación controlada de latencia y los índices/gather tienen coste propio.
 
 ---
 

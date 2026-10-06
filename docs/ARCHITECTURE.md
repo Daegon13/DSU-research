@@ -2,7 +2,7 @@
 
 # 1. DSU-S
 
-La especificación normativa de **DSU-S v0** está en [DSU_S_SPEC.md](DSU_S_SPEC.md). Fija `D=784`, `H=128`, `B=4`, `K=16` exacto por dendrita, topología aleatoria fija por `topology_seed`, LeakyReLU 0.1 en dendritas y somas, y salida lineal de 10 logits. `DSUSv0` almacena sus 10634 parámetros entrenables en tensores compactos y `G` como buffer entero persistente. Su estructura está verificada; el aprendizaje aún no se evaluó. Sigue sin estado temporal.
+La especificación normativa de **DSU-S v0** está en [DSU_S_SPEC.md](DSU_S_SPEC.md). Fija `D=784`, `H=128`, `B=4`, `K=16` exacto por dendrita, topología aleatoria fija por `topology_seed`, LeakyReLU 0.1 en dendritas y somas, y salida lineal de 10 logits. `DSUSv0` almacena sus 10634 parámetros entrenables en tensores compactos y `G` como buffer entero persistente. Su estructura está verificada y el primer benchmark de aprendizaje figura en [EXPERIMENT_001_DSU_S_LEARNING.md](EXPERIMENT_001_DSU_S_LEARNING.md). Sigue sin estado temporal.
 
 ---
 
