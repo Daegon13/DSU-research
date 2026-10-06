@@ -18,6 +18,7 @@ class ExperimentConfig:
     hidden_dim: int = 128
     train_samples: int | None = None
     test_samples: int | None = None
+    topology_seed: int | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.model, str) or not self.model.strip():
@@ -32,6 +33,8 @@ class ExperimentConfig:
                 raise ValueError(f"{name} must be a valid integer")
         if self.seed > 2**32 - 1:
             raise ValueError("seed must fit NumPy's 32-bit seed range")
+        if self.topology_seed is not None and (type(self.topology_seed) is not int or not 0 <= self.topology_seed <= 2**32 - 1):
+            raise ValueError("topology_seed must be a nonnegative 32-bit integer or null")
         for name in ("train_samples", "test_samples"):
             value = getattr(self, name)
             if value is not None and (type(value) is not int or value < 1):

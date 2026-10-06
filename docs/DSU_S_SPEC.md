@@ -1,6 +1,6 @@
 # DSU-S v0 — especificación S2-T01
 
-**Estado:** especificación cerrada; implementación y resultados pendientes. **Alcance:** una sola capa dendrítica espacial sobre Fashion-MNIST, seguida de salida lineal. DSU-S v0 usa exactamente la anchura oculta de la pareja fija de `REPRODUCTION_001`: 512 dendritas y 128 somas. No es una variante de dANN-R ni una reproducción de su máscara.
+**Estado:** especificación cerrada; implementación estructural verificada; resultados de aprendizaje pendientes. **Alcance:** una sola capa dendrítica espacial sobre Fashion-MNIST, seguida de salida lineal. DSU-S v0 usa exactamente la anchura oculta de la pareja fija de `REPRODUCTION_001`: 512 dendritas y 128 somas. No es una variante de dANN-R ni una reproducción de su máscara.
 
 ## Definición matemática
 
@@ -70,3 +70,11 @@ DSU-S v0 no contiene memoria temporal, `lambda`, estado recurrente, spikes, gati
 S2-T04 comparará inicialmente **vANN**, **dANN-R dense-mask** y **DSU-S v0 compact** sobre Fashion-MNIST con **N=3 seeds**, usando el mismo split y protocolo de `REPRODUCTION_001` cuando sea razonablemente posible. Las parejas compartirán split por seed; se registrarán por separado `training_seed` y `topology_seed` de DSU-S y sus hashes. Cualquier diferencia de inicialización o tratamiento de seeds se declarará antes de interpretar resultados. La comparación inicial iguala anchura oculta y protocolo de datos, **no** presupuesto de parámetros almacenados, MAC, tiempo o energía. No se ejecuta en S2-T01.
 
 Una señal futura prometedora sería aprendizaje estable, rendimiento cercano a dANN-R, sólo 10634 parámetros entrenables físicamente almacenados, menor tamaño real de modelo y ausencia de penalización extrema de latencia. Son criterios de interpretación experimental, **no** un gate arbitrario de implementación. La velocidad real se decidirá por medición.
+
+## IMPLEMENTATION STATUS: IMPLEMENTED / VERIFIED (S2-T02/T03)
+
+`DSUSv0` almacena seis tensores entrenables compactos y `G` como buffer `int64` persistente en `state_dict`; al cargar, el buffer guardado reemplaza la topología generada en el constructor. El modelo acepta imágenes que aplana a `[batch,784]` y devuelve diez logits. Cada fila de `G` se genera con `np.random.default_rng(topology_seed).choice(784,16,replace=False)`; el generador es local e independiente de la seed de entrenamiento. El hash SHA-256 de `G` se registra en las métricas estructurales.
+
+La inicialización es Glorot uniform explícita para `W_d` como matriz `[512,16]`, `W_s` como `[128,4]` y `W_o` como `[10,128]`; los tres sesgos empiezan en cero. Esta decisión mantiene la familia de inicialización usada en los baselines, pero sus dimensiones compactas producen límites distintos de la matriz densa enmascarada de dANN-R. No se ajustó para mejorar accuracy.
+
+Verificado estáticamente: `stored = trainable = effective = 10634`; bytes entrenables float32 `42536`; `G` tiene 8192 índices `torch.int64` y `65536` bytes; payload de tensores `108072` bytes; MAC principales `8192 + 512 + 1280 = 9984` por muestra. No son medidas de RAM, tamaño de checkpoint, FLOPs totales ni latencia. Los tests inspeccionan shapes de parámetros y buffers, conectividad real, matemática del forward, gradientes, serialización y un batch sintético por el harness. La suite CPU pasó; CUDA queda sin ejecutar en un host sin GPU. Fashion-MNIST y S2-T04 siguen pendientes.

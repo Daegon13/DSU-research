@@ -172,6 +172,8 @@ def run_experiment(
             "effective_parameters": model.effective_parameters() if hasattr(model, "effective_parameters") else trainable,
         })
         result["mask_statistics"] = model.connectivity_metrics() if hasattr(model, "connectivity_metrics") else None
+        if hasattr(model, "structural_metrics"):
+            result["parameters"].update(model.structural_metrics())
         result["training"]["checkpoint_selected"] = f"final_epoch_{config.epochs}"
         result["training"]["validation_best_epoch_diagnostic"] = min(
             history, key=lambda item: item["validation"]["loss"])["epoch"]

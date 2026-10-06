@@ -122,3 +122,21 @@ La reproducción dANN-R mostró 10634 conexiones y sesgos efectivos, pero 468874
 ### Consequence
 
 DSU-S ya no replica la máscara aleatoria global de dANN-R: distribuye sus 8192 conexiones como 16 por dendrita. El primer benchmark medirá calidad, tamaño y latencia y declarará ambos cambios. El coste de índices se contabilizará aparte; los MAC teóricos no se interpretarán como velocidad medida.
+
+---
+
+## ADR-009 — Inicialización y persistencia de DSU-S v0
+
+**Status:** ACCEPTED
+
+### Decision
+
+Inicializar explícitamente los pesos compactos con Glorot uniform (`W_d` visto como `[512,16]`, `W_s` como `[128,4]`, `W_o` como `[10,128]`) y los sesgos en cero. Generar `G` con un RNG NumPy local de `topology_seed`, guardarlo como buffer `int64` persistente en `state_dict` y registrar seed y hash.
+
+### Reason
+
+Glorot mantiene coherencia de familia con los baselines sin trasladar su matriz densa; el buffer conserva la topología exacta al serializar y se mueve con el modelo entre dispositivos. La escala concreta difiere de dANN-R y deberá declararse al comparar calidad.
+
+### Consequence
+
+`G` añade 65536 bytes nominales a los 42536 bytes de parámetros float32. La seed guardada como atributo no reemplaza al buffer en un checkpoint; al cargar, `G` del `state_dict` es la fuente de verdad.
