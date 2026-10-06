@@ -43,6 +43,30 @@ class VanillaANN(nn.Module):
         return self.output(x)
 
 
+class ParameterMatchedMLP(nn.Module):
+    """Frozen 784->13->17->10 dense baseline for S2-T05."""
+
+    def __init__(self):
+        super().__init__()
+        self.hidden1 = nn.Linear(784, 13)
+        self.hidden2 = nn.Linear(13, 17)
+        self.output = nn.Linear(17, 10)
+        for layer in (self.hidden1, self.hidden2, self.output):
+            _glorot_linear(layer)
+
+    def forward(self, x):
+        x = F.leaky_relu(self.hidden1(x.flatten(1)), negative_slope=0.1)
+        x = F.leaky_relu(self.hidden2(x), negative_slope=0.1)
+        return self.output(x)
+
+    def structural_metrics(self) -> dict:
+        return {
+            "trainable_parameter_bytes": sum(p.numel() * p.element_size() for p in self.parameters() if p.requires_grad),
+            "theoretical_main_macs_per_sample": sum(layer.weight.numel() for layer in
+                                                     (self.hidden1, self.hidden2, self.output)),
+        }
+
+
 class DendriticANNRandom(VanillaANN):
     """Dense Keras-equivalent storage with fixed RANDOM and cable masks."""
 

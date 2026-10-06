@@ -1,6 +1,6 @@
 # RESULTS
 
-Existen resultados diagnósticos de Sprint 0, una reproducción N=5 de Sprint 1 y el primer benchmark de aprendizaje de DSU-S v0; R-002 conserva el corte intermedio N=3.
+Existen resultados diagnósticos de Sprint 0, una reproducción N=5 de Sprint 1 y comparaciones DSU-S v0 contra dANN-R y un MLP igualado por parámetros; R-002 conserva el corte intermedio N=3.
 
 Gate S0 auditado el 2026-10-05: **PASS**. Evidencia de cierre en R-001.
 
@@ -25,6 +25,7 @@ No borrar resultados por no coincidir con la hipótesis.
 | R-002 | vANN / dANN-R | Fashion-MNIST, 54000/6000/10000, N=3 | 468874 almacenados ambos; efectivos 468874 / 10634 | test loss 0.373826 / 0.358398; accuracy 89.433 / 87.237 % | batch 1 por trial abajo | RAM CPU no medida | COMPLETE (S1-T02 PASS) |
 | R-003 | vANN / dANN-R | Fashion-MNIST, 54000/6000/10000, N=5 | 468874 almacenados ambos; efectivos 468874 / 10634 | test loss 0.374481 / 0.358606; accuracy 89.322 / 87.216 % | no se infiere aceleración | RAM CPU no medida | COMPLETE (REPRODUCED; Sprint 1 PASS) |
 | R-005 | DSU-S v0 | Fashion-MNIST, 54000/6000/10000, N=3 | 10634 almacenados y efectivos | test loss 0.357825 ± 0.002485; accuracy 87.253 ± 0.277 % | batch 1 automático, sin comparación controlada | 108072 bytes de tensores; RAM CPU no medida | COMPLETE (S2-T04 PASS; señal FUERTE) |
+| R-006 | MLP 784→13→17→10 vs DSU-S v0 | Fashion-MNIST, 54000/6000/10000, N=3 | 10623 vs 10634 | MLP loss 0.398187 ± 0.007987, accuracy 85.883 ± 0.287 %; DSU-S 0.357825 ± 0.002485, 87.253 ± 0.277 % | no comparada de forma controlada | MLP 42492 bytes de pesos; RAM CPU no medida | COMPLETE (S2-T05 PASS; señal MODERADA) |
 
 ---
 
@@ -161,3 +162,18 @@ La suite estructural verifica fan-in exacto, unicidad, rango, semillas separadas
 | DSU-S v0 | 10634 | 10634 | **0.357825 ± 0.002485** | **87.253 ± 0.277 %** |
 
 DSU-S − dANN-R: loss **−0.000574 ± 0.002440**, accuracy **+0.017 ± 0.117 pp**. DSU-S − vANN: loss **−0.016001 ± 0.003214**, accuracy **−2.180 ± 0.282 pp**. Seed 2 empeora el loss frente a dANN-R en +0.002073. Train+validation total **556.30 s**. Tensores entrenables **42536 bytes**, índices **65536 bytes**, suma **108072 bytes**; `state_dict` serializado de una instancia recién inicializada **111508 bytes**. RAM pico CPU no medida. Las tres corridas muestran aprendizaje estable según loss y métricas finitas; no se registraron normas de gradientes ni predicciones por clase. H-001: **SUPPORTED** dentro de esta comparación estrecha; H-002 permanece **UNTESTED** para eficiencia física/latencia. Siguiente tarea: **S2-T05 — Comparar DSU-S v0 contra un MLP aproximadamente igualado por parámetros**.
+
+---
+
+## R-006 — DSU-S v0 frente a MLP denso igualado por parámetros (S2-T05)
+
+**Status: COMPLETE. Gate técnico S2-T05: PASS. Señal científica: MODERADA/PROMETEDORA.** Fashion-MNIST N=3, 25 épocas, mismos splits seed a seed y test del estado final. MLP 784→13→17→10 con LeakyReLU 0.1, 10623 parámetros almacenados y efectivos, 42492 bytes de pesos float32 y 10583 MAC principales/muestra; DSU-S 10634 parámetros, 42536 bytes de pesos más 65536 bytes de índices y 9984 MAC principales/muestra. La comparación es por parámetros aproximados, no por FLOPs, tiempo ni RAM. Arquitectura y criterios se fijaron antes de entrenar.
+
+| Seed | MLP test loss | MLP accuracy | Δ loss MLP−DSU-S | Δ accuracy MLP−DSU-S (pp) |
+|---:|---:|---:|---:|---:|
+| 1 | 0.398530 | 85.98 % | +0.040941 | −1.20 |
+| 2 | 0.405998 | 85.56 % | +0.050532 | −2.00 |
+| 3 | 0.390034 | 86.11 % | +0.029615 | −0.91 |
+| **Media ± DE muestral** | **0.398187 ± 0.007987** | **85.883 ± 0.287 %** | **+0.040362 ± 0.010470** | **−1.370 ± 0.565** |
+
+Loss positivo y accuracy negativa en Δ favorecen DSU-S. Las tres parejas tienen esa dirección. H-008 = **WEAK SUPPORT** para este MLP concreto. Las historias por época, duraciones (447.61 s train+validation en total), hashes, protocolo, interpretación y límites constan en [EXPERIMENT_002_PARAMETER_MATCHED_MLP.md](EXPERIMENT_002_PARAMETER_MATCHED_MLP.md). Siguiente tarea: **S2-T06 — Determinar qué tamaño necesita un MLP denso para igualar la calidad de DSU-S v0**; no ejecutada.

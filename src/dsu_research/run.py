@@ -11,7 +11,7 @@ from .config import load_config
 from .data import load_fashion_mnist, load_mnist
 from .dsu_s import DSUSv0
 from .harness import run_experiment
-from .model import DendriticANNRandom, MLPReLU, VanillaANN
+from .model import DendriticANNRandom, MLPReLU, ParameterMatchedMLP, VanillaANN
 
 
 def main() -> None:
@@ -59,8 +59,12 @@ def main() -> None:
         if config.topology_seed is None:
             parser.error("DSU-S requires an explicit topology_seed")
         factory, dataset_loader = lambda cfg: DSUSv0(cfg.topology_seed), load_fashion_mnist
+    elif config.model == "parameter_matched_mlp" and config.dataset == "fashion_mnist":
+        if config.topology_seed is not None:
+            parser.error("The dense MLP must not have a topology_seed")
+        factory, dataset_loader = lambda cfg: ParameterMatchedMLP(), load_fashion_mnist
     else:
-        parser.error("Single-run CLI supports mlp_relu/MNIST or dsu_s_v0/Fashion-MNIST; use --seeds for the reproduction pair")
+        parser.error("Single-run CLI supports mlp_relu/MNIST, dsu_s_v0/Fashion-MNIST or parameter_matched_mlp/Fashion-MNIST; use --seeds for the reproduction pair")
     output = args.output or Path("runs") / f"{config.model}_{config.dataset}_{datetime.now(timezone.utc):%Y%m%dT%H%M%S%fZ}.json"
     result = run_experiment(config, model_factory=factory, dataset_loader=dataset_loader)
     result["run_utc"] = datetime.now(timezone.utc).isoformat()

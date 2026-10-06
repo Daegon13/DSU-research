@@ -1,0 +1,9 @@
+{
+  "model": "parameter_matched_mlp",
+  "dataset": "fashion_mnist",
+  "seed": 1,
+  "epochs": 25,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "device": "cpu"
+}

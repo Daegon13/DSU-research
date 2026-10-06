@@ -120,3 +120,21 @@ Una DSU suficientemente madura puede sustituir parcial o totalmente el FFN de un
 
 ### Gate
 No probar hasta completar los milestones previos.
+
+---
+
+## H-008 — Capacidad de clasificación por parámetro frente a MLP denso
+
+**Status:** WEAK SUPPORT
+
+### Statement
+Con un presupuesto de aproximadamente 10.6k parámetros, DSU-S v0 logra mejor calidad de clasificación Fashion-MNIST que un MLP denso de profundidad no lineal comparable.
+
+### Experiment
+S2-T05: comparar DSU-S v0 ya entrenada en seeds 1, 2 y 3 con el MLP congelado 784→13→17→10, LeakyReLU 0.1 en ambas capas ocultas, 10623 parámetros, 25 épocas y el mismo split por seed. Se evaluará el estado final. Criterios fijados antes del entrenamiento en `docs/EXPERIMENT_002_PARAMETER_MATCHED_MLP.md`.
+
+### Prediction
+DSU-S distribuiría sus pocos pesos entre 512 activaciones dendríticas y 128 somáticas, frente a 13 y 17 activaciones ocultas del MLP. Estas activaciones no son parámetros; mayor cantidad no garantiza mayor calidad.
+
+### Resultado S2-T05 (2026-10-06)
+DSU-S obtuvo 87.253 ± 0.277 % y loss 0.357825 ± 0.002485; el MLP 85.883 ± 0.287 % y loss 0.398187 ± 0.007987. Los deltas pareados MLP − DSU-S son −1.370 ± 0.565 pp y +0.040362 ± 0.010470 de loss, con ventaja DSU-S en las tres seeds. Señal **MODERADA/PROMETEDORA** según criterios previos; H-008 queda en **WEAK SUPPORT** por N=3 y una única arquitectura MLP fijada. No aísla la estructura dendrítica de otras diferencias ni demuestra superioridad general.
