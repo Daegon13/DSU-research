@@ -15,42 +15,34 @@ Estados permitidos:
 **Status:** UNTESTED
 
 ### Statement
-Una unidad con varias dendritas estructuradas puede alcanzar calidad comparable a un MLP convencional usando menos parámetros.
+Una arquitectura dendrítica compacta puede mantener rendimiento comparable al baseline dANN-R de igual anchura usando muchos menos parámetros físicamente almacenados; comparaciones posteriores con MLP de presupuestos igualados evaluarán la ventaja más general.
 
 ### Reason
 Cada dendrita procesa sólo un subconjunto de las entradas y realiza agregación local antes del soma.
 
 ### Experiment
-Comparar MLP vs DSU-S con:
-- mismo dataset;
-- mismo protocolo;
-- igualdad aproximada por calidad;
-- igualdad aproximada por parámetros.
+S2-T04: comparar vANN, dANN-R dense-mask y DSU-S v0 compact en Fashion-MNIST con el mismo split y protocolo cuando sea posible, inicialmente N=3 seeds. S2-T05/T06: comparaciones posteriores igualadas por parámetros y por calidad.
 
 ### Prediction
-DSU-S necesitará menos parámetros para alcanzar una calidad similar.
+DSU-S almacenará 10634 parámetros entrenables frente a 468874 de dANN-R y vANN; la similitud de calidad sigue por probar. El coste de índices se reportará aparte.
 
 ---
 
-## H-002 — Sparsity estructurada > sparsity aleatoria
+## H-002 — Utilidad física de la conectividad regular
 
 **Status:** UNTESTED
 
 ### Statement
-La agrupación estructurada y regular de entradas será más eficiente que sparsity aleatoria de densidad equivalente.
+Una estructura compacta de fan-in fijo puede convertir la sparsity dendrítica en una reducción física de almacenamiento y un cómputo estructural utilizable.
 
 ### Reason
-La estructura regular debería favorecer acceso de memoria, vectorización y kernels agrupados.
+DSU-S v0 almacena sólo pesos conectados y 16 índices por dendrita; dANN-R almacena matrices densas enmascaradas. La indexación puede añadir coste y debe medirse.
 
 ### Experiment
-Comparar:
-- grupos fijos;
-- grupos aleatorios;
-- máscara sparse irregular;
-- operaciones block/grouped.
+S2-T04: medir bytes de parámetros, bytes de topología, bytes de checkpoint, RAM y latencia reales frente a dANN-R dense-mask, junto con calidad. La comparación de distintas topologías y kernels queda para Sprint 3/5, con variables controladas.
 
 ### Prediction
-La versión estructurada tendrá latencia menor o más estable.
+DSU-S reducirá almacenamiento de pesos entrenables; el resultado de latencia queda abierto. Menos parámetros o MAC teóricos no garantizan aceleración.
 
 ---
 

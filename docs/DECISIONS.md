@@ -104,3 +104,21 @@ Es un pipeline pequeño y público que se descarga automáticamente, permite tes
 
 ### Consequence
 El smoke test comprueba funcionamiento, no compara arquitecturas ni estima calidad final. Versiones exactas se fijan en `uv.lock`; las métricas incluyen configuración y entorno. RAM pico en CPU queda sin medir por ahora.
+
+---
+
+## ADR-008 — DSU-S v0 con fan-in fijo y pesos compactos
+
+**Status:** ACCEPTED
+
+### Decision
+
+Fijar la primera DSU-S en 128 somas, cuatro dendritas por soma y exactamente 16 índices distintos por dendrita, muestreados uniformemente sin reemplazo dentro de cada dendrita. Separar `topology_seed` de `training_seed`; mantener la topología fija y no entrenable. Almacenar sólo los 10634 pesos y sesgos conectados, más 8192 índices como metadata o buffers. La definición completa y el experimento inicial están en [DSU_S_SPEC.md](DSU_S_SPEC.md).
+
+### Reason
+
+La reproducción dANN-R mostró 10634 conexiones y sesgos efectivos, pero 468874 parámetros físicamente almacenados por sus matrices densas enmascaradas. El fan-in fijo permite una representación compacta regular sin añadir estado ni optimizaciones complejas.
+
+### Consequence
+
+DSU-S ya no replica la máscara aleatoria global de dANN-R: distribuye sus 8192 conexiones como 16 por dendrita. El primer benchmark medirá calidad, tamaño y latencia y declarará ambos cambios. El coste de índices se contabilizará aparte; los MAC teóricos no se interpretarán como velocidad medida.

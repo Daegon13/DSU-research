@@ -7,16 +7,16 @@ Sprint 2 — DSU-S
 S2
 
 ## CURRENT TASK
-S2-T01 — Cerrar la especificación matemática y computacional de DSU-S antes de implementarla.
+S2-T02 — Implementar DSU-S v0 con almacenamiento físicamente compacto.
 
 ## LAST COMPLETED TASK
-S1-T03/S1-T04: PASS. Comparación formal N=5 de vANN/dANN-R y documentación de divergencias en R-003; gate REPRODUCTION_001 = REPRODUCED y gate Sprint 1 = PASS. 10 tests pasan.
+S2-T01: PASS. Especificación matemática y computacional de DSU-S v0 cerrada en `docs/DSU_S_SPEC.md`; no se implementó ni ejecutó DSU-S. Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
 R-003, N=5 propio: dANN-R test loss 0.358606 ± 0.003586, accuracy 87.216 ± 0.187 %; vANN loss 0.374481 ± 0.014621, accuracy 89.322 ± 0.180 %. Deltas pareados dANN-R − vANN: loss −0.015874 ± 0.014078, accuracy −2.106 ± 0.211 puntos porcentuales. Seed 4 invierte la dirección de loss individual. dANN-R tiene 10634 parámetros efectivos frente a 468874 de vANN, pero ambos almacenan 468874. JSON locales y resumen N=5 en `runs/reproduction_001/`; detalles y referencia oficial en `docs/RESULTS.md`.
 
 ## CURRENT BEST MODEL
-No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija se evaluó en época 25. DSU-S aún no está especificada ni implementada.
+No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija se evaluó en época 25. DSU-S v0 está especificada, aún no implementada ni evaluada.
 
 ## CURRENT BASELINE
 Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Para reproducción Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros. Hardware de R-002: AMD Ryzen 5 5600G, Windows 11, CPU float32, PyTorch 2.14.1+cpu. La pareja tiene la misma anchura oculta, no igual presupuesto de conexiones efectivas.
@@ -31,11 +31,11 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Para re
 
 ## ACTIVE HYPOTHESIS
 H-001:
-Una unidad con agregación dendrítica estructurada puede alcanzar calidad comparable a una capa densa usando menos parámetros.
+DSU-S v0 compacta podría mantener calidad cercana a dANN-R usando menos parámetros físicamente almacenados. H-002 pregunta si el fan-in fijo puede convertir la sparsity en ahorro físico útil; H-006 mantiene abierta la latencia real.
 
 ## OPEN QUESTIONS
-- ¿Cuánto difiere la reproducción PyTorch compacta de la semántica Keras de inicialización, máscara y shuffle?
-- ¿Qué topología de grupos dendríticos será más eficiente en PyTorch?
+- ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
+- ¿Qué rendimiento tendrá la topología fija de 16 entradas por dendrita y cuánto costará su indexación en PyTorch?
 - ¿La ventaja paramétrica se convierte en ventaja real de memoria y latencia?
 - ¿El estado temporal por dendrita aporta capacidad suficiente para justificar su coste?
 
@@ -51,7 +51,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S2-T01 — Cerrar la especificación matemática y computacional de DSU-S antes de implementarla. No se inició la implementación.
+S2-T02 — Implementar DSU-S v0 con almacenamiento físicamente compacto, respetando `docs/DSU_S_SPEC.md`. Aún no iniciada.
 
 ## LAST UPDATE
-2026-10-05
+2026-10-06

@@ -2,52 +2,7 @@
 
 # 1. DSU-S
 
-## Entrada
-
-Sea:
-
-\[
-x \in \mathbb{R}^{D}
-\]
-
-Cada soma posee \(B\) dendritas.
-
-Cada dendrita observa un subconjunto:
-
-\[
-G_b \subset \{1,\dots,D\}
-\]
-
-con:
-
-\[
-|G_b| = K,\quad K \ll D
-\]
-
-## Cálculo dendrítico
-
-\[
-z_b = W_b x_{G_b} + b_b
-\]
-
-\[
-d_b = \phi(z_b)
-\]
-
-## Integración somática
-
-\[
-s = \psi\left(\sum_{b=1}^{B} c_b d_b + b_s\right)
-\]
-
-## Propiedades
-
-- sin estado;
-- diferenciable;
-- compatible con backpropagation;
-- conectividad estructurada;
-- múltiples ramas por soma;
-- coste controlado.
+La especificación normativa de **DSU-S v0** está en [DSU_S_SPEC.md](DSU_S_SPEC.md). Fija `D=784`, `H=128`, `B=4`, `K=16` exacto por dendrita, topología aleatoria fija por `topology_seed`, LeakyReLU 0.1 en dendritas y somas, y salida lineal de 10 logits. Sus 10634 parámetros entrenables se almacenarán de forma compacta. Sigue sin estado temporal.
 
 ---
 
@@ -124,7 +79,7 @@ No implementar antes del gate correspondiente.
 
 # 4. Topología
 
-La primera familia de pruebas debería variar:
+La topología de DSU-S v0 queda fijada en [DSU_S_SPEC.md](DSU_S_SPEC.md). En Sprint 3 se podrá variar, en experimentos separados:
 
 - \(B \in \{2,4,8\}\)
 - diferentes valores de \(K\);
