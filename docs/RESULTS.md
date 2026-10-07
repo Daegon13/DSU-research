@@ -1,6 +1,6 @@
 # RESULTS
 
-Existen resultados diagnósticos de Sprint 0, una reproducción N=5 de Sprint 1 y comparaciones DSU-S v0 contra dANN-R y un MLP igualado por parámetros; R-002 conserva el corte intermedio N=3.
+Existen resultados diagnósticos de Sprint 0, una reproducción N=5 de Sprint 1 y comparaciones DSU-S v0 contra dANN-R y MLP densos igualados por parámetros o calidad; R-002 conserva el corte intermedio N=3.
 
 Gate S0 auditado el 2026-10-05: **PASS**. Evidencia de cierre en R-001.
 
@@ -177,3 +177,11 @@ DSU-S − dANN-R: loss **−0.000574 ± 0.002440**, accuracy **+0.017 ± 0.117 p
 | **Media ± DE muestral** | **0.398187 ± 0.007987** | **85.883 ± 0.287 %** | **+0.040362 ± 0.010470** | **−1.370 ± 0.565** |
 
 Loss positivo y accuracy negativa en Δ favorecen DSU-S. Las tres parejas tienen esa dirección. H-008 = **WEAK SUPPORT** para este MLP concreto. Las historias por época, duraciones (447.61 s train+validation en total), hashes, protocolo, interpretación y límites constan en [EXPERIMENT_002_PARAMETER_MATCHED_MLP.md](EXPERIMENT_002_PARAMETER_MATCHED_MLP.md). Siguiente tarea: **S2-T06 — Determinar qué tamaño necesita un MLP denso para igualar la calidad de DSU-S v0**; no ejecutada.
+
+---
+
+## R-007 — Capacidad MLP necesaria para match de validation (S2-T06)
+
+**Status: COMPLETE. Gate técnico S2-T06: PASS.** Search exclusivamente con train+validation, seeds 1–3, época final 25 y umbrales fijados antes de entrenar: accuracy media ≥87.988889 %, loss media ≤0.340460462. El baseline `13→17` se reutilizó; `16→21` y `19→25` fallaron; `22→29` fue el primer full match; `25→33` pasó como sanity check; el refinamiento `20→26` y `21→27` pasó. Se seleccionó y congeló **`784→20→26→10`**, el menor full match: **16516 parámetros**, **1.553×** DSU-S, **16460 MAC principales/muestra**, **1.649×** DSU-S. Sus pesos float32 ocupan **66064 bytes**, frente a **42536 bytes de pesos + 65536 bytes de topología** de DSU-S. La suma de payload tensorial DSU-S es mayor que la del MLP elegido.
+
+Validation del seleccionado: loss **0.336997 ± 0.012175**, accuracy **88.167 ± 0.765 %**. Sólo después de congelar la selección se abrió test para ese MLP: loss **0.375776 ± 0.003194**, accuracy **86.700 ± 0.191 %**; DSU-S reutilizada: **0.357825 ± 0.002485**, **87.253 ± 0.277 %**. Deltas pareados MLP−DSU-S: loss **+0.017952 ± 0.005227**, accuracy **−0.553 ± 0.463 pp**, con la misma dirección en tres seeds. Train+validation del seleccionado sumó **522.05 s**; no es un benchmark controlado de velocidad. Tabla completa, resultados por seed, protocolo, artefactos, interpretación y límites: [EXPERIMENT_003_MLP_CAPACITY_SEARCH.md](EXPERIMENT_003_MLP_CAPACITY_SEARCH.md). H-008 = **SUPPORTED dentro de la familia y protocolo fijados**, sin inferencia de superioridad general ni de menor almacenamiento total. **Siguiente tarea: S2-REVIEW — Auditar Sprint 2 y decidir si avanzar a Sprint 3.** No se cierra Sprint 2 ni se inicia Sprint 3 automáticamente.

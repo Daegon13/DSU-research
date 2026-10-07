@@ -125,7 +125,9 @@ No probar hasta completar los milestones previos.
 
 ## H-008 — Capacidad de clasificación por parámetro frente a MLP denso
 
-**Status:** WEAK SUPPORT
+**Status:** SUPPORTED
+
+**Alcance:** familia MLP densa y protocolo S2-T05/T06.
 
 ### Statement
 Con un presupuesto de aproximadamente 10.6k parámetros, DSU-S v0 logra mejor calidad de clasificación Fashion-MNIST que un MLP denso de profundidad no lineal comparable.
@@ -138,3 +140,6 @@ DSU-S distribuiría sus pocos pesos entre 512 activaciones dendríticas y 128 so
 
 ### Resultado S2-T05 (2026-10-06)
 DSU-S obtuvo 87.253 ± 0.277 % y loss 0.357825 ± 0.002485; el MLP 85.883 ± 0.287 % y loss 0.398187 ± 0.007987. Los deltas pareados MLP − DSU-S son −1.370 ± 0.565 pp y +0.040362 ± 0.010470 de loss, con ventaja DSU-S en las tres seeds. Señal **MODERADA/PROMETEDORA** según criterios previos; H-008 queda en **WEAK SUPPORT** por N=3 y una única arquitectura MLP fijada. No aísla la estructura dendrítica de otras diferencias ni demuestra superioridad general.
+
+### Resultado S2-T06 (2026-10-06)
+El search prefijado usó sólo validation para seleccionar dentro de la familia `784→h1→round(17h1/13)→10`. Los MLP `13→17`, `16→21` y `19→25` fallaron el criterio dual de calidad; `22→29` fue el primer full match de escalera y el refinamiento seleccionó `20→26` con **16516 parámetros**, **1.553×** DSU-S. Después de congelar la selección, sólo ese MLP se evaluó en test: **86.700 ± 0.191 %**, loss **0.375776 ± 0.003194**, frente a DSU-S **87.253 ± 0.277 %** y **0.357825 ± 0.002485**. La ventaja de test DSU-S conserva dirección en las tres seeds. H-008 pasa a **SUPPORTED en este alcance estrecho**: eficiencia de parámetros entrenables dentro de la familia y protocolo evaluados. N=3, tolerancias heurísticas y una familia limitada impiden afirmar superioridad general o causalidad dendrítica. Los **65536 bytes de topología** de DSU-S hacen que su payload tensorial total sea mayor que el de este MLP; no se afirma ventaja de almacenamiento total, latencia o energía. Detalles en [EXPERIMENT_003_MLP_CAPACITY_SEARCH.md](EXPERIMENT_003_MLP_CAPACITY_SEARCH.md).

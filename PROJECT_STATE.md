@@ -7,19 +7,19 @@ Sprint 2 — DSU-S
 S2
 
 ## CURRENT TASK
-S2-T06 — Determinar qué tamaño necesita un MLP denso para igualar la calidad de DSU-S v0. Pendiente; no ejecutado.
+S2-REVIEW — Auditar los resultados completos de Sprint 2 y decidir si existe evidencia suficiente para avanzar a Sprint 3. Pendiente; no iniciada. Sprint 2 sigue abierto.
 
 ## LAST COMPLETED TASK
-S2-T05: PASS técnico, señal científica MODERADA/PROMETEDORA. MLP 784→13→17→10 congelado antes de entrenar; tres seeds Fashion-MNIST de 25 épocas y comparación pareada con DSU-S S2-T04 reutilizada. H-008 = WEAK SUPPORT. Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S2-T06: PASS técnico. Búsqueda MLP de dos capas ocultas con train+validation únicamente, escalera prefijada, sanity check y refinamiento completos. `784→20→26→10` seleccionado y congelado antes de abrir test. H-008 = SUPPORTED dentro de esa familia y protocolo. Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-R-006, N=3 MLP igualado: test loss 0.398187 ± 0.007987, accuracy 85.883 ± 0.287 %; DSU-S reutilizada: 0.357825 ± 0.002485 y 87.253 ± 0.277 %. Deltas pareados MLP − DSU-S: loss +0.040362 ± 0.010470, accuracy −1.370 ± 0.565 pp. Ventaja DSU-S en las tres seeds, con mismo split y estado final de época 25. MLP: 10623 parámetros, 42492 bytes de pesos, 10583 MAC principales/muestra. JSON locales y detalle en `docs/EXPERIMENT_002_PARAMETER_MATCHED_MLP.md` y `docs/RESULTS.md`.
+R-007, N=3: target DSU-S validation accuracy 88.488889 %, loss 0.320460462. MLP `20→26` fue el menor full match de validation: 88.167 ± 0.765 %, loss 0.336997 ± 0.012175, 16516 parámetros (1.553× DSU-S) y 16460 MAC principales (1.649×). Test final del seleccionado: 86.700 ± 0.191 %, loss 0.375776 ± 0.003194; DSU-S: 87.253 ± 0.277 %, loss 0.357825 ± 0.002485. Deltas pareados MLP−DSU-S: −0.553 ± 0.463 pp y +0.017952 ± 0.005227 loss. Detalle en `docs/EXPERIMENT_003_MLP_CAPACITY_SEARCH.md` y JSON locales `runs/mlp_capacity_s2_t06/`.
 
 ## CURRENT BEST MODEL
-No se seleccionó un modelo por validation ni test. La pareja vANN/dANN-R fija, DSU-S v0 y el MLP de S2-T05 se evaluaron en época 25. No se eligió un checkpoint por validation.
+En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
 
 ## CURRENT BASELINE
-Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros; la pareja vANN/dANN-R tiene igual anchura oculta, no igual presupuesto efectivo. S2-T05: MLP denso LeakyReLU 784→13→17→10, 10623 parámetros y 10583 MAC principales, aproximadamente igualado a DSU-S por parámetros. Hardware CPU AMD Ryzen 5 5600G, Windows 11, float32, PyTorch 2.14.1+cpu.
+Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros; la pareja vANN/dANN-R tiene igual anchura oculta, no igual presupuesto efectivo. S2-T05: MLP denso LeakyReLU 784→13→17→10, 10623 parámetros y 10583 MAC principales, aproximadamente igualado a DSU-S por parámetros. S2-T06: MLP quality-matched en validation `784→20→26→10`, 16516 parámetros y 16460 MAC principales. Hardware CPU AMD Ryzen 5 5600G, Windows 11, float32, PyTorch 2.14.1+cpu.
 
 ## IMPORTANT NUMBERS
 - Dedicación objetivo: 2–4 h/semana.
@@ -30,7 +30,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
   - >= 1.25–1.5x de mejora de throughput o reducción equivalente de latencia.
 
 ## ACTIVE HYPOTHESIS
-H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = WEAK SUPPORT frente al MLP denso aproximadamente igualado por parámetros (ventaja DSU-S de 1.370 pp). H-002 sigue UNTESTED para eficiencia física/latencia de ejecución; H-006 mantiene abierta la latencia real.
+H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el full match de validation necesitó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para eficiencia física/latencia de ejecución; H-006 mantiene abierta la latencia real.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -47,13 +47,14 @@ H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 =
 - DSU-S v0 se entrenó en CPU con Fashion-MNIST en tres seeds; CUDA se omite limpiamente si no está disponible. No hay RAM pico CPU, comparación controlada de latencia ni evidencia de ventaja energética.
 - El `state_dict` medido corresponde a una instancia recién inicializada con la misma estructura, no a los pesos finales: el harness no conserva pesos entrenados. N=3 y fan-in exacto frente a promedio impiden atribuir una diferencia de calidad sólo al almacenamiento compacto.
 - R-006 compara sólo un MLP denso fijado y N=3; la ventaja de DSU-S no aísla causalmente la estructura dendrítica de inicialización, conectividad y número de activaciones. MAC principales teóricos no son FLOPs exactos ni tiempo medido. RAM de activaciones no medida.
+- R-007 cubre sólo una familia MLP, tres seeds y tolerancias heurísticas; no identifica el mejor MLP posible. El match de validation no eliminó la desventaja de test del seleccionado. Los 65536 bytes de topología de DSU-S hacen que su payload tensorial total supere los 66064 bytes de pesos del MLP seleccionado; no se infiere ventaja de almacenamiento total ni velocidad.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S2-T06 — Determinar qué tamaño necesita un MLP denso para igualar la calidad de DSU-S v0. No iniciada; requiere tarea propia.
+S2-REVIEW — Auditar los resultados completos de Sprint 2 y decidir si existe evidencia suficiente para avanzar a Sprint 3. No iniciada; requiere tarea propia.
 
 ## LAST UPDATE
 2026-10-06

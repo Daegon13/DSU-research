@@ -67,6 +67,33 @@ class ParameterMatchedMLP(nn.Module):
         }
 
 
+class CapacityMLP(nn.Module):
+    """Two-hidden-layer dense family for the predefined S2-T06 search."""
+
+    def __init__(self, hidden1: int):
+        super().__init__()
+        if type(hidden1) is not int or hidden1 < 1:
+            raise ValueError("hidden1 must be a positive integer")
+        hidden2 = round(17 / 13 * hidden1)
+        self.hidden1 = nn.Linear(784, hidden1)
+        self.hidden2 = nn.Linear(hidden1, hidden2)
+        self.output = nn.Linear(hidden2, 10)
+        for layer in (self.hidden1, self.hidden2, self.output):
+            _glorot_linear(layer)
+
+    def forward(self, x):
+        x = F.leaky_relu(self.hidden1(x.flatten(1)), negative_slope=0.1)
+        x = F.leaky_relu(self.hidden2(x), negative_slope=0.1)
+        return self.output(x)
+
+    def structural_metrics(self) -> dict:
+        return {
+            "trainable_parameter_bytes": sum(p.numel() * p.element_size() for p in self.parameters()),
+            "theoretical_main_macs_per_sample": sum(layer.weight.numel() for layer in
+                                                     (self.hidden1, self.hidden2, self.output)),
+        }
+
+
 class DendriticANNRandom(VanillaANN):
     """Dense Keras-equivalent storage with fixed RANDOM and cable masks."""
 
