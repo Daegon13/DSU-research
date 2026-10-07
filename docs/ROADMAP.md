@@ -75,22 +75,17 @@ Implementar la primera unidad propia.
 - S2-T06 comparación quality-matched.
 
 ### Gate
-GO si existe señal de eficiencia paramétrica u otra ventaja reproducible.
+**PASS — S2-REVIEW (2026-10-06).** DSU-S aprendió de forma estable, conservó calidad próxima a dANN-R de igual anchura y mostró señal de capacidad por parámetro frente a la familia MLP probada. **GO TO SPRINT 3** para resolver causalidad. El payload tensorial conocido de DSU-S con topología int64 es mayor que el del MLP quality-matched; no hay evidencia de ventaja de almacenamiento total, latencia o energía. Véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).
 
 ---
 
-## Sprint 3 — Topología
+## Sprint 3 — Topology and Causal Ablations
 
-Comparar:
-- número de dendritas;
-- tamaño de grupo;
-- solapamiento;
-- grupos aleatorios;
-- grupos estructurados;
-- permutación.
+**Objetivo:** separar el efecto de fan-in regular, organización dendrita→soma y representación compacta antes de variar número de dendritas o fan-in. Las comparaciones posteriores podrán incluir solapamiento, grupos y permutación, una variable conceptual por experimento.
 
-### Pregunta
-¿Qué topología maximiza calidad por parámetro sin destruir velocidad?
+**S3-T01, siguiente tarea:** diseñar únicamente el control Fixed-dANN de fan-in exactamente 16 y la matriz causal dANN-R (variable/dense-mask), Fixed-dANN (fijo/dense-mask), DSU-S (fijo/compact). A vs B pregunta por fan-in; B vs C sólo aísla representación si topología, inicialización y matemática se alinean. No implementar ni entrenar en S3-T01.
+
+**Backlog de topología:** estudiar regeneración desde seed, checkpoint sin `G`, metadata int32/int16 y topología implícita. Distinguir ahorro de checkpoint de memoria residente/runtime; no cambiar dtype hasta una tarea propia. No introducir todavía estado temporal, DSU-T, gating apical, spikes ni Transformers.
 
 ---
 

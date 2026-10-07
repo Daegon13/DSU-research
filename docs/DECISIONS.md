@@ -140,3 +140,21 @@ Glorot mantiene coherencia de familia con los baselines sin trasladar su matriz 
 ### Consequence
 
 `G` añade 65536 bytes nominales a los 42536 bytes de parámetros float32. La seed guardada como atributo no reemplaza al buffer en un checkpoint; al cargar, `G` del `state_dict` es la fuente de verdad.
+
+---
+
+## ADR-010 — Continuar con ablaciones causales tras Sprint 2
+
+**Status:** ACCEPTED
+
+### Decision
+
+Cerrar Sprint 2 como PASS y avanzar a Sprint 3 — Topology and Causal Ablations. La primera tarea, S3-T01, será sólo el diseño de un control Fixed-dANN con fan-in exactamente 16 y una matriz causal dANN-R / Fixed-dANN / DSU-S. No se autoriza por esta decisión implementar el control ni entrenar modelos nuevos.
+
+### Reason
+
+DSU-S v0 aprendió en tres seeds, mantuvo calidad próxima a dANN-R de igual anchura almacenando 44.09× menos parámetros entrenables y mostró señal de capacidad por parámetro frente a MLP densos probados. Persisten confusores de fan-in, topología, inicialización y representación, y el payload tensorial conocido con índices int64 supera al del MLP quality-matched. El siguiente paso útil es aislar causas y costes físicos, no ampliar todavía la arquitectura.
+
+### Consequence
+
+El GO es un gate de investigación causal, no una afirmación de eficiencia total. Sprint 3 mantendrá separados calidad, parámetros entrenables, bytes de topología, checkpoint, RAM runtime y velocidad. Las opciones para comprimir o regenerar topología quedan en backlog; cada una requiere experimento propio y no cambia `G` en esta revisión. Véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).

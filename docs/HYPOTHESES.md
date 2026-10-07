@@ -29,6 +29,9 @@ DSU-S almacenaría 10634 parámetros entrenables frente a 468874 de dANN-R y vAN
 ### Resultado S2-T04 (2026-10-06)
 En Fashion-MNIST N=3, DSU-S obtuvo test loss **0.357825 ± 0.002485** y accuracy **87.253 ± 0.277 %**; dANN-R obtuvo **0.358398 ± 0.004885** y **87.237 ± 0.235 %**. Deltas pareados DSU-S − dANN-R: **−0.000574 ± 0.002440** de loss y **+0.017 ± 0.117 pp** de accuracy. Tres entrenamientos estables y 10634 parámetros almacenados frente a 468874 de dANN-R satisfacen la señal fuerte predefinida para esta comparación. `SUPPORTED` se limita a este benchmark de igual anchura; N=3 no aísla fan-in/topología/inicialización ni demuestra ventaja general frente a MLP igualado. Detalles en [EXPERIMENT_001_DSU_S_LEARNING.md](EXPERIMENT_001_DSU_S_LEARNING.md).
 
+### Auditoría S2-REVIEW
+**SUPPORTED** se conserva para la comparación de Fashion-MNIST N=3 de igual anchura y protocolo. Es una reducción de parámetros entrenables físicamente almacenados frente a **dANN-R dense-mask**, no prueba de menor payload tensorial que un MLP quality-matched ni atribución causal a las dendritas. Véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).
+
 ---
 
 ## H-002 — Utilidad física de la conectividad regular
@@ -49,6 +52,9 @@ DSU-S reducirá almacenamiento de pesos entrenables; el resultado de latencia qu
 
 ### Evidencia parcial S2-T04
 DSU-S almacena 42536 bytes de tensores entrenables más 65536 bytes de índices; un `state_dict` representativo ocupa 111508 bytes. Esto confirma tamaño tensorial compacto, pero H-002 sigue **UNTESTED** en cuanto a eficiencia física/latencia de ejecución: no se midió RAM pico CPU ni una comparación controlada de latencia y los índices/gather tienen coste propio.
+
+### Auditoría S2-REVIEW
+El payload tensorial conocido de DSU-S (**108072 bytes**) supera los **66064 bytes** de pesos del MLP `20→26`. H-002 permanece **UNTESTED** para utilidad de memoria runtime y cómputo; el resultado observado impide afirmar una ventaja de almacenamiento total frente a ese MLP con la representación int64 actual. Optimizar topología requiere estudio separado de checkpoint y runtime.
 
 ---
 
@@ -143,3 +149,6 @@ DSU-S obtuvo 87.253 ± 0.277 % y loss 0.357825 ± 0.002485; el MLP 85.883 ± 0.2
 
 ### Resultado S2-T06 (2026-10-06)
 El search prefijado usó sólo validation para seleccionar dentro de la familia `784→h1→round(17h1/13)→10`. Los MLP `13→17`, `16→21` y `19→25` fallaron el criterio dual de calidad; `22→29` fue el primer full match de escalera y el refinamiento seleccionó `20→26` con **16516 parámetros**, **1.553×** DSU-S. Después de congelar la selección, sólo ese MLP se evaluó en test: **86.700 ± 0.191 %**, loss **0.375776 ± 0.003194**, frente a DSU-S **87.253 ± 0.277 %** y **0.357825 ± 0.002485**. La ventaja de test DSU-S conserva dirección en las tres seeds. H-008 pasa a **SUPPORTED en este alcance estrecho**: eficiencia de parámetros entrenables dentro de la familia y protocolo evaluados. N=3, tolerancias heurísticas y una familia limitada impiden afirmar superioridad general o causalidad dendrítica. Los **65536 bytes de topología** de DSU-S hacen que su payload tensorial total sea mayor que el de este MLP; no se afirma ventaja de almacenamiento total, latencia o energía. Detalles en [EXPERIMENT_003_MLP_CAPACITY_SEARCH.md](EXPERIMENT_003_MLP_CAPACITY_SEARCH.md).
+
+### Auditoría S2-REVIEW
+**SUPPORTED** se conserva para el MLP 13→17 probado y la familia/criterios S2-T06. El factor 1.553× es el mínimo **entre los candidatos evaluados**, no un mínimo demostrado entre todas las anchuras y MLP posibles. La decisión de Sprint 3 se fundamenta en esta señal acotada y en la necesidad de ablaciones causales; véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).
