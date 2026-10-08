@@ -29,6 +29,7 @@ No borrar resultados por no coincidir con la hipótesis.
 | R-007 | MLP 784→20→26→10 vs DSU-S v0 | Fashion-MNIST, 54000/6000/10000, N=3 | 16516 vs 10634 | MLP test loss 0.375776 ± 0.003194, accuracy 86.700 ± 0.191 %; DSU-S 0.357825 ± 0.002485, 87.253 ± 0.277 % | no comparada de forma controlada | MLP 66064 bytes de pesos; DSU-S 108072 bytes de payload conocido | COMPLETE (S2-T06 PASS; match en validation) |
 | R-008 | Revisión Sprint 2 | Evidencia acumulada S2-T02–T06 | no aplica | señal acotada de capacidad por parámetro | no medida de forma controlada | sin ventaja de payload total frente al MLP 20→26 | S2-REVIEW PASS; Sprint 2 PASS; GO causal Sprint 3 |
 | R-009 | Fixed-dANN / DSU-S paired | Sintético determinista, CPU float32 | 468874 / 10634 almacenados; 10634 efectivos ambos | max forward 1.19e-7; max grad 3.73e-9; max delta tras 5 Adam 3.35e-8 | no medida | no medida; máscaras/índices no contabilizados como RAM | COMPLETE (S3-T02 PASS) |
+| R-010 | dANN-R vs Fixed-dANN | Fashion-MNIST, 54000/6000/10000, N=5 paired | 468874 almacenados y 10634 efectivos ambos | A/B test loss 0.358606 / 0.359673; accuracy 87.216 / 87.174%; Δ B−A +0.001066 loss, −0.042 pp | no interpretar duraciones como performance | RAM no medida | COMPLETE (S3-T03 PASS; H-009 NOT SUPPORTED / NEGLIGIBLE) |
 
 ---
 

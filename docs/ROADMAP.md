@@ -87,7 +87,9 @@ Implementar la primera unidad propia.
 
 **S3-T02: PASS (2026-10-08).** Fixed-dANN dense-mask comparte exactamente `G` y pesos efectivos con DSU-S; forward, loss, gradientes y cinco pasos Adam fueron equivalentes dentro de tolerancia CPU float32. Detalle en [EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md](EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md).
 
-**S3-E01, siguiente tarea:** ejecutar dANN-R vs Fixed-dANN con el protocolo causal congelado para estudiar regularización de fan-in junto a distribución topológica. No se ejecutó en S3-T02.
+**S3-T03 / S3-E01: PASS técnico (2026-10-08).** dANN-R vs Fixed-dANN completó N=5 con inicialización y minibatches pareados. El efecto medio fue despreciable según criterios prefijados; H-009 = NOT SUPPORTED / NEGLIGIBLE. Véase [EXPERIMENT_005_FIXED_FANIN_ABLATION.md](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
+
+**S3-T04, siguiente tarea:** ejecutar S3-E02, benchmark físico controlado Fixed-dANN vs DSU-S. Mantener separadas equivalencia funcional, almacenamiento, operaciones, latencia y RAM.
 
 **Experimentos siguientes:** S3-E01 A/B con N=5 propuesto y protocolo congelado; S3-E02 B/C primero equivalencia y luego accounting, trayectoria y rendimiento físico. Segunda fase: barridos separados `B∈{1,2,4,8}` y `K∈{8,16,32}`. **Alta prioridad:** `1×64 vs 2×32 vs 4×16 vs 8×8`, 64 conexiones por soma con cobertura controlada, para estudiar compartimentalización dendrítica; sus conteos de sesgos/pesos soma difieren y deben declararse.
 

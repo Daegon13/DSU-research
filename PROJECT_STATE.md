@@ -7,13 +7,13 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-E01 — Ejecutar la ablación causal dANN-R vs Fixed-dANN para fan-in/topología bajo el protocolo congelado. Pendiente; no iniciada.
+S3-T04 — Ejecutar S3-E02: benchmark físico controlado Fixed-dANN vs DSU-S. Pendiente; no iniciado.
 
 ## LAST COMPLETED TASK
-S3-T02: PASS. Fixed-dANN dense-mask implementado y verificado contra DSU-S con `G` y pesos activos idénticos: equivalencia de intermedios, logits, loss, gradientes y cinco pasos Adam en CPU float32. No se ejecutó Fashion-MNIST ni performance. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T03: PASS técnico. S3-E01 completó 10 corridas Fashion-MNIST con inicialización y minibatches pareados. Fixed-dANN menos dANN-R: −0.042 ± 0.329 pp test accuracy y +0.001066 ± 0.007721 test loss; H-009 = NOT SUPPORTED / NEGLIGIBLE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-R-009: Fixed-dANN y DSU-S paired mostraron máximo error 1.19e-7 en forward, 3.73e-9 en gradientes y 3.35e-8 en parámetros activos tras cinco pasos Adam. Gradientes y momentos Adam inactivos exactamente cero. Fixed-dANN almacena 468874 parámetros y DSU-S 10634, ambos con 10634 efectivos. Alcance: sintético CPU float32; sin performance ni entrenamiento largo. Detalle en `docs/EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md`.
+R-010: dANN-R vs Fixed-dANN N=5 bajo protocolo dense-mask pareado. Test A/B: loss 0.358606/0.359673, accuracy 87.216/87.174%; deltas B−A +0.001066 loss y −0.042 pp accuracy. Efecto medio despreciable según criterios prefijados. Detalle en `docs/EXPERIMENT_005_FIXED_FANIN_ABLATION.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -31,7 +31,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
-H-009 (fan-in) y H-011 (partición dendrítica) = UNTESTED. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02; no implica ventaja de memoria total o performance.
+H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02; no implica ventaja de memoria total o performance. H-011 (partición dendrítica) = UNTESTED.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -52,13 +52,14 @@ H-009 (fan-in) y H-011 (partición dendrítica) = UNTESTED. H-010 = SUPPORTED en
 - R-007 cubre sólo una familia MLP, tres seeds y tolerancias heurísticas; no identifica el mejor MLP posible. El match de validation no eliminó la desventaja de test del seleccionado. Los 65536 bytes de topología de DSU-S hacen que su payload tensorial total supere los 66064 bytes de pesos del MLP seleccionado; no se infiere ventaja de almacenamiento total ni velocidad.
 - S2-REVIEW confirma que la comparación DSU-S/dANN-R confunde fan-in variable vs fijo, topología, inicialización y representación. Sprint 3 debe diseñar controles antes de atribuir causalidad; el GO no autoriza modelos nuevos por sí mismo.
 - S3-T02 sólo verificó equivalencia paired con datos sintéticos y cinco pasos Adam en CPU float32. CUDA, trayectoria larga, checkpoint comparable, RAM y latencia siguen sin evidencia.
+- S3-T03 N=5 encontró efecto medio despreciable de regularizar fan-in/topología a K=16. Las aristas A/B difieren y la dispersión entre seeds supera el delta medio; no generalizar fuera del protocolo.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-E01 — Ejecutar la ablación causal dANN-R vs Fixed-dANN para fan-in/topología bajo el protocolo congelado. No iniciada; no confundir el contraste con efecto exclusivo de K=16.
+S3-T04 — Ejecutar S3-E02: benchmark físico controlado Fixed-dANN vs DSU-S. No iniciado; mantener separadas equivalencia funcional, bytes, operaciones ejecutadas, latencia y RAM.
 
 ## LAST UPDATE
 2026-10-08

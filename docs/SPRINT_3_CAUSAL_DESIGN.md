@@ -64,6 +64,8 @@ Comparar A y B con **N=5** seeds de entrenamiento/topología `1..5` si el coste 
 
 Resultado primario de calidad: diferencia pareada de loss y accuracy de test en época 25, con validation diagnóstica y resultados por seed; inspeccionar historia y dispersión. Una mejora B frente a A apoyaría el efecto **conjunto** de regularización de fan-in y nueva distribución topológica bajo dense-mask; empate o peor rendimiento también se registran. N=5 es descriptivo, no prueba de significancia ni de generalización.
 
+**Resultado S3-T03 / S3-E01 (2026-10-08): PASS técnico; H-009 NOT SUPPORTED / NEGLIGIBLE.** Con inicialización densa y orden de minibatches pareados, B−A fue −0.042 ± 0.329 pp de test accuracy y +0.001066 ± 0.007721 de test loss. B ganó accuracy en 2/5 seeds y loss en 3/5. El efecto medio quedó dentro de los umbrales despreciables prefijados. Detalle en [EXPERIMENT_005_FIXED_FANIN_ABLATION.md](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
+
 ## S3-E02 — Representación (futuro, sin ejecutar)
 
 Orden de gates: (1) identidad de `G` y mapeo de parámetros; (2) equivalencia de intermedios/logits/gradientes; (3) un paso y trayectoria Adam pareados; (4) accounting y mediciones físicas. El criterio primario es **equivalencia funcional**, no accuracy. Reportar errores numéricos máximos y trayectorias por paso; si (1)–(2) fallan, no interpretar B/C como ablación de representación.
@@ -78,7 +80,7 @@ Tras cerrar E01/E02, considerar barrido de `B∈{1,2,4,8}` con K=16 y barrido de
 
 ## Hipótesis, límites y gate
 
-- **H-009, fan-in:** el fan-in fijo 16 aporta parte de la diferencia dANN-R/DSU-S; UNTESTED. E01 examina distribución de fan-in junto a distribución topológica.
+- **H-009, fan-in:** NOT SUPPORTED / NEGLIGIBLE en S3-E01 para Fashion-MNIST N=5; regularizar a K=16 exacto no mostró efecto material bajo el protocolo dense-mask pareado. El contraste examina distribución de fan-in junto a distribución topológica.
 - **H-010, representación:** dense-mask y compact pueden ser funcionalmente equivalentes con la misma `G` y pesos, usando cantidades distintas de pesos físicamente almacenados; UNTESTED para equivalencia pareada, con evidencia estructural preliminar de conteos.
 - **H-011, partición dendrítica:** con 64 conexiones input por soma, múltiples subunidades no lineales aportan más capacidad que una sola integración; UNTESTED.
 

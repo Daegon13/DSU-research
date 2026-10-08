@@ -5,6 +5,8 @@ Estados permitidos:
 - UNTESTED
 - SUPPORTED
 - WEAK SUPPORT
+- NOT SUPPORTED / NEGLIGIBLE
+- CONTRARY
 - REFUTED
 - INCONCLUSIVE
 
@@ -157,13 +159,16 @@ El search prefijado usó sólo validation para seleccionar dentro de la familia 
 
 ## H-009 — Fan-in fijo 16
 
-**Status:** UNTESTED
+**Status:** NOT SUPPORTED / NEGLIGIBLE
 
 ### Statement
 El fan-in fijo de 16 aporta parte de la diferencia de rendimiento observada entre dANN-R y DSU-S.
 
 ### Experiment
 S3-E01: dANN-R dense-mask frente a Fixed-dANN dense-mask, ambos con 8192 aristas de entrada y protocolo pareado. El contraste cambia también la distribución de topología; no identifica el efecto exclusivo del número 16. Véase [SPRINT_3_CAUSAL_DESIGN.md](SPRINT_3_CAUSAL_DESIGN.md).
+
+### Resultado S3-T03 (2026-10-08)
+En Fashion-MNIST N=5, Fixed-dANN menos dANN-R obtuvo **−0.042 ± 0.329 pp** de test accuracy y **+0.001066 ± 0.007721** de test loss. B ganó accuracy en 2/5 seeds y loss en 3/5; ambos deltas medios quedaron dentro del criterio prefijado de efecto despreciable. **NOT SUPPORTED / NEGLIGIBLE** dentro de este protocolo: regularizar a K=16 exacto no mostró señal material. No se concluye que fan-in nunca importe; A/B también cambia aristas concretas. Véase [EXPERIMENT_005_FIXED_FANIN_ABLATION.md](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
 
 ---
 
