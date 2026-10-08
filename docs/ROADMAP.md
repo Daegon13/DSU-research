@@ -85,7 +85,9 @@ Implementar la primera unidad propia.
 
 **S3-T01: PASS de diseño (2026-10-08).** La matriz A/B/C, el emparejamiento de topología y pesos, y los límites causales están en [SPRINT_3_CAUSAL_DESIGN.md](SPRINT_3_CAUSAL_DESIGN.md). A vs B examina fan-in regular junto a distribución topológica; B vs C requiere equivalencia funcional antes de medir representación. No hubo implementación ni entrenamiento.
 
-**S3-T02, siguiente tarea:** implementar Fixed-dANN como control dense-mask y verificar equivalencia funcional paired con DSU-S, incluidos `G`, pesos efectivos, intermedios, logits y gradientes. No ejecutar E01/E02 antes de ese gate.
+**S3-T02: PASS (2026-10-08).** Fixed-dANN dense-mask comparte exactamente `G` y pesos efectivos con DSU-S; forward, loss, gradientes y cinco pasos Adam fueron equivalentes dentro de tolerancia CPU float32. Detalle en [EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md](EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md).
+
+**S3-E01, siguiente tarea:** ejecutar dANN-R vs Fixed-dANN con el protocolo causal congelado para estudiar regularización de fan-in junto a distribución topológica. No se ejecutó en S3-T02.
 
 **Experimentos siguientes:** S3-E01 A/B con N=5 propuesto y protocolo congelado; S3-E02 B/C primero equivalencia y luego accounting, trayectoria y rendimiento físico. Segunda fase: barridos separados `B∈{1,2,4,8}` y `K∈{8,16,32}`. **Alta prioridad:** `1×64 vs 2×32 vs 4×16 vs 8×8`, 64 conexiones por soma con cobertura controlada, para estudiar compartimentalización dendrítica; sus conteos de sesgos/pesos soma difieren y deben declararse.
 

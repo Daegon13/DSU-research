@@ -169,13 +169,16 @@ S3-E01: dANN-R dense-mask frente a Fixed-dANN dense-mask, ambos con 8192 aristas
 
 ## H-010 — Equivalencia de representación
 
-**Status:** UNTESTED
+**Status:** SUPPORTED
 
 ### Statement
 Una representación compacta puede ser funcionalmente equivalente a una dense-mask con la misma topología y pesos efectivos, usando muchos menos parámetros entrenables físicamente almacenados.
 
 ### Experiment
 S3-E02: par Fixed-dANN/DSU-S con `G` idéntica y transferencia exacta de pesos; comparar intermedios, logits, gradientes, trayectoria y bytes. Los conteos estructurales existentes son evidencia preliminar de almacenamiento de pesos, no prueba de equivalencia pareada ni de menor RAM total.
+
+### Resultado S3-T02 (2026-10-08)
+**SUPPORTED en el alcance estructural y funcional CPU float32 probado.** Fixed-dANN y DSU-S compartieron `G`, pesos activos y sesgos. El máximo error observado fue 1.19e-7 en forward, 3.73e-9 en gradientes y 3.35e-8 en parámetros activos tras cinco pasos Adam; los gradientes y momentos inactivos fueron exactamente cero. Fixed-dANN almacenó 468874 parámetros frente a 10634 de DSU-S. Esto no prueba menor checkpoint/RAM total, performance, energía, equivalencia GPU ni trayectoria larga. Véase [EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md](EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md).
 
 ---
 

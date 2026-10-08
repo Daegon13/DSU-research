@@ -7,13 +7,13 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T02 — Implementar Fixed-dANN y verificar equivalencia funcional paired con DSU-S. Pendiente; no iniciada. No ejecutar entrenamientos causales antes del gate de equivalencia.
+S3-E01 — Ejecutar la ablación causal dANN-R vs Fixed-dANN para fan-in/topología bajo el protocolo congelado. Pendiente; no iniciada.
 
 ## LAST COMPLETED TASK
-S3-T01: PASS de diseño. Matriz A/B/C, emparejamiento de `G` y pesos, protocolo E01/E02 y comparación prioritaria de partición documentados en `docs/SPRINT_3_CAUSAL_DESIGN.md`. No se implementó Fixed-dANN ni se entrenó. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T02: PASS. Fixed-dANN dense-mask implementado y verificado contra DSU-S con `G` y pesos activos idénticos: equivalencia de intermedios, logits, loss, gradientes y cinco pasos Adam en CPU float32. No se ejecutó Fashion-MNIST ni performance. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-R-008: revisión acumulada de Sprint 2. DSU-S aprendió de forma estable, mantuvo calidad próxima a dANN-R de igual anchura con 44.09× menos parámetros entrenables almacenados y mostró señal de capacidad por parámetro frente a MLP densos evaluados. Límite central: 42536 bytes de pesos + 65536 bytes de topología int64 = 108072 bytes de payload tensorial conocido, frente a 66064 bytes del MLP quality-matched `20→26`. No se demostró ventaja de almacenamiento total, RAM runtime, latencia o energía. Detalle en `docs/SPRINT_2_REVIEW.md`.
+R-009: Fixed-dANN y DSU-S paired mostraron máximo error 1.19e-7 en forward, 3.73e-9 en gradientes y 3.35e-8 en parámetros activos tras cinco pasos Adam. Gradientes y momentos Adam inactivos exactamente cero. Fixed-dANN almacena 468874 parámetros y DSU-S 10634, ambos con 10634 efectivos. Alcance: sintético CPU float32; sin performance ni entrenamiento largo. Detalle en `docs/EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -31,7 +31,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
-H-009 (fan-in), H-010 (equivalencia de representación) y H-011 (partición dendrítica) = UNTESTED; S3-T01 fijó sus diseños, no resultados.
+H-009 (fan-in) y H-011 (partición dendrítica) = UNTESTED. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02; no implica ventaja de memoria total o performance.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -51,13 +51,14 @@ H-009 (fan-in), H-010 (equivalencia de representación) y H-011 (partición dend
 - R-006 compara sólo un MLP denso fijado y N=3; la ventaja de DSU-S no aísla causalmente la estructura dendrítica de inicialización, conectividad y número de activaciones. MAC principales teóricos no son FLOPs exactos ni tiempo medido. RAM de activaciones no medida.
 - R-007 cubre sólo una familia MLP, tres seeds y tolerancias heurísticas; no identifica el mejor MLP posible. El match de validation no eliminó la desventaja de test del seleccionado. Los 65536 bytes de topología de DSU-S hacen que su payload tensorial total supere los 66064 bytes de pesos del MLP seleccionado; no se infiere ventaja de almacenamiento total ni velocidad.
 - S2-REVIEW confirma que la comparación DSU-S/dANN-R confunde fan-in variable vs fijo, topología, inicialización y representación. Sprint 3 debe diseñar controles antes de atribuir causalidad; el GO no autoriza modelos nuevos por sí mismo.
+- S3-T02 sólo verificó equivalencia paired con datos sintéticos y cinco pasos Adam en CPU float32. CUDA, trayectoria larga, checkpoint comparable, RAM y latencia siguen sin evidencia.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T02 — Implementar Fixed-dANN y verificar equivalencia funcional paired con DSU-S. No iniciada; ver requisitos y tolerancias de `docs/SPRINT_3_CAUSAL_DESIGN.md`.
+S3-E01 — Ejecutar la ablación causal dANN-R vs Fixed-dANN para fan-in/topología bajo el protocolo congelado. No iniciada; no confundir el contraste con efecto exclusivo de K=16.
 
 ## LAST UPDATE
 2026-10-08
