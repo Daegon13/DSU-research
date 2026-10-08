@@ -7,10 +7,10 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T01 — Diseñar el control Fixed-dANN de fan-in 16 y la matriz causal de Sprint 3. Pendiente; no iniciada. Es sólo diseño/especificación; no implementar ni entrenar todavía.
+S3-T02 — Implementar Fixed-dANN y verificar equivalencia funcional paired con DSU-S. Pendiente; no iniciada. No ejecutar entrenamientos causales antes del gate de equivalencia.
 
 ## LAST COMPLETED TASK
-S2-REVIEW: PASS. Sprint 2: PASS. Decisión formal: GO TO SPRINT 3 para ablaciones causales, sin ejecutar S3-T01. H-001 y H-008 permanecen SUPPORTED sólo dentro de los alcances evaluados. Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T01: PASS de diseño. Matriz A/B/C, emparejamiento de `G` y pesos, protocolo E01/E02 y comparación prioritaria de partición documentados en `docs/SPRINT_3_CAUSAL_DESIGN.md`. No se implementó Fixed-dANN ni se entrenó. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
 R-008: revisión acumulada de Sprint 2. DSU-S aprendió de forma estable, mantuvo calidad próxima a dANN-R de igual anchura con 44.09× menos parámetros entrenables almacenados y mostró señal de capacidad por parámetro frente a MLP densos evaluados. Límite central: 42536 bytes de pesos + 65536 bytes de topología int64 = 108072 bytes de payload tensorial conocido, frente a 66064 bytes del MLP quality-matched `20→26`. No se demostró ventaja de almacenamiento total, RAM runtime, latencia o energía. Detalle en `docs/SPRINT_2_REVIEW.md`.
@@ -31,6 +31,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
+H-009 (fan-in), H-010 (equivalencia de representación) y H-011 (partición dendrítica) = UNTESTED; S3-T01 fijó sus diseños, no resultados.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -56,7 +57,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T01 — Diseñar el control Fixed-dANN de fan-in 16 y la matriz causal de Sprint 3. No iniciada; tarea sólo de especificación, sin implementación ni entrenamiento.
+S3-T02 — Implementar Fixed-dANN y verificar equivalencia funcional paired con DSU-S. No iniciada; ver requisitos y tolerancias de `docs/SPRINT_3_CAUSAL_DESIGN.md`.
 
 ## LAST UPDATE
-2026-10-06
+2026-10-08

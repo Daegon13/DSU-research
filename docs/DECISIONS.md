@@ -158,3 +158,21 @@ DSU-S v0 aprendió en tres seeds, mantuvo calidad próxima a dANN-R de igual anc
 ### Consequence
 
 El GO es un gate de investigación causal, no una afirmación de eficiencia total. Sprint 3 mantendrá separados calidad, parámetros entrenables, bytes de topología, checkpoint, RAM runtime y velocidad. Las opciones para comprimir o regenerar topología quedan en backlog; cada una requiere experimento propio y no cambia `G` en esta revisión. Véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).
+
+---
+
+## ADR-011 — Controles pareados de Sprint 3
+
+**Status:** ACCEPTED
+
+### Decision
+
+Usar Fixed-dANN dense-mask sólo como control experimental: A vs B conserva almacenamiento denso y protocolo de dANN-R; B vs C debe compartir exactamente el buffer `G`, los pesos activos, sesgos y función antes de comparar representación. El PASS funcional y de gradientes es requisito para interpretar B/C. El diseño completo está en [SPRINT_3_CAUSAL_DESIGN.md](SPRINT_3_CAUSAL_DESIGN.md).
+
+### Reason
+
+La seed común no garantiza topología ni inicialización común. A/C mezcla fan-in, topología, escala de inicialización y almacenamiento.
+
+### Consequence
+
+A/B sólo estima el efecto conjunto de regularizar fan-in y cambiar la distribución topológica. B/C separa representación si se verifica equivalencia; pequeñas diferencias numéricas no prueban distinto mecanismo neuronal. La implementación y los experimentos requieren tareas posteriores.

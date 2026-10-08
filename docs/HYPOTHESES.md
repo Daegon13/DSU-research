@@ -152,3 +152,39 @@ El search prefijado usó sólo validation para seleccionar dentro de la familia 
 
 ### Auditoría S2-REVIEW
 **SUPPORTED** se conserva para el MLP 13→17 probado y la familia/criterios S2-T06. El factor 1.553× es el mínimo **entre los candidatos evaluados**, no un mínimo demostrado entre todas las anchuras y MLP posibles. La decisión de Sprint 3 se fundamenta en esta señal acotada y en la necesidad de ablaciones causales; véase [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md).
+
+---
+
+## H-009 — Fan-in fijo 16
+
+**Status:** UNTESTED
+
+### Statement
+El fan-in fijo de 16 aporta parte de la diferencia de rendimiento observada entre dANN-R y DSU-S.
+
+### Experiment
+S3-E01: dANN-R dense-mask frente a Fixed-dANN dense-mask, ambos con 8192 aristas de entrada y protocolo pareado. El contraste cambia también la distribución de topología; no identifica el efecto exclusivo del número 16. Véase [SPRINT_3_CAUSAL_DESIGN.md](SPRINT_3_CAUSAL_DESIGN.md).
+
+---
+
+## H-010 — Equivalencia de representación
+
+**Status:** UNTESTED
+
+### Statement
+Una representación compacta puede ser funcionalmente equivalente a una dense-mask con la misma topología y pesos efectivos, usando muchos menos parámetros entrenables físicamente almacenados.
+
+### Experiment
+S3-E02: par Fixed-dANN/DSU-S con `G` idéntica y transferencia exacta de pesos; comparar intermedios, logits, gradientes, trayectoria y bytes. Los conteos estructurales existentes son evidencia preliminar de almacenamiento de pesos, no prueba de equivalencia pareada ni de menor RAM total.
+
+---
+
+## H-011 — Partición dendrítica
+
+**Status:** UNTESTED
+
+### Statement
+Con igual número total de conexiones input por soma, dividirlas entre múltiples subunidades dendríticas no lineales proporciona más capacidad que una sola integración.
+
+### Experiment
+Comparación prioritaria futura `1×64`, `2×32`, `4×16`, `8×8`, con 64 índices por soma y cobertura controlada. Cambian también sesgos y pesos soma; registrar el presupuesto de parámetros y añadir control si esa diferencia resulta decisiva.

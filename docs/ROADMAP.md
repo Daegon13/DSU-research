@@ -83,9 +83,13 @@ Implementar la primera unidad propia.
 
 **Objetivo:** separar el efecto de fan-in regular, organización dendrita→soma y representación compacta antes de variar número de dendritas o fan-in. Las comparaciones posteriores podrán incluir solapamiento, grupos y permutación, una variable conceptual por experimento.
 
-**S3-T01, siguiente tarea:** diseñar únicamente el control Fixed-dANN de fan-in exactamente 16 y la matriz causal dANN-R (variable/dense-mask), Fixed-dANN (fijo/dense-mask), DSU-S (fijo/compact). A vs B pregunta por fan-in; B vs C sólo aísla representación si topología, inicialización y matemática se alinean. No implementar ni entrenar en S3-T01.
+**S3-T01: PASS de diseño (2026-10-08).** La matriz A/B/C, el emparejamiento de topología y pesos, y los límites causales están en [SPRINT_3_CAUSAL_DESIGN.md](SPRINT_3_CAUSAL_DESIGN.md). A vs B examina fan-in regular junto a distribución topológica; B vs C requiere equivalencia funcional antes de medir representación. No hubo implementación ni entrenamiento.
 
-**Backlog de topología:** estudiar regeneración desde seed, checkpoint sin `G`, metadata int32/int16 y topología implícita. Distinguir ahorro de checkpoint de memoria residente/runtime; no cambiar dtype hasta una tarea propia. No introducir todavía estado temporal, DSU-T, gating apical, spikes ni Transformers.
+**S3-T02, siguiente tarea:** implementar Fixed-dANN como control dense-mask y verificar equivalencia funcional paired con DSU-S, incluidos `G`, pesos efectivos, intermedios, logits y gradientes. No ejecutar E01/E02 antes de ese gate.
+
+**Experimentos siguientes:** S3-E01 A/B con N=5 propuesto y protocolo congelado; S3-E02 B/C primero equivalencia y luego accounting, trayectoria y rendimiento físico. Segunda fase: barridos separados `B∈{1,2,4,8}` y `K∈{8,16,32}`. **Alta prioridad:** `1×64 vs 2×32 vs 4×16 vs 8×8`, 64 conexiones por soma con cobertura controlada, para estudiar compartimentalización dendrítica; sus conteos de sesgos/pesos soma difieren y deben declararse.
+
+**Backlog de topología:** estudiar regeneración desde seed, checkpoint sin `G`, metadata int32/int16 empaquetada, topología implícita y topología estructurada/por bloques. Distinguir ahorro de checkpoint de memoria residente/runtime; no cambiar dtype hasta una tarea propia. No introducir todavía estado temporal, DSU-T, AIS, inhibición, rewiring, gating apical, spikes, otros datasets ni Transformers.
 
 ---
 
