@@ -56,7 +56,7 @@ E01 y E02 usan **cohortes de inicialización distintas** del mismo diseño B: B 
 
 Primero comparar forward y un paso de optimizador; después, en tarea experimental separada, comparar trayectorias a pasos prefijados, loss y logits con batch ordering idéntico. Diferencias pueden acumularse por orden de reducción, kernels, operaciones masked/gather, CPU/GPU y redondeo float32. Registrar divergencia y no llamarla diferencia de capacidad neuronal sin análisis adicional. La equivalencia funcional a pesos congelados es condición necesaria; igualdad exacta de trayectorias no está garantizada por álgebra real en hardware float32.
 
-## S3-E01 — Fan-in/topología (futuro, sin ejecutar)
+## S3-E01 — Fan-in/topología (ejecutado en S3-T03)
 
 Comparar A y B con **N=5** seeds de entrenamiento/topología `1..5` si el coste es razonable, reportando cada trial y media ± DE de diferencias pareadas B−A para `final_epoch_25` en validation y test. Fashion-MNIST oficial, `ToTensor()` float32, 54000/6000/10000, split por `np.random.default_rng(training_seed)` y hashes iguales por pareja; 25 épocas, batch 128, Adam y parámetros de arriba, LeakyReLU 0.1, logits/cross-entropy. No seleccionar por mínimo de validation ni afinar B tras ver test. Mantener el código y resultados históricos de A intactos; si se reutilizan sus N=5 métricas, verificar config, hashes y condiciones comparables y explicar diferencias de inicialización. Si no, planificar ambas corridas con política común.
 
