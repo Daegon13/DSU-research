@@ -196,3 +196,27 @@ Con igual número total de conexiones input por soma, dividirlas entre múltiple
 
 ### Experiment
 Comparación prioritaria futura `1×64`, `2×32`, `4×16`, `8×8`, con 64 índices por soma y cobertura controlada. Cambian también sesgos y pesos soma; registrar el presupuesto de parámetros y añadir control si esa diferencia resulta decisiva.
+
+---
+
+## H-012 — Almacenamiento físico B/C
+
+**Status:** SUPPORTED para Fixed-dANN frente a DSU-S en CPU float32.
+
+### Statement
+La representación compacta reduce materialmente el almacenamiento físico del modelo y del estado de entrenamiento frente a la dense-mask funcionalmente equivalente.
+
+### Resultado S3-T04 (2026-10-09)
+Con `G` y pesos activos pareados, DSU-S reduce 22.281× el payload tensorial del modelo, 21.737× el checkpoint de modelo, 44.080× el estado tensorial Adam y 30.752× el checkpoint de entrenamiento. Son bytes medidos para las implementaciones actuales, incluyendo `G` y máscaras persistentes; no equivalen a RAM pico. Véase [EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).
+
+---
+
+## H-013 — Latencia física B/C
+
+**Status:** MIXED / NOT SUPPORTED como ventaja general.
+
+### Statement
+La representación compacta reduce latencia de ejecución frente a la dense-mask funcionalmente equivalente en hardware convencional.
+
+### Resultado S3-T04 (2026-10-09)
+En este CPU y PyTorch, DSU-S favorece claramente forward batch 1 (Fixed/DSU 4.245× con 1 thread; 2.381× con 6), pero Fixed es más rápida en forward batches 128 y 512 (ratios 0.252–0.512). El paso Adam batch 128 es similar. La dirección depende de batch y modo; no hay ventaja general de latencia ni conclusión para otros equipos. Véase [EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).

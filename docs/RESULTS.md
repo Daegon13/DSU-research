@@ -197,3 +197,21 @@ Validation del seleccionado: loss **0.336997 ± 0.012175**, accuracy **88.167 ±
 **Gate S2-REVIEW: PASS. Gate Sprint 2: PASS. Decisión: GO TO SPRINT 3**, limitada a diseño y ablaciones causales. La auditoría de código, tests, artefactos y resultados confirma aprendizaje estable de DSU-S N=3, calidad próxima a dANN-R de igual anchura con **44.09× menos parámetros entrenables almacenados** y señal de capacidad por parámetro frente al MLP 13→17 y la familia S2-T06 evaluada. H-001 y H-008 permanecen **SUPPORTED** sólo dentro de sus alcances documentados. El resultado **no** aísla dendritas o fan-in, ni prueba menor latencia, energía, RAM runtime o generalización.
 
 Limitación central: **42536 bytes** de pesos entrenables + **65536 bytes** de topología int64 = **108072 bytes** de payload tensorial conocido para DSU-S, frente a **66064 bytes** de pesos del MLP quality-matched. Por tanto, con la representación actual no hay ventaja de payload tensorial total frente a ese MLP. N=3 es descriptivo. La matriz de diez claims, confusores, criterios Go/No-Go y backlog figuran en [SPRINT_2_REVIEW.md](SPRINT_2_REVIEW.md). **Siguiente tarea exacta: S3-T01 — Diseñar el control Fixed-dANN de fan-in 16 y la matriz causal de Sprint 3.** No se implementa ni ejecuta aquí.
+
+---
+
+## R-009 — Equivalencia funcional Fixed-dANN / DSU-S (S3-T02)
+
+**Gate técnico: PASS.** Con `G`, pesos activos y sesgos idénticos en CPU float32, los errores máximos fueron 1.19e-7 en forward, 3.73e-9 en gradientes y 3.35e-8 en parámetros activos tras cinco pasos Adam. H-010 = SUPPORTED en este alcance. [Protocolo y resultados](EXPERIMENT_004_FIXED_DANN_EQUIVALENCE.md).
+
+---
+
+## R-010 — Ablación dANN-R / Fixed-dANN (S3-T03)
+
+**Gate técnico: PASS.** Fashion-MNIST N=5 bajo protocolo dense-mask pareado. Test A/B: loss 0.358606/0.359673, accuracy 87.216/87.174%; deltas B−A +0.001066 loss y −0.042 pp accuracy. H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de este protocolo; el contraste cambia conjuntamente fan-in y distribución topológica. [Protocolo y resultados](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
+
+---
+
+## R-011 — Benchmark físico Fixed-dANN / DSU-S (S3-T04)
+
+**Gate técnico: PASS.** Pareja B/C con `G`, pesos activos, biases e inputs idénticos; error máximo de logits inicial 2.24e-8 en batch 128 CPU float32. Fixed/DSU: parámetros 44.092×, buffers 8.125× en bytes, payload tensorial 22.281×, checkpoint de modelo 21.737×, estado Adam 44.080× y checkpoint de entrenamiento 30.752×. Los dos modelos representan 9984 MAC principales efectivos/muestra; Fixed usa 468224 MAC principales de matmul denso frente a 9984 compactos de DSU, sin implicar un ratio de velocidad. En forward batch 1 DSU fue más rápida (Fixed/DSU 4.245× con 1 thread, 2.381× con 6); en batch 128 y 512 Fixed fue más rápida. Paso Adam batch 128 similar. H-012 = SUPPORTED para almacenamiento B/C; H-013 = MIXED / NOT SUPPORTED como ventaja general de latencia. RAM pico CPU no medida fiablemente. [Protocolo y tablas](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).

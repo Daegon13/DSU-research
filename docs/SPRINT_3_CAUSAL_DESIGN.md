@@ -66,11 +66,13 @@ Resultado primario de calidad: diferencia pareada de loss y accuracy de test en 
 
 **Resultado S3-T03 / S3-E01 (2026-10-08): PASS técnico; H-009 NOT SUPPORTED / NEGLIGIBLE.** Con inicialización densa y orden de minibatches pareados, B−A fue −0.042 ± 0.329 pp de test accuracy y +0.001066 ± 0.007721 de test loss. B ganó accuracy en 2/5 seeds y loss en 3/5. El efecto medio quedó dentro de los umbrales despreciables prefijados. Detalle en [EXPERIMENT_005_FIXED_FANIN_ABLATION.md](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
 
-## S3-E02 — Representación (futuro, sin ejecutar)
+## S3-E02 — Representación (ejecutado en S3-T04)
 
 Orden de gates: (1) identidad de `G` y mapeo de parámetros; (2) equivalencia de intermedios/logits/gradientes; (3) un paso y trayectoria Adam pareados; (4) accounting y mediciones físicas. El criterio primario es **equivalencia funcional**, no accuracy. Reportar errores numéricos máximos y trayectorias por paso; si (1)–(2) fallan, no interpretar B/C como ablación de representación.
 
 Contabilizar por separado parámetros almacenados/efectivos, bytes de pesos, máscaras y `G`, payload tensorial total, bytes de checkpoint de `state_dict` con igual política de serialización, MAC principales teóricos, operaciones efectivamente ejecutadas, latencia controlada y RAM/VRAM pico **sólo cuando haya medición fiable**. B dense-mask puede ejecutar MAC de matrices densas pese a 9984 MAC de aristas activas; esos conteos teóricos estructurales no son FLOPs ejecutados. Medir inferencia batch 1 y un batch de entrenamiento fijado, warm-up, repeticiones, sincronización GPU, entorno y dispersión; perfilar gather/indexing separado si es posible. No inferir energía sin medirla. No afirmar que compactación mejora accuracy, ni almacenamiento total frente al MLP `20→26`: el C actual tiene 108072 bytes de payload conocido frente a 66064 de ese MLP.
+
+**Resultado S3-T04 / S3-E02 (2026-10-09): PASS técnico.** B/C conservaron equivalencia de logits dentro de la tolerancia aprobada. DSU-S redujo payload tensorial del modelo 22.281×, estado Adam 44.080× y checkpoint de entrenamiento 30.752× frente a Fixed-dANN. La latencia cambió de signo según batch/modo: DSU-S favorecida en forward batch 1 y Fixed-dANN en forward batches 128/512. RAM pico CPU no se midió fiablemente. H-012 SUPPORTED; H-013 MIXED / NOT SUPPORTED como ventaja general. Protocolo y tablas: [EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).
 
 ## Segunda fase: B ramas y K entradas
 
@@ -81,7 +83,7 @@ Tras cerrar E01/E02, considerar barrido de `B∈{1,2,4,8}` con K=16 y barrido de
 ## Hipótesis, límites y gate
 
 - **H-009, fan-in:** NOT SUPPORTED / NEGLIGIBLE en S3-E01 para Fashion-MNIST N=5; regularizar a K=16 exacto no mostró efecto material bajo el protocolo dense-mask pareado. El contraste examina distribución de fan-in junto a distribución topológica.
-- **H-010, representación:** dense-mask y compact pueden ser funcionalmente equivalentes con la misma `G` y pesos, usando cantidades distintas de pesos físicamente almacenados; UNTESTED para equivalencia pareada, con evidencia estructural preliminar de conteos.
+- **H-010, representación:** SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02; S3-T04 midió almacenamiento y ejecución del par equivalente.
 - **H-011, partición dendrítica:** con 64 conexiones input por soma, múltiples subunidades no lineales aportan más capacidad que una sola integración; UNTESTED.
 
 Amenazas: fan-in y topología inseparables en A/B; escala Glorot distinta entre reproducción y DSU-S; aristas A/B distintas aunque compartan seed; N pequeño; orden float32 y kernels; máscaras y metadata en el checkpoint; mediciones de tiempo dependientes de hardware; barrido B/K con sesgos y activaciones no igualados; sólo Fashion-MNIST. No investigar aún estado temporal, DSU-T, AIS, inhibición, rewiring, spikes, Transformer ni otros datasets.

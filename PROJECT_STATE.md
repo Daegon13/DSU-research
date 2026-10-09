@@ -7,13 +7,13 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T04 — Ejecutar S3-E02: benchmark físico controlado Fixed-dANN vs DSU-S. Pendiente; no iniciado.
+S3-T05 — Diseñar y ejecutar la ablación de compartimentalización dendrítica con 64 conexiones por soma: 1×64, 2×32, 4×16, 8×8. Pendiente; no iniciado.
 
 ## LAST COMPLETED TASK
-S3-T03: PASS técnico. S3-E01 completó 10 corridas Fashion-MNIST con inicialización y minibatches pareados. Fixed-dANN menos dANN-R: −0.042 ± 0.329 pp test accuracy y +0.001066 ± 0.007721 test loss; H-009 = NOT SUPPORTED / NEGLIGIBLE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T04: PASS técnico. S3-E02 midió bytes y latencias de Fixed-dANN frente a DSU-S con `G`, pesos activos e inputs pareados. H-012 storage = SUPPORTED; H-013 runtime = MIXED / NOT SUPPORTED como ventaja general. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-R-010: dANN-R vs Fixed-dANN N=5 bajo protocolo dense-mask pareado. Test A/B: loss 0.358606/0.359673, accuracy 87.216/87.174%; deltas B−A +0.001066 loss y −0.042 pp accuracy. Efecto medio despreciable según criterios prefijados. Detalle en `docs/EXPERIMENT_005_FIXED_FANIN_ABLATION.md`.
+R-011: DSU-S reduce 22.281× el payload tensorial del modelo, 21.737× el checkpoint de modelo, 44.080× el estado Adam y 30.752× el checkpoint de entrenamiento frente a Fixed-dANN equivalente. Forward batch 1 favorece DSU-S, batches 128/512 favorecen Fixed; Adam batch 128 es similar. RAM pico CPU no medida fiablemente. Detalle en `docs/EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -31,7 +31,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
-H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02; no implica ventaja de memoria total o performance. H-011 (partición dendrítica) = UNTESTED.
+H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = UNTESTED. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -41,7 +41,7 @@ H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo de
 - ¿El estado temporal por dendrita aporta capacidad suficiente para justificar su coste?
 
 ## KNOWN PROBLEMS
-- RAM pico de CPU no medida; la interfaz deja el campo en null.
+- RAM pico de CPU no medida fiablemente; el benchmark S3-T04 registra explícitamente esta limitación.
 - Los experimentos de cierre usan subconjuntos pequeños y no demuestran calidad final ni comparabilidad estadística.
 - La latencia CPU mostró variación entre procesos; no usarla como comparación de rendimiento entre arquitecturas.
 - R-003 N=5 difiere numéricamente del archivo Keras N=5; inicialización, shuffle y detalles de Adam no son bit a bit equivalentes. La pérdida media mantiene la dirección esperada, con inversión individual en seed 4. La pequeña DE inicial de accuracy vANN no provino de redondeo prematuro; N=5 presenta mayor dispersión.
@@ -51,7 +51,7 @@ H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo de
 - R-006 compara sólo un MLP denso fijado y N=3; la ventaja de DSU-S no aísla causalmente la estructura dendrítica de inicialización, conectividad y número de activaciones. MAC principales teóricos no son FLOPs exactos ni tiempo medido. RAM de activaciones no medida.
 - R-007 cubre sólo una familia MLP, tres seeds y tolerancias heurísticas; no identifica el mejor MLP posible. El match de validation no eliminó la desventaja de test del seleccionado. Los 65536 bytes de topología de DSU-S hacen que su payload tensorial total supere los 66064 bytes de pesos del MLP seleccionado; no se infiere ventaja de almacenamiento total ni velocidad.
 - S2-REVIEW confirma que la comparación DSU-S/dANN-R confunde fan-in variable vs fijo, topología, inicialización y representación. Sprint 3 debe diseñar controles antes de atribuir causalidad; el GO no autoriza modelos nuevos por sí mismo.
-- S3-T02 sólo verificó equivalencia paired con datos sintéticos y cinco pasos Adam en CPU float32. CUDA, trayectoria larga, checkpoint comparable, RAM y latencia siguen sin evidencia.
+- S3-T02 verificó equivalencia paired con datos sintéticos y cinco pasos Adam en CPU float32. S3-T04 añadió checkpoint, estado Adam y microbenchmarks CPU; CUDA, trayectoria larga y RAM pico siguen sin evidencia.
 - S3-T03 N=5 encontró efecto medio despreciable de regularizar fan-in/topología a K=16. Las aristas A/B difieren y la dispersión entre seeds supera el delta medio; no generalizar fuera del protocolo.
 
 ## BLOCKERS
@@ -59,7 +59,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T04 — Ejecutar S3-E02: benchmark físico controlado Fixed-dANN vs DSU-S. No iniciado; mantener separadas equivalencia funcional, bytes, operaciones ejecutadas, latencia y RAM.
+S3-T05 — Diseñar y ejecutar la ablación de compartimentalización dendrítica con 64 conexiones por soma: 1×64 vs 2×32 vs 4×16 vs 8×8. No iniciado.
 
 ## LAST UPDATE
-2026-10-08
+2026-10-09
