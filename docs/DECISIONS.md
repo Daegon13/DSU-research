@@ -176,3 +176,21 @@ La seed común no garantiza topología ni inicialización común. A/C mezcla fan
 ### Consequence
 
 A/B sólo estima el efecto conjunto de regularizar fan-in y cambiar la distribución topológica. B/C separa representación si se verifica equivalencia; pequeñas diferencias numéricas no prueban distinto mecanismo neuronal. La implementación y los experimentos requieren tareas posteriores.
+
+---
+
+## ADR-012 — Controles de parámetros y escala de S3-T06
+
+**Status:** ACCEPTED para diseño preentrenamiento.
+
+### Decision
+
+Comparar PointSparse con una familia de compartimentos B=1,2,4,8 usando la misma G64 nested, 8192 pesos input, 128 sesgos soma y salida compartida en estructura: 9610 parámetros por brazo. No hay bias dendrítico ni peso entrenable rama→soma. La agregación fija es `sum(d)/sqrt(B)`, seguida por una transformación afín escalar sin labels que iguala media y DE a la preactivación PointSparse sobre 256 ejemplos train predeterminados por seed. Congelar ganancia y offset antes del entrenamiento.
+
+### Reason
+
+S3-T05 mezcló partición, 256B parámetros adicionales y escala de logits. La regla `1/sqrt(B)` preserva varianza sólo aproximadamente si las ramas son independientes; la media positiva tras LeakyReLU requiere medición. La calibración reduce diferencias triviales de escala sin optimizar accuracy.
+
+### Consequence
+
+El control sigue teniendo distinta cantidad de activaciones y operaciones fijas; media/DE igualadas del agregado no implican logits iguales. H-014/H-015 quedan UNTESTED hasta S3-T07. [Diseño y diagnóstico](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).

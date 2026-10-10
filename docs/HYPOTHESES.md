@@ -220,3 +220,19 @@ La representación compacta reduce latencia de ejecución frente a la dense-mask
 
 ### Resultado S3-T04 (2026-10-09)
 En este CPU y PyTorch, DSU-S favorece claramente forward batch 1 (Fixed/DSU 4.245× con 1 thread; 2.381× con 6), pero Fixed es más rápida en forward batches 128 y 512 (ratios 0.252–0.512). El paso Adam batch 128 es similar. La dirección depende de batch y modo; no hay ventaja general de latencia ni conclusión para otros equipos. Véase [EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).
+
+---
+
+## H-014 — H-SPARSE: anchura sparse sin compartimentos
+
+**Status:** UNTESTED.
+
+La mayor parte de la eficiencia paramétrica observada frente al MLP denso proviene de mantener muchas unidades sparse con fan-in restringido, incluso sin compartimentalización dendrítica. S3-T06 implementó PointSparse (128 somas, 64 entradas únicas/soma, 9610 parámetros) como control; ninguna comparación de entrenamiento de esta hipótesis se ejecutó. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+
+---
+
+## H-015 — H-COMPARTMENT-PURE: partición sin parámetros extra
+
+**Status:** UNTESTED.
+
+Con igual número de parámetros, las mismas 64 entradas por soma y escala inicial controlada, dividir entradas entre múltiples no linealidades dendríticas mejora la capacidad. S3-T06 implementó B=1,2,4,8 con 9610 parámetros cada uno, G64 nested y calibración sin labels; faltan entrenamientos. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).

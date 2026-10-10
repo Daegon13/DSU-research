@@ -80,6 +80,10 @@ Tras cerrar E01/E02, considerar barrido de `B∈{1,2,4,8}` con K=16 y barrido de
 
 **S3-T05 ejecutado: partición dendrítica con 64 conexiones por soma.** Se compararon `(B,K)=(1,64),(2,32),(4,16),(8,8)` con 128 somas y 8192 conexiones input→dendrita, 64 índices únicos por soma, `G64` compartida y partición nested. `B` altera número de sesgos dendríticos, pesos soma y activaciones; total de parámetros efectivos `9610 + 256B` (9866, 10122, 10634, 11658). Por ello **no es igualdad exacta de parámetros**, ni aísla solamente la no linealidad. La variante B=4 con conjunto de 64 sin solapamiento **no es** la topología DSU-S v0 original. Las cuatro se entrenaron de nuevo con seeds 1–3, inicialización base y minibatches pareados. El contraste principal `4×16 − 1×64` fue +0.023 ± 0.138 pp de test accuracy y −0.005051 ± 0.001043 de test loss. Gate técnico PASS; H-011 NEGLIGIBLE según los umbrales fijados. [Detalle](EXPERIMENT_007_DENDRITIC_COMPARTMENT_ABLATION.md).
 
+## S3-T06 — controles posteriores a la ablación
+
+S3-T06 quedó cerrado como PASS de diseño, implementación y diagnóstico forward, sin entrenamiento. PointSparse y la familia neutral B=1,2,4,8 reutilizan exactamente G64 nested y tienen 9610 parámetros y 9472 MAC principales cada uno. La agregación fija `sum(d)/sqrt(B)` y la calibración afín global sin labels se congelaron antes de S3-T07. El menor loss de S3-T05 puede reflejar probabilidades/márgenes, escala de logits, parámetros extra o compartimentalización; todavía no se distingue cuál. H-014 y H-015 siguen UNTESTED. [Especificación, tabla y procedimiento](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md). Siguiente tarea exacta: S3-T07 — ejecutar la comparación causal pareada.
+
 ## Hipótesis, límites y gate
 
 - **H-009, fan-in:** NOT SUPPORTED / NEGLIGIBLE en S3-E01 para Fashion-MNIST N=5; regularizar a K=16 exacto no mostró efecto material bajo el protocolo dense-mask pareado. El contraste examina distribución de fan-in junto a distribución topológica.
