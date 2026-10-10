@@ -13,11 +13,13 @@ import torch
 from dsu_research.compartment_ablation import (CompartmentalDSU, base_topology,
                                                 initialize_paired, shared_initialization)
 from dsu_research.dsu_s import DSUSv0
+from dsu_research.fixed_dann import FixedDANN
 from dsu_research.fixed_fanin_ablation import build_paired_models
 from dsu_research.harness import seed_everything
 from dsu_research.model import (CapacityMLP, DendriticANNRandom,
                                 ParameterMatchedMLP, VanillaANN)
 from dsu_research.s3_t06_diagnostics import train_calibration_batch
+from dsu_research.sparse_compartment_controls import NeutralCompartments, PointSparse
 from dsu_research.sparse_compartment_experiment import build_arm
 
 from .zero_cost import collect_activations, compute_proxies, input_presence, state_fingerprint
@@ -64,6 +66,17 @@ def build_untrained_model(adapter: str, arm: str, seed: int, inputs: torch.Tenso
     raise ValueError(f"unknown adapter {adapter}")
 
 
+def forward_temporary_max_bytes(model: torch.nn.Module, batch_size: int) -> int:
+    """Largest known forward intermediate beyond the statistics workspace."""
+    if isinstance(model, (PointSparse, NeutralCompartments)):
+        return batch_size * model.G64.numel() * 4  # gathered float32 inputs
+    if isinstance(model, (CompartmentalDSU, DSUSv0)):
+        return batch_size * model.G.numel() * 4
+    if isinstance(model, (FixedDANN, DendriticANNRandom)):
+        return model.dendrites.weight.numel() * 4  # dense masked float32 weight
+    return 0
+
+
 def collect(seeds=SEEDS, arms=ARMS):
     """Cannot inspect historical outcomes: this module never loads the registry."""
     torch.set_num_threads(1)
@@ -84,6 +97,9 @@ def collect(seeds=SEEDS, arms=ARMS):
             start_proxy = time.perf_counter_ns()
             values = collect_activations(model, inputs)
             metrics = compute_proxies(values, input_presence(model))
+            metrics["peak_tensor_size_bytes_estimate"] = max(
+                metrics["peak_tensor_size_bytes_estimate"],
+                forward_temporary_max_bytes(model, len(inputs)))
             proxy_ms = (time.perf_counter_ns() - start_proxy) / 1e6
             if any(p.grad is not None for p in model.parameters()):
                 raise RuntimeError("forward proxy created parameter gradients")
@@ -99,6 +115,7 @@ def collect(seeds=SEEDS, arms=ARMS):
                 **metrics,
             })
     return {"schema_version": 1, "task": "S3-T09", "phase": "forward_proxies_only",
+            "accounting_revision": "Post-result correction to largest logical tensor estimate: include compact gather or dense masked weight; all ranking proxies, fingerprints, and timings unchanged. Median absolute correlation corrected to conventional midpoint for even pair counts; other ranking fields and timing unchanged.",
             "frozen_protocol": "docs/EXPERIMENT_009_ZERO_COST_FORWARD_PROXIES.md",
             "seeds": list(seeds), "calibration_sample_count": 256,
             "device": "cpu", "model_dtype": "float32", "statistics_dtype": "float64",

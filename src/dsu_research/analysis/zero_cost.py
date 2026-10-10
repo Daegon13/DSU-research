@@ -166,7 +166,7 @@ def compute_proxies(values: Activations, presence: torch.Tensor | None = None,
         sub = covariance[valid][:, valid] / (std[valid, None] * std[None, valid])
         offdiag = sub.abs().clamp_max(1)[torch.triu_indices(valid_count, valid_count, 1).unbind()]
         corr_mean = offdiag.mean().item()
-        corr_median = offdiag.median().item()
+        corr_median = torch.quantile(offdiag, 0.5).item()
     else:
         corr_mean = corr_median = None
     signs = (act > 0).to(torch.float64)

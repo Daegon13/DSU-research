@@ -2,12 +2,15 @@
 
 import math
 
+import numpy as np
+import pytest
 import torch
 
 from dsu_research.analysis.zero_cost import (Activations, collect_activations,
                                              compute_proxies, feature_coverage,
                                              input_presence, state_fingerprint)
-from dsu_research.analysis.zero_cost_collection import build_untrained_model
+from dsu_research.analysis.zero_cost_collection import (ARMS, build_untrained_model,
+                                                         forward_temporary_max_bytes)
 from dsu_research.analysis.zero_cost_validation import kendall_tau_b, pairwise, spearman
 from dsu_research.model import ParameterMatchedMLP
 from dsu_research.sparse_compartment_controls import PointSparse, base_topology
@@ -47,6 +50,15 @@ def test_coverage_and_constant_units():
     assert result["mean_abs_corr"] is None
 
 
+def test_even_pair_correlation_uses_conventional_median():
+    values = torch.tensor([[1., 3., 5., 2.], [2., 2., 0., 1.],
+                           [3., 4., 2., 0.], [4., 1., 3., 2.],
+                           [5., 0., 4., 6.]])
+    expected = np.abs(np.corrcoef(values.numpy(), rowvar=False))
+    offdiag = expected[np.triu_indices(4, k=1)]
+    assert abs(_proxies(values)["median_abs_corr"] - np.median(offdiag)) < 1e-10
+
+
 def test_adapter_is_deterministic_and_does_not_mutate_or_create_gradients():
     x = torch.linspace(0, 1, 4 * 784).reshape(4, 784)
     for model in (ParameterMatchedMLP(), PointSparse(base_topology(1))):
@@ -81,3 +93,24 @@ def test_rank_correlations_and_near_ties():
     assert result["scored_pairs"] == 2
     assert result["accuracy_excluding_near_ties"] == 1
     assert result["accuracy_including_near_ties"] == 2.5 / 3
+
+
+def test_known_forward_temporary_sizes():
+    inputs = torch.rand((8, 784))
+    point, _ = build_untrained_model("s3_t07", "PointSparse", 1, inputs)
+    dense_mask, _ = build_untrained_model("s3_t03", "fixed_dann", 1, inputs)
+    assert forward_temporary_max_bytes(point, 256) == 256 * 8192 * 4
+    assert forward_temporary_max_bytes(dense_mask, 256) == 512 * 784 * 4
+
+
+@pytest.mark.parametrize("architecture_id,adapter,arm", ARMS)
+def test_each_adapter_matches_unchanged_forward(architecture_id, adapter, arm):
+    inputs = torch.rand((8, 784), generator=torch.Generator().manual_seed(7))
+    model, _ = build_untrained_model(adapter, arm, 1, inputs)
+    before = state_fingerprint(model)
+    collected = collect_activations(model, inputs)
+    with torch.inference_mode():
+        expected = model(inputs)
+    assert torch.allclose(collected.logits, expected, rtol=1e-5, atol=1e-6), architecture_id
+    assert state_fingerprint(model) == before
+    assert all(parameter.grad is None for parameter in model.parameters())

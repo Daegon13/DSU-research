@@ -55,7 +55,7 @@
       "participation_ratio_raw": 6.4377099840207315,
       "participation_ratio_norm": 0.050294609250161965,
       "mean_abs_corr": 0.2227579491521446,
-      "median_abs_corr": 0.19315131149822634,
+      "median_abs_corr": 0.19322072075617538,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -83,7 +83,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 1x64",
@@ -105,7 +105,7 @@
       "participation_ratio_raw": 5.389771966135703,
       "participation_ratio_norm": 0.04210759348543518,
       "mean_abs_corr": 0.1716849708712903,
-      "median_abs_corr": 0.13276826957594867,
+      "median_abs_corr": 0.13278887041633042,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -133,7 +133,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 2x32",
@@ -155,7 +155,7 @@
       "participation_ratio_raw": 4.681281170981271,
       "participation_ratio_norm": 0.03657250914829118,
       "mean_abs_corr": 0.19657636849223864,
-      "median_abs_corr": 0.1592070130458839,
+      "median_abs_corr": 0.15920736588427253,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -183,7 +183,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 4x16",
@@ -205,7 +205,7 @@
       "participation_ratio_raw": 3.7695731559176844,
       "participation_ratio_norm": 0.02944979028060691,
       "mean_abs_corr": 0.22269097405051363,
-      "median_abs_corr": 0.18091706008753253,
+      "median_abs_corr": 0.18091958205981257,
       "constant_units_excluded": 0,
       "near_zero_fraction": 3.0517578125e-05,
       "exact_zero_fraction": 0.0,
@@ -233,7 +233,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 8x8",
@@ -255,7 +255,7 @@
       "participation_ratio_raw": 2.885911554312915,
       "participation_ratio_norm": 0.022546184018069647,
       "mean_abs_corr": 0.29897406779297864,
-      "median_abs_corr": 0.267142892132526,
+      "median_abs_corr": 0.26716320441648767,
       "constant_units_excluded": 0,
       "near_zero_fraction": 3.0517578125e-05,
       "exact_zero_fraction": 0.0,
@@ -283,7 +283,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 1x64",
@@ -305,7 +305,7 @@
       "participation_ratio_raw": 4.321674858337907,
       "participation_ratio_norm": 0.0337630848307649,
       "mean_abs_corr": 0.23721793408686626,
-      "median_abs_corr": 0.20575417551610653,
+      "median_abs_corr": 0.20581885199074623,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00018310546875,
       "exact_zero_fraction": 0.0,
@@ -333,7 +333,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 2x32",
@@ -355,7 +355,7 @@
       "participation_ratio_raw": 5.000303625893875,
       "participation_ratio_norm": 0.0390648720772959,
       "mean_abs_corr": 0.2267035206478418,
-      "median_abs_corr": 0.20023446291750743,
+      "median_abs_corr": 0.20024186809694705,
       "constant_units_excluded": 0,
       "near_zero_fraction": 3.0517578125e-05,
       "exact_zero_fraction": 0.0,
@@ -383,7 +383,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 4x16",
@@ -405,7 +405,7 @@
       "participation_ratio_raw": 5.789685464370319,
       "participation_ratio_norm": 0.045231917690393114,
       "mean_abs_corr": 0.24233423648573485,
-      "median_abs_corr": 0.21406330831180423,
+      "median_abs_corr": 0.2140880500524358,
       "constant_units_excluded": 0,
       "near_zero_fraction": 6.103515625e-05,
       "exact_zero_fraction": 0.0,
@@ -433,7 +433,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 8x8",
@@ -455,7 +455,7 @@
       "participation_ratio_raw": 5.4404710903709335,
       "participation_ratio_norm": 0.04250368039352292,
       "mean_abs_corr": 0.2321545437442378,
-      "median_abs_corr": 0.19822720162455337,
+      "median_abs_corr": 0.19829886324505896,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -483,7 +483,7 @@
       "reference_count_sd": 2.9999913230472846,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.042609980736691984,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S2-T05|MLP 13->17",
@@ -505,7 +505,7 @@
       "participation_ratio_raw": 1.554056218710002,
       "participation_ratio_norm": 0.09141507168882365,
       "mean_abs_corr": 0.5066946294523089,
-      "median_abs_corr": 0.5653138300771126,
+      "median_abs_corr": 0.5786325407474565,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00022977941176470588,
       "exact_zero_fraction": 0.0,
@@ -605,7 +605,7 @@
       "participation_ratio_raw": 6.930888480855894,
       "participation_ratio_norm": 0.05414756625668667,
       "mean_abs_corr": 0.2146666361739589,
-      "median_abs_corr": 0.18186163005550504,
+      "median_abs_corr": 0.18186648462365124,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -655,7 +655,7 @@
       "participation_ratio_raw": 7.702804151335213,
       "participation_ratio_norm": 0.06017815743230635,
       "mean_abs_corr": 0.2000246682025619,
-      "median_abs_corr": 0.16717988948794976,
+      "median_abs_corr": 0.16725907235272075,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.001617431640625,
       "exact_zero_fraction": 0.0,
@@ -683,7 +683,7 @@
       "reference_count_sd": 2.9673968424733026,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.041020008803917096,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|dANN-R",
@@ -705,7 +705,7 @@
       "participation_ratio_raw": 7.702804151335213,
       "participation_ratio_norm": 0.06017815743230635,
       "mean_abs_corr": 0.2000246682025619,
-      "median_abs_corr": 0.16717988948794976,
+      "median_abs_corr": 0.16725907235272075,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.001617431640625,
       "exact_zero_fraction": 0.0,
@@ -733,7 +733,7 @@
       "reference_count_sd": 2.9673968424733026,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.041020008803917096,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|Fixed-dANN",
@@ -755,7 +755,7 @@
       "participation_ratio_raw": 6.747510323235607,
       "participation_ratio_norm": 0.05271492440027818,
       "mean_abs_corr": 0.21051428876728864,
-      "median_abs_corr": 0.17682616609771448,
+      "median_abs_corr": 0.1768339894062958,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.001739501953125,
       "exact_zero_fraction": 0.0,
@@ -783,7 +783,7 @@
       "reference_count_sd": 3.033494461501323,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04138395928053186,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S2-T04|DSU-S",
@@ -805,7 +805,7 @@
       "participation_ratio_raw": 9.765562381835448,
       "participation_ratio_norm": 0.07629345610808944,
       "mean_abs_corr": 0.19263278205508302,
-      "median_abs_corr": 0.1591731943283142,
+      "median_abs_corr": 0.15918097043894358,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00048828125,
       "exact_zero_fraction": 0.0,
@@ -833,7 +833,7 @@
       "reference_count_sd": 3.033494461501323,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04138395928053186,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|PointSparse",
@@ -855,7 +855,7 @@
       "participation_ratio_raw": 4.9928842052230245,
       "participation_ratio_norm": 0.03900690785330488,
       "mean_abs_corr": 0.2113417674539125,
-      "median_abs_corr": 0.17560938358255795,
+      "median_abs_corr": 0.17562169398328736,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -883,7 +883,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 1x64",
@@ -905,7 +905,7 @@
       "participation_ratio_raw": 3.9680294480359914,
       "participation_ratio_norm": 0.031000230062781183,
       "mean_abs_corr": 0.15465500035032206,
-      "median_abs_corr": 0.10743644350108178,
+      "median_abs_corr": 0.10749356563809567,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -933,7 +933,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 2x32",
@@ -955,7 +955,7 @@
       "participation_ratio_raw": 3.568364605343725,
       "participation_ratio_norm": 0.02787784847924785,
       "mean_abs_corr": 0.20106274692890452,
-      "median_abs_corr": 0.14845525448972674,
+      "median_abs_corr": 0.14845631029379908,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -983,7 +983,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 4x16",
@@ -1005,7 +1005,7 @@
       "participation_ratio_raw": 3.1226573535582753,
       "participation_ratio_norm": 0.024395760574674026,
       "mean_abs_corr": 0.23524851681122996,
-      "median_abs_corr": 0.18640673214931705,
+      "median_abs_corr": 0.18641249068864085,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1033,7 +1033,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 8x8",
@@ -1055,7 +1055,7 @@
       "participation_ratio_raw": 2.5439304656873456,
       "participation_ratio_norm": 0.019874456763182387,
       "mean_abs_corr": 0.3074847427157659,
-      "median_abs_corr": 0.2838297586317191,
+      "median_abs_corr": 0.2838306133328482,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1083,7 +1083,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 1x64",
@@ -1105,7 +1105,7 @@
       "participation_ratio_raw": 4.359815498821046,
       "participation_ratio_norm": 0.03406105858453942,
       "mean_abs_corr": 0.19549670186880622,
-      "median_abs_corr": 0.1527978879500331,
+      "median_abs_corr": 0.1528240180560898,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00048828125,
       "exact_zero_fraction": 0.0,
@@ -1133,7 +1133,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 2x32",
@@ -1155,7 +1155,7 @@
       "participation_ratio_raw": 7.089214262726877,
       "participation_ratio_norm": 0.055384486427553725,
       "mean_abs_corr": 0.19127011099146707,
-      "median_abs_corr": 0.15408695197075123,
+      "median_abs_corr": 0.1540924124383746,
       "constant_units_excluded": 0,
       "near_zero_fraction": 9.1552734375e-05,
       "exact_zero_fraction": 0.0,
@@ -1183,7 +1183,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 4x16",
@@ -1205,7 +1205,7 @@
       "participation_ratio_raw": 6.650318503745309,
       "participation_ratio_norm": 0.051955613310510226,
       "mean_abs_corr": 0.1971900964647074,
-      "median_abs_corr": 0.16611690451985012,
+      "median_abs_corr": 0.16611864403068152,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1233,7 +1233,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 8x8",
@@ -1255,7 +1255,7 @@
       "participation_ratio_raw": 6.521723149013606,
       "participation_ratio_norm": 0.050950962101668794,
       "mean_abs_corr": 0.19251533297208315,
-      "median_abs_corr": 0.15649871263182755,
+      "median_abs_corr": 0.15650287518129324,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1283,7 +1283,7 @@
       "reference_count_sd": 3.0430497892725414,
       "max_reference_count": 20,
       "mean_jaccard_between_units": 0.04273357130504056,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S2-T05|MLP 13->17",
@@ -1305,7 +1305,7 @@
       "participation_ratio_raw": 3.8183173116365765,
       "participation_ratio_norm": 0.2246069006845045,
       "mean_abs_corr": 0.29868532503579437,
-      "median_abs_corr": 0.25682664312253445,
+      "median_abs_corr": 0.2597690540162847,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1405,7 +1405,7 @@
       "participation_ratio_raw": 5.649625117357616,
       "participation_ratio_norm": 0.04413769622935638,
       "mean_abs_corr": 0.2233154452442675,
-      "median_abs_corr": 0.18873013453580395,
+      "median_abs_corr": 0.18873901204796067,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1455,7 +1455,7 @@
       "participation_ratio_raw": 6.0007814747116015,
       "participation_ratio_norm": 0.04688110527118439,
       "mean_abs_corr": 0.21138767281897292,
-      "median_abs_corr": 0.18040506649895882,
+      "median_abs_corr": 0.1804745425239493,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00177001953125,
       "exact_zero_fraction": 0.0,
@@ -1483,7 +1483,7 @@
       "reference_count_sd": 3.121477346074021,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04133148136052105,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|dANN-R",
@@ -1505,7 +1505,7 @@
       "participation_ratio_raw": 6.0007814747116015,
       "participation_ratio_norm": 0.04688110527118439,
       "mean_abs_corr": 0.21138767281897292,
-      "median_abs_corr": 0.18040506649895882,
+      "median_abs_corr": 0.1804745425239493,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00177001953125,
       "exact_zero_fraction": 0.0,
@@ -1533,7 +1533,7 @@
       "reference_count_sd": 3.121477346074021,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04133148136052105,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|Fixed-dANN",
@@ -1555,7 +1555,7 @@
       "participation_ratio_raw": 7.345551819978954,
       "participation_ratio_norm": 0.057387123593585575,
       "mean_abs_corr": 0.2060737720179416,
-      "median_abs_corr": 0.16884439958400632,
+      "median_abs_corr": 0.1689603760502397,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.001922607421875,
       "exact_zero_fraction": 0.0,
@@ -1583,7 +1583,7 @@
       "reference_count_sd": 2.894619992967292,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04106656044892581,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S2-T04|DSU-S",
@@ -1605,7 +1605,7 @@
       "participation_ratio_raw": 4.757346256112042,
       "participation_ratio_norm": 0.03716676762587533,
       "mean_abs_corr": 0.20802283184033293,
-      "median_abs_corr": 0.17537600696354086,
+      "median_abs_corr": 0.1753802280258241,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0006103515625,
       "exact_zero_fraction": 0.0,
@@ -1633,7 +1633,7 @@
       "reference_count_sd": 2.894619992967292,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04106656044892581,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|PointSparse",
@@ -1655,7 +1655,7 @@
       "participation_ratio_raw": 7.568524219448901,
       "participation_ratio_norm": 0.05912909546444454,
       "mean_abs_corr": 0.20849657507371994,
-      "median_abs_corr": 0.17633085113520297,
+      "median_abs_corr": 0.1763976092524074,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1683,7 +1683,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 1x64",
@@ -1705,7 +1705,7 @@
       "participation_ratio_raw": 6.692416745945538,
       "participation_ratio_norm": 0.052284505827699515,
       "mean_abs_corr": 0.15842998774304817,
-      "median_abs_corr": 0.11643156572937291,
+      "median_abs_corr": 0.1164356263762745,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1733,7 +1733,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 2x32",
@@ -1755,7 +1755,7 @@
       "participation_ratio_raw": 5.949045310823597,
       "participation_ratio_norm": 0.04647691649080935,
       "mean_abs_corr": 0.18924468358845,
-      "median_abs_corr": 0.14489930057368214,
+      "median_abs_corr": 0.1449027604963718,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1783,7 +1783,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 4x16",
@@ -1805,7 +1805,7 @@
       "participation_ratio_raw": 4.47923965401319,
       "participation_ratio_norm": 0.03499405979697805,
       "mean_abs_corr": 0.22614775607024087,
-      "median_abs_corr": 0.18377215372093317,
+      "median_abs_corr": 0.18378395190429359,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -1833,7 +1833,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T07|parameter-neutral 8x8",
@@ -1855,7 +1855,7 @@
       "participation_ratio_raw": 3.3963508846904045,
       "participation_ratio_norm": 0.026533991286643785,
       "mean_abs_corr": 0.30570930249259254,
-      "median_abs_corr": 0.2895521427439921,
+      "median_abs_corr": 0.28960595253560995,
       "constant_units_excluded": 0,
       "near_zero_fraction": 3.0517578125e-05,
       "exact_zero_fraction": 0.0,
@@ -1883,7 +1883,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 1x64",
@@ -1905,7 +1905,7 @@
       "participation_ratio_raw": 4.5743461230275075,
       "participation_ratio_norm": 0.0357370790861524,
       "mean_abs_corr": 0.213237149326847,
-      "median_abs_corr": 0.174588394401888,
+      "median_abs_corr": 0.1746286096502908,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0001220703125,
       "exact_zero_fraction": 0.0,
@@ -1933,7 +1933,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 2x32",
@@ -1955,7 +1955,7 @@
       "participation_ratio_raw": 5.469630042197713,
       "participation_ratio_norm": 0.042731484704669635,
       "mean_abs_corr": 0.20941311012052116,
-      "median_abs_corr": 0.17350470837531914,
+      "median_abs_corr": 0.17351058799427949,
       "constant_units_excluded": 0,
       "near_zero_fraction": 9.1552734375e-05,
       "exact_zero_fraction": 0.0,
@@ -1983,7 +1983,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 4x16",
@@ -2005,7 +2005,7 @@
       "participation_ratio_raw": 6.027010036550559,
       "participation_ratio_norm": 0.04708601591055124,
       "mean_abs_corr": 0.22453334447850612,
-      "median_abs_corr": 0.19541730854412795,
+      "median_abs_corr": 0.19541787442582598,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -2033,7 +2033,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S3-T05|original compartment 8x8",
@@ -2055,7 +2055,7 @@
       "participation_ratio_raw": 4.4699069095495405,
       "participation_ratio_norm": 0.034921147730855785,
       "mean_abs_corr": 0.21046455349427143,
-      "median_abs_corr": 0.1743632590658722,
+      "median_abs_corr": 0.174385791019734,
       "constant_units_excluded": 0,
       "near_zero_fraction": 3.0517578125e-05,
       "exact_zero_fraction": 0.0,
@@ -2083,7 +2083,7 @@
       "reference_count_sd": 3.1294273094765708,
       "max_reference_count": 22,
       "mean_jaccard_between_units": 0.04294462483168821,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     },
     {
       "architecture_id": "S2-T05|MLP 13->17",
@@ -2105,7 +2105,7 @@
       "participation_ratio_raw": 3.503898794260326,
       "participation_ratio_norm": 0.20611169378001917,
       "mean_abs_corr": 0.2840769370656481,
-      "median_abs_corr": 0.23925794572741618,
+      "median_abs_corr": 0.24011749377614267,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -2205,7 +2205,7 @@
       "participation_ratio_raw": 5.820257185283894,
       "participation_ratio_norm": 0.04547075926003042,
       "mean_abs_corr": 0.21807160771527034,
-      "median_abs_corr": 0.18132466055311058,
+      "median_abs_corr": 0.1813377302424004,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.0,
       "exact_zero_fraction": 0.0,
@@ -2255,7 +2255,7 @@
       "participation_ratio_raw": 6.083817930745506,
       "participation_ratio_norm": 0.04752982758394927,
       "mean_abs_corr": 0.20441092942796013,
-      "median_abs_corr": 0.1707964186970406,
+      "median_abs_corr": 0.17081268622047938,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00177001953125,
       "exact_zero_fraction": 0.0,
@@ -2283,7 +2283,7 @@
       "reference_count_sd": 3.017896766434723,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04103294860227726,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|dANN-R",
@@ -2305,7 +2305,7 @@
       "participation_ratio_raw": 6.083817930745506,
       "participation_ratio_norm": 0.04752982758394927,
       "mean_abs_corr": 0.20441092942796013,
-      "median_abs_corr": 0.1707964186970406,
+      "median_abs_corr": 0.17081268622047938,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.00177001953125,
       "exact_zero_fraction": 0.0,
@@ -2333,7 +2333,7 @@
       "reference_count_sd": 3.017896766434723,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04103294860227726,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S3-T03|Fixed-dANN",
@@ -2355,7 +2355,7 @@
       "participation_ratio_raw": 7.855037439810356,
       "participation_ratio_norm": 0.06136747999851841,
       "mean_abs_corr": 0.19625226006659624,
-      "median_abs_corr": 0.1666225541898937,
+      "median_abs_corr": 0.1667137380501426,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.002349853515625,
       "exact_zero_fraction": 3.0517578125e-05,
@@ -2383,7 +2383,7 @@
       "reference_count_sd": 3.162573729124603,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04179489609234116,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 1605632
     },
     {
       "architecture_id": "S2-T04|DSU-S",
@@ -2405,7 +2405,7 @@
       "participation_ratio_raw": 7.975391468849196,
       "participation_ratio_norm": 0.062307745850384344,
       "mean_abs_corr": 0.18516316358583995,
-      "median_abs_corr": 0.16011401405695389,
+      "median_abs_corr": 0.16016519052168587,
       "constant_units_excluded": 0,
       "near_zero_fraction": 0.000579833984375,
       "exact_zero_fraction": 3.0517578125e-05,
@@ -2433,7 +2433,8 @@
       "reference_count_sd": 3.162573729124603,
       "max_reference_count": 21,
       "mean_jaccard_between_units": 0.04179489609234116,
-      "peak_tensor_size_bytes_estimate": 802816
+      "peak_tensor_size_bytes_estimate": 8388608
     }
-  ]
+  ],
+  "accounting_revision": "Post-result correction to largest logical tensor estimate: include compact gather or dense masked weight; all ranking proxies, fingerprints, and timings unchanged. Median absolute correlation corrected to conventional midpoint for even pair counts; other ranking fields and timing unchanged."
 }

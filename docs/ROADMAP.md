@@ -101,6 +101,8 @@ Implementar la primera unidad propia.
 
 **Actualización S3-T08 (2026-10-10):** S3-T04/T05/T06/T07 ya se ejecutaron o cerraron según [PROJECT_STATE](../PROJECT_STATE.md). La evidencia de S3-T07 favorece investigar sparse width/topology y deja la expansión dendrítica estática en pausa. [Programa A/B](RESEARCH_PROGRAM_A_B.md), [framework analítico](ANALYTICAL_SCREENING_FRAMEWORK.md) y funnel del [protocolo](EXPERIMENT_PROTOCOL.md) fijan la nueva dirección. **S3-T09 siguiente:** implementar y validar primeros proxies zero-cost contra el registro histórico, sin nuevas búsquedas o entrenamiento en T08. Revisar el cierre de Sprint 3 después de T09; no queda cerrado automáticamente. Las líneas dinámicas y Sprint 4 requieren gate separado.
 
+**S3-T09: PASS técnico (2026-10-10).** Primera tanda forward-only, 16 arquitecturas, tres seeds y validación retrospectiva por grupo. Effective rank raw es prometedor sólo en alcance acotado; pattern logdet falló. [Resultados](EXPERIMENT_009_ZERO_COST_FORWARD_PROXIES.md). **S3-T10 propuesto:** pre-registrar screening retrospectivo y diseño de piloto barato con rango efectivo como métrica independiente; no ajustar score arbitrario sobre estas mismas filas. Sprint 3 continúa abierto.
+
 ---
 
 ## Sprint 4 — DSU-T

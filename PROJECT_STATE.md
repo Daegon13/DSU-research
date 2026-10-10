@@ -7,15 +7,17 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T08 completada como especificación y base analítica; Sprint 3 sigue abierto. S3-T09 es la siguiente tarea propuesta, sin ejecución aún. No se inició DSU-T.
+S3-T09 completada como validación retrospectiva forward-only. Sprint 3 sigue abierto; S3-T10 está propuesto y no iniciado. No se inició DSU-T.
 
 ## LAST COMPLETED TASK
-S3-T08: PASS de documentación y contabilidad. Programa A/B, framework de cuatro capas, 30 filas históricas agrupadas por protocolo (incluidas diagnóstico S0 y S3-T06), funnel 0–4 y modelo estructural con tests. No hubo entrenamiento ni búsqueda. S3-T07 permanece como último resultado experimental: H-014 SUPPORTED en comparación histórica acotada, H-015 CONTRARY, H-016 INCONCLUSIVE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T09: PASS técnico. 48 registros forward-only (16 arquitecturas × seeds 1–3) con 256 imágenes train/seed, métricas reproducidas, análisis por `protocol_family` y `paired_comparison_group`. Effective rank raw: PROMISING en alcance acotado; pattern logdet: MISLEADING. No hubo entrenamiento, backward ni search. S3-T08 y S3-T07 permanecen cerradas; las clasificaciones H-014/015/016 no cambian. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
 R-013: PointSparse obtuvo test accuracy 86.913 ± .125% y NLL .372309 ± .001408. `1×64 − PointSparse` dio −.273 pp/+ .003573 NLL; `4×16 − 1×64` dio −.397 pp/+ .011383 NLL, con loss adversa en 3/3 seeds. La tendencia de menor NLL con B de S3-T05 no reapareció. Detalle en `docs/EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md`.
 
 S3-T08 no generó resultados de aprendizaje. Formalizó Línea A (sparse architecture) y Línea B (dynamic neuron), y reprodujo contabilidad conocida PointSparse 9610/9472, DSU-S 10634/9984/8192 índices, Fixed-dANN 468874 almacenados/10634 efectivos/468224 MAC GEMM y vANN 468874. Registro: `data/historical_experiments.json`; especificación: `docs/ANALYTICAL_SCREENING_FRAMEWORK.md`.
+
+R-014: en S3-T07, effective rank y participation ratio ordenaron 9/9 pares no near-tie de accuracy/NLL por medias; en S3-T05 original, effective rank 2/3 y participation ratio 1/3 pares de accuracy restantes. El contraste PointSparse/MLP13 histórico se invierte al normalizar rank por ancho. Pattern logdet falló en ambos grupos. Proxies: `data/zero_cost_proxy_results.json`; análisis: `data/zero_cost_validation.json`; detalles: `docs/EXPERIMENT_009_ZERO_COST_FORWARD_PROXIES.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -59,13 +61,14 @@ H-014 (H-SPARSE) = SUPPORTED frente al MLP histórico dentro del alcance acotado
 - S3-T05 N=3 igualó conectividad por soma pero no parámetros totales, número de activaciones ni escala exacta de logits iniciales. `4×16` usó topología sin solapamiento distinta de DSU-S v0. La clasificación NEGLIGIBLE es exploratoria y no demuestra que la compartimentalización sea inútil en general.
 - S3-T06 iguala parámetros y media/DE del agregado en un lote train sin labels, pero no iguala distribución completa, correlaciones, logits ni número de operaciones de activación. Las constantes se congelan antes de entrenar; no hay resultado de calidad.
 - S3-T07 N=3 muestra que PointSparse retiene gran parte del gap de accuracy histórico, pero MLP/DSU-S históricos no están completamente pareados con él. La familia neutral aumenta activaciones y operaciones fijas con B; NLL y top-1 empeoran al aumentar B, mientras ECE mejora. No se infiere causa única, menor FLOPs totales ni ventaja de runtime.
+- S3-T09 usa targets de test históricos sólo después de sellar proxies, para auditoría retrospectiva. S3-T05 tiene varios near-ties; MLP y PointSparse pertenecen a protocolos distintos. La señal de effective rank no es prueba prospectiva ni causal y no justifica optimizar un score con las mismas filas.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T09 — Implementar y validar los primeros zero-cost architecture proxies contra el registro histórico. Congelar lotes train, semillas, métricas, presupuesto y evaluación en validation antes de inspeccionar resultados. No usar test para seleccionar; no cerrar Sprint 3 automáticamente. El diseño está en `docs/ANALYTICAL_SCREENING_FRAMEWORK.md`.
+S3-T10 — Diseñar screening retrospectivo / cheap pilot pre-registrado usando effective rank raw como candidato independiente y redundancia como diagnóstico, con nueva cohorte o controles aún no usados para ajustar reglas. No crear score arbitrario ni seleccionar arquitectura desde test histórico. Sprint 3 sigue abierto.
 
 ## LAST UPDATE
 2026-10-10
