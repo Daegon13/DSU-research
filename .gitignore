@@ -10,6 +10,9 @@ venv/
 runs/
 experiments/runs/
 data/
+!data/
+data/*
+!data/historical_experiments.json
 checkpoints/
 *.pt
 *.pth

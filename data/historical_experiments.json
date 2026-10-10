@@ -1,0 +1,1486 @@
+{
+  "schema_version": 1,
+  "units": {
+    "accuracy": "fraction",
+    "nll": "cross_entropy",
+    "latency": "median_ms_per_batch",
+    "bytes": "bytes"
+  },
+  "missing": "null means not measured or not reported for this protocol",
+  "records": [
+    {
+      "architecture": "S0 MLP/ReLU 128",
+      "experiment_id": "S0_SMOKE",
+      "protocol_family": "s0_mnist_diagnostic",
+      "paired_comparison_group": "s0_smoke",
+      "source_files": [
+        "runs/s0_mlp_mnist_smoke.json"
+      ],
+      "seed_count": 1,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        128
+      ],
+      "params_stored": 101770,
+      "params_effective": 101770,
+      "main_macs_per_sample": 101632,
+      "stored_parameter_bytes": 407080,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 407080,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.69140625,
+      "test_nll_mean": 1.6144016087055206,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "PyTorch Linear default"
+    },
+    {
+      "architecture": "S0 MLP/ReLU 128",
+      "experiment_id": "S0_CONVERGENCE",
+      "protocol_family": "s0_mnist_diagnostic",
+      "paired_comparison_group": "s0_convergence",
+      "source_files": [
+        "runs/s0_gate_convergence.json"
+      ],
+      "seed_count": 1,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        128
+      ],
+      "params_stored": 101770,
+      "params_effective": 101770,
+      "main_macs_per_sample": 101632,
+      "stored_parameter_bytes": 407080,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 407080,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.8125,
+      "test_nll_mean": 0.7556596398353577,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "PyTorch Linear default"
+    },
+    {
+      "architecture": "vANN",
+      "experiment_id": "REPRODUCTION_001",
+      "protocol_family": "s1_reproduction",
+      "paired_comparison_group": "s1_vann_dannr",
+      "source_files": [
+        "runs/reproduction_001/vann_seed1.json",
+        "runs/reproduction_001/vann_seed2.json",
+        "runs/reproduction_001/vann_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        512,
+        128
+      ],
+      "params_stored": 468874,
+      "params_effective": 468874,
+      "main_macs_per_sample": 468224,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 1875496,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.8943333333333333,
+      "test_nll_mean": 0.3738256912231445,
+      "validation_accuracy_mean": 0.9023888888888889,
+      "validation_nll_mean": 0.3241832101609972,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "dANN-R",
+      "experiment_id": "REPRODUCTION_001",
+      "protocol_family": "s1_reproduction",
+      "paired_comparison_group": "s1_vann_dannr",
+      "source_files": [
+        "runs/reproduction_001/dann_r_seed1.json",
+        "runs/reproduction_001/dann_r_seed2.json",
+        "runs/reproduction_001/dann_r_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 4,
+      "K": null,
+      "mean_K": 16,
+      "hidden_widths": null,
+      "params_stored": 468874,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 466944,
+      "model_tensor_payload_bytes_estimate": 2342440,
+      "topology_characteristics": {
+        "fan_in": "variable; mean 16"
+      },
+      "test_accuracy_mean": 0.8723666666666666,
+      "test_nll_mean": 0.3583983746846517,
+      "validation_accuracy_mean": 0.8842777777777778,
+      "validation_nll_mean": 0.3236114092932807,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; global random mask"
+    },
+    {
+      "architecture": "vANN",
+      "experiment_id": "REPRODUCTION_001_N5",
+      "protocol_family": "s1_reproduction_n5",
+      "paired_comparison_group": "s1_n5_vann_dannr",
+      "source_files": [
+        "runs/reproduction_001/vann_seed1.json",
+        "runs/reproduction_001/vann_seed2.json",
+        "runs/reproduction_001/vann_seed3.json",
+        "runs/reproduction_001/vann_seed4.json",
+        "runs/reproduction_001/vann_seed5.json"
+      ],
+      "seed_count": 5,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        512,
+        128
+      ],
+      "params_stored": 468874,
+      "params_effective": 468874,
+      "main_macs_per_sample": 468224,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 1875496,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.89322,
+      "test_nll_mean": 0.3744807043766975,
+      "validation_accuracy_mean": 0.9018666666666667,
+      "validation_nll_mean": 0.33340988477071126,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "dANN-R",
+      "experiment_id": "REPRODUCTION_001_N5",
+      "protocol_family": "s1_reproduction_n5",
+      "paired_comparison_group": "s1_n5_vann_dannr",
+      "source_files": [
+        "runs/reproduction_001/dann_r_seed1.json",
+        "runs/reproduction_001/dann_r_seed2.json",
+        "runs/reproduction_001/dann_r_seed3.json",
+        "runs/reproduction_001/dann_r_seed4.json",
+        "runs/reproduction_001/dann_r_seed5.json"
+      ],
+      "seed_count": 5,
+      "H": 128,
+      "B": 4,
+      "K": null,
+      "mean_K": 16,
+      "hidden_widths": null,
+      "params_stored": 468874,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 466944,
+      "model_tensor_payload_bytes_estimate": 2342440,
+      "topology_characteristics": {
+        "fan_in": "variable; mean 16"
+      },
+      "test_accuracy_mean": 0.87216,
+      "test_nll_mean": 0.35860626057624817,
+      "validation_accuracy_mean": 0.8859666666666667,
+      "validation_nll_mean": 0.3204783507029216,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; global random mask"
+    },
+    {
+      "architecture": "dANN-R",
+      "experiment_id": "S3-T03",
+      "protocol_family": "s3_fixed_fanin",
+      "paired_comparison_group": "s3_t03_ab",
+      "source_files": [
+        "runs/fixed_fanin_s3_t03/dann_r_seed1.json",
+        "runs/fixed_fanin_s3_t03/dann_r_seed2.json",
+        "runs/fixed_fanin_s3_t03/dann_r_seed3.json",
+        "runs/fixed_fanin_s3_t03/dann_r_seed4.json",
+        "runs/fixed_fanin_s3_t03/dann_r_seed5.json"
+      ],
+      "seed_count": 5,
+      "H": 128,
+      "B": 4,
+      "K": null,
+      "mean_K": 16,
+      "hidden_widths": null,
+      "params_stored": 468874,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 466944,
+      "model_tensor_payload_bytes_estimate": 2342440,
+      "topology_characteristics": {
+        "input_connections": 8192,
+        "soma_connections": 512,
+        "fan_in_min": 4,
+        "fan_in_max": 29,
+        "fan_in_mean": 16.0,
+        "fan_in_sample_std": 4.047177751163243,
+        "input_mask_sha256": "7472cbf6a53e0d10fe179145405f3038ddc617c210f0b433f4b00775d508006b"
+      },
+      "test_accuracy_mean": 0.87216,
+      "test_nll_mean": 0.35860626057624817,
+      "validation_accuracy_mean": 0.8859666666666667,
+      "validation_nll_mean": 0.3204783507029216,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired dense-mask baseline"
+    },
+    {
+      "architecture": "Fixed-dANN",
+      "experiment_id": "S3-T03",
+      "protocol_family": "s3_fixed_fanin",
+      "paired_comparison_group": "s3_t03_ab",
+      "source_files": [
+        "runs/fixed_fanin_s3_t03/fixed_dann_seed1.json",
+        "runs/fixed_fanin_s3_t03/fixed_dann_seed2.json",
+        "runs/fixed_fanin_s3_t03/fixed_dann_seed3.json",
+        "runs/fixed_fanin_s3_t03/fixed_dann_seed4.json",
+        "runs/fixed_fanin_s3_t03/fixed_dann_seed5.json"
+      ],
+      "seed_count": 5,
+      "H": 128,
+      "B": 4,
+      "K": 16,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 468874,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 1875496,
+      "topology_bytes": 532480,
+      "model_tensor_payload_bytes_estimate": 2407976,
+      "topology_characteristics": {
+        "input_connections": 8192,
+        "soma_connections": 512,
+        "fan_in_min": 16,
+        "fan_in_max": 16,
+        "fan_in_mean": 16.0,
+        "fan_in_sample_std": 0.0,
+        "input_mask_sha256": "3d639302a5d04a4d4159c0196a9a57a1d31550e98da3406e8839b4f04967910b"
+      },
+      "test_accuracy_mean": 0.87174,
+      "test_nll_mean": 0.35967254217147826,
+      "validation_accuracy_mean": 0.8858333333333334,
+      "validation_nll_mean": 0.32103587131500244,
+      "latency": {
+        "single": {
+          "1": 0.4002370000011979,
+          "32": 0.8144895000009457,
+          "128": 1.9238249999943948,
+          "512": 5.828700000165554
+        },
+        "default": {
+          "1": 0.2769939999984672,
+          "32": 0.4799500000012813,
+          "128": 0.7820370000013099,
+          "512": 2.0756000000119457
+        }
+      },
+      "activation_stats": null,
+      "initialization_scheme": "paired dense-mask control",
+      "latency_source": "runs/physical_s3_t04.json"
+    },
+    {
+      "architecture": "DSU-S",
+      "experiment_id": "S2-T04",
+      "protocol_family": "s2_dsu_learning",
+      "paired_comparison_group": "s2_t04_dannr_dsu",
+      "source_files": [
+        "runs/dsu_s_v0_s2_t04/dsu_s_seed1.json",
+        "runs/dsu_s_v0_s2_t04/dsu_s_seed2.json",
+        "runs/dsu_s_v0_s2_t04/dsu_s_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 4,
+      "K": 16,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 10634,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 42536,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 108072,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.8725333333333334,
+      "test_nll_mean": 0.35782474081516263,
+      "validation_accuracy_mean": 0.8848888888888888,
+      "validation_nll_mean": 0.32046046214633517,
+      "latency": {
+        "single": {
+          "1": 0.0942944999997053,
+          "32": 1.1061850000032791,
+          "128": 4.522145000032651,
+          "512": 23.118800000247575
+        },
+        "default": {
+          "1": 0.11635949999799777,
+          "32": 0.511953000000176,
+          "128": 1.527019999980439,
+          "512": 6.817870000031689
+        }
+      },
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases",
+      "latency_source": "runs/physical_s3_t04.json"
+    },
+    {
+      "architecture": "MLP 13->17",
+      "experiment_id": "S2-T05",
+      "protocol_family": "s2_parameter_matched",
+      "paired_comparison_group": "s2_t05_mlp_dsu",
+      "source_files": [
+        "runs/parameter_matched_mlp_s2_t05/mlp_seed1.json",
+        "runs/parameter_matched_mlp_s2_t05/mlp_seed2.json",
+        "runs/parameter_matched_mlp_s2_t05/mlp_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        13,
+        17
+      ],
+      "params_stored": 10623,
+      "params_effective": 10623,
+      "main_macs_per_sample": 10583,
+      "stored_parameter_bytes": 42492,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 42492,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.8588333333333333,
+      "test_nll_mean": 0.39818713559309643,
+      "validation_accuracy_mean": 0.8725,
+      "validation_nll_mean": 0.367634701622857,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 16->21",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_capacity",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h16_seed1.json",
+        "runs/mlp_capacity_s2_t06/h16_seed2.json",
+        "runs/mlp_capacity_s2_t06/h16_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        16,
+        21
+      ],
+      "params_stored": 13137,
+      "params_effective": 13137,
+      "main_macs_per_sample": 13090,
+      "stored_parameter_bytes": 52548,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 52548,
+      "topology_characteristics": null,
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": 0.8783888888888889,
+      "validation_nll_mean": 0.3453259006076389,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 19->25",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_capacity",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h19_seed1.json",
+        "runs/mlp_capacity_s2_t06/h19_seed2.json",
+        "runs/mlp_capacity_s2_t06/h19_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        19,
+        25
+      ],
+      "params_stored": 15675,
+      "params_effective": 15675,
+      "main_macs_per_sample": 15621,
+      "stored_parameter_bytes": 62700,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 62700,
+      "topology_characteristics": null,
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": 0.8783333333333333,
+      "validation_nll_mean": 0.3443735594219632,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 20->26",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_selected_dsu",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h20_seed1.json",
+        "runs/mlp_capacity_s2_t06/h20_seed2.json",
+        "runs/mlp_capacity_s2_t06/h20_seed3.json",
+        "runs/mlp_capacity_s2_t06/selected_test.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        20,
+        26
+      ],
+      "params_stored": 16516,
+      "params_effective": 16516,
+      "main_macs_per_sample": 16460,
+      "stored_parameter_bytes": 66064,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 66064,
+      "topology_characteristics": null,
+      "test_accuracy_mean": 0.867,
+      "test_nll_mean": 0.37577627884546916,
+      "validation_accuracy_mean": 0.8816666666666667,
+      "validation_nll_mean": 0.3369973062939114,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 21->27",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_capacity",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h21_seed1.json",
+        "runs/mlp_capacity_s2_t06/h21_seed2.json",
+        "runs/mlp_capacity_s2_t06/h21_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        21,
+        27
+      ],
+      "params_stored": 17359,
+      "params_effective": 17359,
+      "main_macs_per_sample": 17301,
+      "stored_parameter_bytes": 69436,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 69436,
+      "topology_characteristics": null,
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": 0.8802222222222222,
+      "validation_nll_mean": 0.33880636893378363,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 22->29",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_capacity",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h22_seed1.json",
+        "runs/mlp_capacity_s2_t06/h22_seed2.json",
+        "runs/mlp_capacity_s2_t06/h22_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        22,
+        29
+      ],
+      "params_stored": 18237,
+      "params_effective": 18237,
+      "main_macs_per_sample": 18176,
+      "stored_parameter_bytes": 72948,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 72948,
+      "topology_characteristics": null,
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": 0.8823888888888889,
+      "validation_nll_mean": 0.33251769977145723,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "MLP 25->33",
+      "experiment_id": "S2-T06",
+      "protocol_family": "s2_capacity_validation",
+      "paired_comparison_group": "s2_t06_capacity",
+      "source_files": [
+        "runs/mlp_capacity_s2_t06/h25_seed1.json",
+        "runs/mlp_capacity_s2_t06/h25_seed2.json",
+        "runs/mlp_capacity_s2_t06/h25_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": null,
+      "B": null,
+      "K": null,
+      "mean_K": null,
+      "hidden_widths": [
+        25,
+        33
+      ],
+      "params_stored": 20823,
+      "params_effective": 20823,
+      "main_macs_per_sample": 20755,
+      "stored_parameter_bytes": 83292,
+      "topology_bytes": 0,
+      "model_tensor_payload_bytes_estimate": 83292,
+      "topology_characteristics": null,
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": 0.8844444444444445,
+      "validation_nll_mean": 0.32554986953735354,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "Glorot uniform; zero biases"
+    },
+    {
+      "architecture": "original compartment 1x64",
+      "experiment_id": "S3-T05",
+      "protocol_family": "s3_compartment_original",
+      "paired_comparison_group": "s3_t05_nested",
+      "source_files": [
+        "runs/compartment_s3_t05/1x64_seed1.json",
+        "runs/compartment_s3_t05/1x64_seed2.json",
+        "runs/compartment_s3_t05/1x64_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 1,
+      "K": 64,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9866,
+      "params_effective": 9866,
+      "main_macs_per_sample": 9600,
+      "stored_parameter_bytes": 39464,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 105000,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "G_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64,
+        "partition": "contiguous nested blocks of G64"
+      },
+      "test_accuracy_mean": 0.8686666666666667,
+      "test_nll_mean": 0.3694971798737844,
+      "validation_accuracy_mean": 0.8833333333333333,
+      "validation_nll_mean": 0.32798283407423234,
+      "latency": null,
+      "activation_stats": {
+        "dendrite_preactivation": {
+          "mean": 0.026006069034337997,
+          "std": 0.6533443331718445
+        },
+        "dendrite_activation": {
+          "mean": 0.23825524747371674,
+          "std": 0.42263147234916687
+        },
+        "soma_preactivation": {
+          "mean": 0.056458353996276855,
+          "std": 0.6595189571380615
+        },
+        "soma_activation": {
+          "mean": 0.17054547369480133,
+          "std": 0.5263645648956299
+        },
+        "logits": {
+          "mean": 0.263889342546463,
+          "std": 0.5672557950019836
+        }
+      },
+      "initialization_scheme": "shared standard-normal input draws scaled sqrt(2/(1+0.1^2))/sqrt(K); shared eight soma draws aggregated by nested normalized sum and scaled sqrt(2/(1+0.1^2))/sqrt(B); shared Xavier-uniform output; zero biases"
+    },
+    {
+      "architecture": "original compartment 2x32",
+      "experiment_id": "S3-T05",
+      "protocol_family": "s3_compartment_original",
+      "paired_comparison_group": "s3_t05_nested",
+      "source_files": [
+        "runs/compartment_s3_t05/2x32_seed1.json",
+        "runs/compartment_s3_t05/2x32_seed2.json",
+        "runs/compartment_s3_t05/2x32_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 2,
+      "K": 32,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 10122,
+      "params_effective": 10122,
+      "main_macs_per_sample": 9728,
+      "stored_parameter_bytes": 40488,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 106024,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "G_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64,
+        "partition": "contiguous nested blocks of G64"
+      },
+      "test_accuracy_mean": 0.8683,
+      "test_nll_mean": 0.36622901646296185,
+      "validation_accuracy_mean": 0.8812222222222222,
+      "validation_nll_mean": 0.32575204584333634,
+      "latency": null,
+      "activation_stats": {
+        "dendrite_preactivation": {
+          "mean": 0.01838906854391098,
+          "std": 0.6595757007598877
+        },
+        "dendrite_activation": {
+          "mean": 0.2323305904865265,
+          "std": 0.4322449266910553
+        },
+        "soma_preactivation": {
+          "mean": 0.03695377707481384,
+          "std": 0.6554206609725952
+        },
+        "soma_activation": {
+          "mean": 0.18805791437625885,
+          "std": 0.4899113178253174
+        },
+        "logits": {
+          "mean": 0.227418452501297,
+          "std": 0.5214148163795471
+        }
+      },
+      "initialization_scheme": "shared standard-normal input draws scaled sqrt(2/(1+0.1^2))/sqrt(K); shared eight soma draws aggregated by nested normalized sum and scaled sqrt(2/(1+0.1^2))/sqrt(B); shared Xavier-uniform output; zero biases"
+    },
+    {
+      "architecture": "original compartment 4x16",
+      "experiment_id": "S3-T05",
+      "protocol_family": "s3_compartment_original",
+      "paired_comparison_group": "s3_t05_nested",
+      "source_files": [
+        "runs/compartment_s3_t05/4x16_seed1.json",
+        "runs/compartment_s3_t05/4x16_seed2.json",
+        "runs/compartment_s3_t05/4x16_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 4,
+      "K": 16,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 10634,
+      "params_effective": 10634,
+      "main_macs_per_sample": 9984,
+      "stored_parameter_bytes": 42536,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 108072,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "G_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64,
+        "partition": "contiguous nested blocks of G64"
+      },
+      "test_accuracy_mean": 0.8689,
+      "test_nll_mean": 0.3644460215727488,
+      "validation_accuracy_mean": 0.8828333333333334,
+      "validation_nll_mean": 0.32576737456851534,
+      "latency": null,
+      "activation_stats": {
+        "dendrite_preactivation": {
+          "mean": 0.013003036379814148,
+          "std": 0.6490583419799805
+        },
+        "dendrite_activation": {
+          "mean": 0.22489142417907715,
+          "std": 0.4157464802265167
+        },
+        "soma_preactivation": {
+          "mean": 0.08325590193271637,
+          "std": 0.6146143078804016
+        },
+        "soma_activation": {
+          "mean": 0.22727832198143005,
+          "std": 0.455467164516449
+        },
+        "logits": {
+          "mean": 0.21419236063957214,
+          "std": 0.5568757653236389
+        }
+      },
+      "initialization_scheme": "shared standard-normal input draws scaled sqrt(2/(1+0.1^2))/sqrt(K); shared eight soma draws aggregated by nested normalized sum and scaled sqrt(2/(1+0.1^2))/sqrt(B); shared Xavier-uniform output; zero biases"
+    },
+    {
+      "architecture": "original compartment 8x8",
+      "experiment_id": "S3-T05",
+      "protocol_family": "s3_compartment_original",
+      "paired_comparison_group": "s3_t05_nested",
+      "source_files": [
+        "runs/compartment_s3_t05/8x8_seed1.json",
+        "runs/compartment_s3_t05/8x8_seed2.json",
+        "runs/compartment_s3_t05/8x8_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 8,
+      "K": 8,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 11658,
+      "params_effective": 11658,
+      "main_macs_per_sample": 10496,
+      "stored_parameter_bytes": 46632,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 112168,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "G_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64,
+        "partition": "contiguous nested blocks of G64"
+      },
+      "test_accuracy_mean": 0.8699333333333333,
+      "test_nll_mean": 0.3626491658449173,
+      "validation_accuracy_mean": 0.8838333333333334,
+      "validation_nll_mean": 0.3276340035332574,
+      "latency": null,
+      "activation_stats": {
+        "dendrite_preactivation": {
+          "mean": 0.00919453427195549,
+          "std": 0.649768590927124
+        },
+        "dendrite_activation": {
+          "mean": 0.2180103361606598,
+          "std": 0.41312873363494873
+        },
+        "soma_preactivation": {
+          "mean": 0.03657941520214081,
+          "std": 0.6150142550468445
+        },
+        "soma_activation": {
+          "mean": 0.22109511494636536,
+          "std": 0.4085646867752075
+        },
+        "logits": {
+          "mean": 0.12154708057641983,
+          "std": 0.5399070382118225
+        }
+      },
+      "initialization_scheme": "shared standard-normal input draws scaled sqrt(2/(1+0.1^2))/sqrt(K); shared eight soma draws aggregated by nested normalized sum and scaled sqrt(2/(1+0.1^2))/sqrt(B); shared Xavier-uniform output; zero biases"
+    },
+    {
+      "architecture": "PointSparse",
+      "experiment_id": "S3-T07",
+      "protocol_family": "s3_parameter_neutral",
+      "paired_comparison_group": "s3_t07_neutral",
+      "source_files": [
+        "runs/sparse_compartment_s3_t07/PointSparse_seed1.json",
+        "runs/sparse_compartment_s3_t07/PointSparse_seed2.json",
+        "runs/sparse_compartment_s3_t07/PointSparse_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 1,
+      "K": 64,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103976,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64
+      },
+      "test_accuracy_mean": 0.8691333333333333,
+      "test_nll_mean": 0.37230858669281003,
+      "validation_accuracy_mean": 0.8817222222222222,
+      "validation_nll_mean": 0.33042047754923504,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired Kaiming input; Xavier output"
+    },
+    {
+      "architecture": "parameter-neutral 1x64",
+      "experiment_id": "S3-T07",
+      "protocol_family": "s3_parameter_neutral",
+      "paired_comparison_group": "s3_t07_neutral",
+      "source_files": [
+        "runs/sparse_compartment_s3_t07/1x64_seed1.json",
+        "runs/sparse_compartment_s3_t07/1x64_seed2.json",
+        "runs/sparse_compartment_s3_t07/1x64_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 1,
+      "K": 64,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64
+      },
+      "test_accuracy_mean": 0.8664,
+      "test_nll_mean": 0.3758813369750977,
+      "validation_accuracy_mean": 0.8828888888888888,
+      "validation_nll_mean": 0.3320008550220066,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "parameter-neutral 2x32",
+      "experiment_id": "S3-T07",
+      "protocol_family": "s3_parameter_neutral",
+      "paired_comparison_group": "s3_t07_neutral",
+      "source_files": [
+        "runs/sparse_compartment_s3_t07/2x32_seed1.json",
+        "runs/sparse_compartment_s3_t07/2x32_seed2.json",
+        "runs/sparse_compartment_s3_t07/2x32_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 2,
+      "K": 32,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64
+      },
+      "test_accuracy_mean": 0.8657333333333334,
+      "test_nll_mean": 0.3818071228981018,
+      "validation_accuracy_mean": 0.8790555555555556,
+      "validation_nll_mean": 0.3417802571190728,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "parameter-neutral 4x16",
+      "experiment_id": "S3-T07",
+      "protocol_family": "s3_parameter_neutral",
+      "paired_comparison_group": "s3_t07_neutral",
+      "source_files": [
+        "runs/sparse_compartment_s3_t07/4x16_seed1.json",
+        "runs/sparse_compartment_s3_t07/4x16_seed2.json",
+        "runs/sparse_compartment_s3_t07/4x16_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 4,
+      "K": 16,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64
+      },
+      "test_accuracy_mean": 0.8624333333333334,
+      "test_nll_mean": 0.3872642673254013,
+      "validation_accuracy_mean": 0.8781666666666667,
+      "validation_nll_mean": 0.3484033665127224,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "parameter-neutral 8x8",
+      "experiment_id": "S3-T07",
+      "protocol_family": "s3_parameter_neutral",
+      "paired_comparison_group": "s3_t07_neutral",
+      "source_files": [
+        "runs/sparse_compartment_s3_t07/8x8_seed1.json",
+        "runs/sparse_compartment_s3_t07/8x8_seed2.json",
+        "runs/sparse_compartment_s3_t07/8x8_seed3.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 8,
+      "K": 8,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "g64_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "unique_inputs_per_soma": 64
+      },
+      "test_accuracy_mean": 0.858,
+      "test_nll_mean": 0.3993025676170985,
+      "validation_accuracy_mean": 0.8725555555555556,
+      "validation_nll_mean": 0.36243121825324165,
+      "latency": null,
+      "activation_stats": null,
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "PointSparse untrained diagnostics",
+      "experiment_id": "S3-T06",
+      "protocol_family": "s3_forward_calibration",
+      "paired_comparison_group": "s3_t06_forward",
+      "source_files": [
+        "runs/s3_t06_initial_diagnostics.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 1,
+      "K": 64,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103976,
+      "topology_characteristics": {
+        "G64": "nested, shared across arms by seed"
+      },
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": [
+        {
+          "soma_preactivation": {
+            "mean": 0.024183757603168488,
+            "std": 0.6642897129058838
+          },
+          "soma_activation": {
+            "mean": 0.24087649583816528,
+            "std": 0.43018800020217896
+          },
+          "logits": {
+            "mean": 0.12589113414287567,
+            "std": 0.6806459426879883
+          },
+          "mean_logit_l2": 2.0815868377685547,
+          "predictive_entropy": 2.1019606590270996
+        },
+        {
+          "soma_preactivation": {
+            "mean": -0.010714657604694366,
+            "std": 0.6821865439414978
+          },
+          "soma_activation": {
+            "mean": 0.22781461477279663,
+            "std": 0.44077834486961365
+          },
+          "logits": {
+            "mean": 0.0728694349527359,
+            "std": 0.5749679207801819
+          },
+          "mean_logit_l2": 1.7184871435165405,
+          "predictive_entropy": 2.1383743286132812
+        },
+        {
+          "soma_preactivation": {
+            "mean": 0.017162097617983818,
+            "std": 0.6444922685623169
+          },
+          "soma_activation": {
+            "mean": 0.23033267259597778,
+            "std": 0.4027808904647827
+          },
+          "logits": {
+            "mean": 0.29112887382507324,
+            "std": 0.5407109260559082
+          },
+          "mean_logit_l2": 1.8237652778625488,
+          "predictive_entropy": 2.1795814037323
+        }
+      ],
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "1x64 untrained diagnostics",
+      "experiment_id": "S3-T06",
+      "protocol_family": "s3_forward_calibration",
+      "paired_comparison_group": "s3_t06_forward",
+      "source_files": [
+        "runs/s3_t06_initial_diagnostics.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 1,
+      "K": 64,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "G64": "nested, shared across arms by seed"
+      },
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": [
+        {
+          "dendrite_preactivation": {
+            "mean": 0.024183757603168488,
+            "std": 0.6642897129058838
+          },
+          "dendrite_activation": {
+            "mean": 0.24087649583816528,
+            "std": 0.43018800020217896
+          },
+          "aggregate": {
+            "mean": 0.024183712899684906,
+            "std": 0.6642897129058838
+          },
+          "soma_activation": {
+            "mean": 0.2356928288936615,
+            "std": 0.5394601821899414
+          },
+          "logits": {
+            "mean": 0.1544288992881775,
+            "std": 0.8039712309837341
+          },
+          "mean_logit_l2": 2.391378879547119,
+          "predictive_entropy": 2.053009033203125
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": -0.010714657604694366,
+            "std": 0.6821865439414978
+          },
+          "dendrite_activation": {
+            "mean": 0.22781461477279663,
+            "std": 0.44077834486961365
+          },
+          "aggregate": {
+            "mean": -0.010714666917920113,
+            "std": 0.6821865439414978
+          },
+          "soma_activation": {
+            "mean": 0.2228420227766037,
+            "std": 0.5530454516410828
+          },
+          "logits": {
+            "mean": 0.09249529242515564,
+            "std": 0.6598064303398132
+          },
+          "mean_logit_l2": 1.9146250486373901,
+          "predictive_entropy": 2.0958077907562256
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": 0.017162097617983818,
+            "std": 0.6444922685623169
+          },
+          "dendrite_activation": {
+            "mean": 0.23033267259597778,
+            "std": 0.4027808904647827
+          },
+          "aggregate": {
+            "mean": 0.017162101343274117,
+            "std": 0.6444922685623169
+          },
+          "soma_activation": {
+            "mean": 0.23040351271629333,
+            "std": 0.5147221088409424
+          },
+          "logits": {
+            "mean": 0.3487837612628937,
+            "std": 0.6750848293304443
+          },
+          "mean_logit_l2": 2.1903910636901855,
+          "predictive_entropy": 2.134495258331299
+        }
+      ],
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "2x32 untrained diagnostics",
+      "experiment_id": "S3-T06",
+      "protocol_family": "s3_forward_calibration",
+      "paired_comparison_group": "s3_t06_forward",
+      "source_files": [
+        "runs/s3_t06_initial_diagnostics.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 2,
+      "K": 32,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "G64": "nested, shared across arms by seed"
+      },
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": [
+        {
+          "dendrite_preactivation": {
+            "mean": 0.017100494354963303,
+            "std": 0.667694628238678
+          },
+          "dendrite_activation": {
+            "mean": 0.235203817486763,
+            "std": 0.4363788068294525
+          },
+          "aggregate": {
+            "mean": 0.024183711037039757,
+            "std": 0.6642897725105286
+          },
+          "soma_activation": {
+            "mean": 0.23888440430164337,
+            "std": 0.5160835981369019
+          },
+          "logits": {
+            "mean": 0.20947334170341492,
+            "std": 0.7323212027549744
+          },
+          "mean_logit_l2": 2.1914520263671875,
+          "predictive_entropy": 2.0893986225128174
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": -0.007576411589980125,
+            "std": 0.6722326874732971
+          },
+          "dendrite_activation": {
+            "mean": 0.22593817114830017,
+            "std": 0.4174030125141144
+          },
+          "aggregate": {
+            "mean": -0.01071467436850071,
+            "std": 0.6821865439414978
+          },
+          "soma_activation": {
+            "mean": 0.22637882828712463,
+            "std": 0.5276799201965332
+          },
+          "logits": {
+            "mean": 0.07814092189073563,
+            "std": 0.6705614924430847
+          },
+          "mean_logit_l2": 1.8896740674972534,
+          "predictive_entropy": 2.0844600200653076
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": 0.012135438621044159,
+            "std": 0.654697060585022
+          },
+          "dendrite_activation": {
+            "mean": 0.2288828343153,
+            "std": 0.4034433662891388
+          },
+          "aggregate": {
+            "mean": 0.017162112519145012,
+            "std": 0.6444922685623169
+          },
+          "soma_activation": {
+            "mean": 0.23458069562911987,
+            "std": 0.4875643253326416
+          },
+          "logits": {
+            "mean": 0.2886534631252289,
+            "std": 0.6119678020477295
+          },
+          "mean_logit_l2": 1.9420104026794434,
+          "predictive_entropy": 2.15146541595459
+        }
+      ],
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "4x16 untrained diagnostics",
+      "experiment_id": "S3-T06",
+      "protocol_family": "s3_forward_calibration",
+      "paired_comparison_group": "s3_t06_forward",
+      "source_files": [
+        "runs/s3_t06_initial_diagnostics.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 4,
+      "K": 16,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "G64": "nested, shared across arms by seed"
+      },
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": [
+        {
+          "dendrite_preactivation": {
+            "mean": 0.012091876938939095,
+            "std": 0.6571381092071533
+          },
+          "dendrite_activation": {
+            "mean": 0.22791998088359833,
+            "std": 0.4192773699760437
+          },
+          "aggregate": {
+            "mean": 0.0241837278008461,
+            "std": 0.6642897129058838
+          },
+          "soma_activation": {
+            "mean": 0.23957465589046478,
+            "std": 0.5039276480674744
+          },
+          "logits": {
+            "mean": 0.19030463695526123,
+            "std": 0.7655245065689087
+          },
+          "mean_logit_l2": 2.207512140274048,
+          "predictive_entropy": 2.0716166496276855
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": -0.0053573306649923325,
+            "std": 0.6419662833213806
+          },
+          "dendrite_activation": {
+            "mean": 0.21165624260902405,
+            "std": 0.4008031189441681
+          },
+          "aggregate": {
+            "mean": -0.010714641772210598,
+            "std": 0.6821865439414978
+          },
+          "soma_activation": {
+            "mean": 0.22638967633247375,
+            "std": 0.5161768794059753
+          },
+          "logits": {
+            "mean": 0.054686397314071655,
+            "std": 0.6780990958213806
+          },
+          "mean_logit_l2": 1.85500967502594,
+          "predictive_entropy": 2.0807418823242188
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": 0.008581050671637058,
+            "std": 0.6509997844696045
+          },
+          "dendrite_activation": {
+            "mean": 0.2228865921497345,
+            "std": 0.4203246533870697
+          },
+          "aggregate": {
+            "mean": 0.017162106931209564,
+            "std": 0.6444922685623169
+          },
+          "soma_activation": {
+            "mean": 0.23456932604312897,
+            "std": 0.47560402750968933
+          },
+          "logits": {
+            "mean": 0.29288947582244873,
+            "std": 0.6160517334938049
+          },
+          "mean_logit_l2": 1.9171218872070312,
+          "predictive_entropy": 2.152963161468506
+        }
+      ],
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    },
+    {
+      "architecture": "8x8 untrained diagnostics",
+      "experiment_id": "S3-T06",
+      "protocol_family": "s3_forward_calibration",
+      "paired_comparison_group": "s3_t06_forward",
+      "source_files": [
+        "runs/s3_t06_initial_diagnostics.json"
+      ],
+      "seed_count": 3,
+      "H": 128,
+      "B": 8,
+      "K": 8,
+      "mean_K": null,
+      "hidden_widths": null,
+      "params_stored": 9610,
+      "params_effective": 9610,
+      "main_macs_per_sample": 9472,
+      "stored_parameter_bytes": 38440,
+      "topology_bytes": 65536,
+      "model_tensor_payload_bytes_estimate": 103984,
+      "topology_characteristics": {
+        "G64": "nested, shared across arms by seed"
+      },
+      "test_accuracy_mean": null,
+      "test_nll_mean": null,
+      "validation_accuracy_mean": null,
+      "validation_nll_mean": null,
+      "latency": null,
+      "activation_stats": [
+        {
+          "dendrite_preactivation": {
+            "mean": 0.008550248108804226,
+            "std": 0.6569891571998596
+          },
+          "dendrite_activation": {
+            "mean": 0.22119775414466858,
+            "std": 0.4162709414958954
+          },
+          "aggregate": {
+            "mean": 0.024183712899684906,
+            "std": 0.6642897129058838
+          },
+          "soma_activation": {
+            "mean": 0.2436612993478775,
+            "std": 0.4935790002346039
+          },
+          "logits": {
+            "mean": 0.12827056646347046,
+            "std": 0.7433807253837585
+          },
+          "mean_logit_l2": 2.065187692642212,
+          "predictive_entropy": 2.075193166732788
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": -0.0037882039323449135,
+            "std": 0.6216800212860107
+          },
+          "dendrite_activation": {
+            "mean": 0.20131540298461914,
+            "std": 0.3961615562438965
+          },
+          "aggregate": {
+            "mean": -0.010714646428823471,
+            "std": 0.6821865439414978
+          },
+          "soma_activation": {
+            "mean": 0.22824202477931976,
+            "std": 0.5088092088699341
+          },
+          "logits": {
+            "mean": 0.039053283631801605,
+            "std": 0.726499617099762
+          },
+          "mean_logit_l2": 1.909448266029358,
+          "predictive_entropy": 2.0242977142333984
+        },
+        {
+          "dendrite_preactivation": {
+            "mean": 0.006067718844860792,
+            "std": 0.6543059945106506
+          },
+          "dendrite_activation": {
+            "mean": 0.21877646446228027,
+            "std": 0.4220414459705353
+          },
+          "aggregate": {
+            "mean": 0.017162028700113297,
+            "std": 0.6444922685623169
+          },
+          "soma_activation": {
+            "mean": 0.2345152199268341,
+            "std": 0.47066667675971985
+          },
+          "logits": {
+            "mean": 0.27082955837249756,
+            "std": 0.6311160326004028
+          },
+          "mean_logit_l2": 1.8858612775802612,
+          "predictive_entropy": 2.1572859287261963
+        }
+      ],
+      "initialization_scheme": "paired Kaiming input; Xavier output; frozen label-free calibration"
+    }
+  ]
+}
