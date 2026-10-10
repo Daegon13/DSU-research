@@ -82,7 +82,11 @@ Tras cerrar E01/E02, considerar barrido de `B∈{1,2,4,8}` con K=16 y barrido de
 
 ## S3-T06 — controles posteriores a la ablación
 
-S3-T06 quedó cerrado como PASS de diseño, implementación y diagnóstico forward, sin entrenamiento. PointSparse y la familia neutral B=1,2,4,8 reutilizan exactamente G64 nested y tienen 9610 parámetros y 9472 MAC principales cada uno. La agregación fija `sum(d)/sqrt(B)` y la calibración afín global sin labels se congelaron antes de S3-T07. El menor loss de S3-T05 puede reflejar probabilidades/márgenes, escala de logits, parámetros extra o compartimentalización; todavía no se distingue cuál. H-014 y H-015 siguen UNTESTED. [Especificación, tabla y procedimiento](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md). Siguiente tarea exacta: S3-T07 — ejecutar la comparación causal pareada.
+S3-T06 quedó cerrado como PASS de diseño, implementación y diagnóstico forward, sin entrenamiento. PointSparse y la familia neutral B=1,2,4,8 reutilizan exactamente G64 nested y tienen 9610 parámetros y 9472 MAC principales cada uno. La agregación fija `sum(d)/sqrt(B)` y la calibración afín global sin labels se congelaron antes de S3-T07. El menor loss de S3-T05 podía reflejar probabilidades/márgenes, escala de logits, parámetros extra o compartimentalización; ese diagnóstico no separaba las causas. H-014 y H-015 quedaron UNTESTED al cierre de S3-T06. [Especificación, tabla y procedimiento](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md). La tarea siguiente en ese momento era S3-T07.
+
+## S3-T07 — resultado de los controles pareados
+
+**Gate técnico PASS**, 15 corridas, N=3, hashes y coeficientes S3-T06 congelados. PointSparse: `86.913 ± .125%` accuracy y `.372309 ± .001408` NLL; H-014 SUPPORTED frente al MLP histórico, con límites de comparación histórica. `1×64 − PointSparse`: −.273 pp y +.003573 NLL; H-016 INCONCLUSIVE. `4×16 − 1×64`: −.397 pp y +.011383 NLL, empeora en las tres seeds; H-015 CONTRARY por el criterio de loss adversa consistente. La tendencia de menor NLL con B de S3-T05 desaparece y se invierte bajo este control; ello no prueba cuál confusor de S3-T05 la produjo. [Protocolo, resultados y límites](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md). No se fijó S3-T08 ni se ejecutaron seeds 4–5 o DSU-T.
 
 ## Hipótesis, límites y gate
 

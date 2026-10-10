@@ -225,14 +225,31 @@ En este CPU y PyTorch, DSU-S favorece claramente forward batch 1 (Fixed/DSU 4.24
 
 ## H-014 — H-SPARSE: anchura sparse sin compartimentos
 
-**Status:** UNTESTED.
+**Status:** SUPPORTED dentro del contraste histórico acotado S3-T07.
 
-La mayor parte de la eficiencia paramétrica observada frente al MLP denso proviene de mantener muchas unidades sparse con fan-in restringido, incluso sin compartimentalización dendrítica. S3-T06 implementó PointSparse (128 somas, 64 entradas únicas/soma, 9610 parámetros) como control; ninguna comparación de entrenamiento de esta hipótesis se ejecutó. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+La mayor parte de la eficiencia paramétrica observada frente al MLP denso proviene de mantener muchas unidades sparse con fan-in restringido, incluso sin compartimentalización dendrítica. S3-T06 implementó PointSparse (128 somas, 64 entradas únicas/soma, 9610 parámetros) como control. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+
+### Resultado S3-T07 (2026-10-10)
+**SUPPORTED en el alcance histórico acotado.** PointSparse obtuvo 86.913 ± .125% test accuracy y `.372309 ± .001408` NLL, +1.030 pp frente al MLP 13→17 histórico y −.340 pp frente a DSU-S histórica. Retuvo 0.752 del gap histórico de accuracy. La comparación histórica no iguala todos los confusores; [detalle](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).
 
 ---
 
 ## H-015 — H-COMPARTMENT-PURE: partición sin parámetros extra
 
-**Status:** UNTESTED.
+**Status:** CONTRARY dentro de S3-T07.
 
-Con igual número de parámetros, las mismas 64 entradas por soma y escala inicial controlada, dividir entradas entre múltiples no linealidades dendríticas mejora la capacidad. S3-T06 implementó B=1,2,4,8 con 9610 parámetros cada uno, G64 nested y calibración sin labels; faltan entrenamientos. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+Con igual número de parámetros, las mismas 64 entradas por soma y escala inicial controlada, dividir entradas entre múltiples no linealidades dendríticas mejora la capacidad. S3-T06 implementó B=1,2,4,8 con 9610 parámetros cada uno, G64 nested y calibración sin labels. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+
+### Resultado S3-T07 (2026-10-10)
+**CONTRARY** según el criterio prefijado de NLL adversa consistente: `4×16 − 1×64` = −.397 pp accuracy, +.011383 NLL, NLL peor en 3/3 seeds. La menor ECE no revierte la pérdida de top-1/NLL. [Detalle](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).
+
+---
+
+## H-016 — H-DENDRITIC-STAGE: etapa dendrítica con una rama
+
+**Status:** INCONCLUSIVE en S3-T07 (registrada antes del entrenamiento).
+
+Con la misma conectividad sparse y el mismo presupuesto entrenable, insertar una etapa dendrítica no lineal antes del soma mejora la capacidad frente a PointSparse. El contraste primario es `1×64 − PointSparse`; ambos tienen 9610 parámetros, 9472 MAC principales y G64 idéntica. La composición de LeakyReLU para entradas negativas y la calibración afín fija también difieren. Criterios prefijados: [EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).
+
+### Resultado S3-T07 (2026-10-10)
+**INCONCLUSIVE.** `1×64 − PointSparse` = −.273 pp accuracy y +.003573 NLL; ambas direcciones desfavorecen la etapa extra, pero no alcanzan el umbral contrario prefijado. [Detalle](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).

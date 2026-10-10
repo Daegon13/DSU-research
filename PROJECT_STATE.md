@@ -7,13 +7,13 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T06 completada: controles PointSparse y compartimentos de presupuesto idéntico implementados y diagnosticados sólo en forward. Siguiente tarea: S3-T07 — ejecutar comparación causal pareada; no iniciada.
+S3-T07 completada. La siguiente decisión científica de Sprint 3 está pendiente; no se definió S3-T08 ni se inició DSU-T.
 
 ## LAST COMPLETED TASK
-S3-T06: PASS de diseño, implementación y diagnóstico inicial sin entrenamiento. Cinco brazos con G64 compartida, 9610 parámetros y 9472 MAC principales cada uno; H-014/H-015 siguen UNTESTED. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T07: PASS técnico, 15 corridas Fashion-MNIST N=3, cinco brazos de 9610 parámetros y 9472 MAC principales, calibración S3-T06 congelada y hashes pareados. H-014 SUPPORTED en comparación histórica acotada; H-015 CONTRARY; H-016 INCONCLUSIVE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-S3-T06: los diagnósticos forward en 256 ejemplos train por seed mostraron DE de logits 0.613–0.804 para la familia y 0.575–0.681 para PointSparse. Sin colapso ni explosión; la escala residual no es idéntica. R-012 de S3-T05 y H-011 = NEGLIGIBLE permanecen documentados en `docs/EXPERIMENT_007_DENDRITIC_COMPARTMENT_ABLATION.md`.
+R-013: PointSparse obtuvo test accuracy 86.913 ± .125% y NLL .372309 ± .001408. `1×64 − PointSparse` dio −.273 pp/+ .003573 NLL; `4×16 − 1×64` dio −.397 pp/+ .011383 NLL, con loss adversa en 3/3 seeds. La tendencia de menor NLL con B de S3-T05 no reapareció. Detalle en `docs/EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -32,7 +32,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
-H-014 (H-SPARSE) y H-015 (H-COMPARTMENT-PURE) = UNTESTED; S3-T06 preparó los controles y sólo midió escala inicial.
+H-014 (H-SPARSE) = SUPPORTED frente al MLP histórico dentro del alcance acotado: +1.030 pp, 0.752 del gap histórico retenido. H-015 (H-COMPARTMENT-PURE) = CONTRARY por deterioro consistente de NLL de 4×16 respecto de 1×64. H-016 (H-DENDRITIC-STAGE) = INCONCLUSIVE; 1×64 pierde frente a PointSparse sin alcanzar umbral contrario.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -56,13 +56,14 @@ H-014 (H-SPARSE) y H-015 (H-COMPARTMENT-PURE) = UNTESTED; S3-T06 preparó los co
 - S3-T03 N=5 encontró efecto medio despreciable de regularizar fan-in/topología a K=16. Las aristas A/B difieren y la dispersión entre seeds supera el delta medio; no generalizar fuera del protocolo.
 - S3-T05 N=3 igualó conectividad por soma pero no parámetros totales, número de activaciones ni escala exacta de logits iniciales. `4×16` usó topología sin solapamiento distinta de DSU-S v0. La clasificación NEGLIGIBLE es exploratoria y no demuestra que la compartimentalización sea inútil en general.
 - S3-T06 iguala parámetros y media/DE del agregado en un lote train sin labels, pero no iguala distribución completa, correlaciones, logits ni número de operaciones de activación. Las constantes se congelan antes de entrenar; no hay resultado de calidad.
+- S3-T07 N=3 muestra que PointSparse retiene gran parte del gap de accuracy histórico, pero MLP/DSU-S históricos no están completamente pareados con él. La familia neutral aumenta activaciones y operaciones fijas con B; NLL y top-1 empeoran al aumentar B, mientras ECE mejora. No se infiere causa única, menor FLOPs totales ni ventaja de runtime.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T07 — Ejecutar el experimento causal PointSparse + parameter-neutral compartment family, fijando antes el protocolo de entrenamiento y los criterios de interpretación. No ejecutar como parte de S3-T06.
+Decidir formalmente entre confirmar una señal con N=5, cerrar la hipótesis dendrítica estática, probar sparse topology como explicación dominante o cerrar Sprint 3. No ejecutar ninguna opción sin una tarea nueva y protocolo congelado. La evidencia S3-T07 favorece priorizar sparse width/topology y no ampliar ahora la familia estática.
 
 ## LAST UPDATE
-2026-10-09
+2026-10-10
