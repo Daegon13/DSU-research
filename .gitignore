@@ -13,6 +13,8 @@ data/
 !data/
 data/*
 !data/historical_experiments.json
+!data/zero_cost_proxy_results.json
+!data/zero_cost_validation.json
 checkpoints/
 *.pt
 *.pth
