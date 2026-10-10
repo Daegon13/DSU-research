@@ -189,13 +189,13 @@ S3-E02: par Fixed-dANN/DSU-S con `G` idéntica y transferencia exacta de pesos; 
 
 ## H-011 — Partición dendrítica
 
-**Status:** UNTESTED
+**Status:** NEGLIGIBLE en S3-T05; evidencia exploratoria Fashion-MNIST N=3.
 
 ### Statement
 Con igual número total de conexiones input por soma, dividirlas entre múltiples subunidades dendríticas no lineales proporciona más capacidad que una sola integración.
 
 ### Experiment
-Comparación prioritaria futura `1×64`, `2×32`, `4×16`, `8×8`, con 64 índices por soma y cobertura controlada. Cambian también sesgos y pesos soma; registrar el presupuesto de parámetros y añadir control si esa diferencia resulta decisiva.
+S3-T05 comparó `1×64`, `2×32`, `4×16`, `8×8` con 64 índices únicos y la misma cobertura por soma, partición nested, inicialización base y minibatches pareados. `4×16 − 1×64` produjo +0.023 ± 0.138 pp de test accuracy (una victoria de tres) y −0.005051 ± 0.001043 de test loss (tres mejoras). Ambos deltas medios quedan bajo los umbrales de efecto material prefijados. Los parámetros suben de 9866 a 10634 en ese contraste; no se aísla sólo la no linealidad. [Protocolo y resultados](EXPERIMENT_007_DENDRITIC_COMPARTMENT_ABLATION.md).
 
 ---
 

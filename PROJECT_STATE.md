@@ -7,13 +7,13 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T05 — Diseñar y ejecutar la ablación de compartimentalización dendrítica con 64 conexiones por soma: 1×64, 2×32, 4×16, 8×8. Pendiente; no iniciado.
+S3-T05 completada. Siguiente diseño pendiente: S3-T06 — diagnosticar la ausencia de ventaja material de compartimentalización, fijando primero un control para parámetros extra y escala inicial. No iniciado.
 
 ## LAST COMPLETED TASK
-S3-T04: PASS técnico. S3-E02 midió bytes y latencias de Fixed-dANN frente a DSU-S con `G`, pesos activos e inputs pareados. H-012 storage = SUPPORTED; H-013 runtime = MIXED / NOT SUPPORTED como ventaja general. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T05: PASS técnico. Doce corridas Fashion-MNIST N=3 con cuatro particiones nested de 64 conexiones input por soma y hashes pareados. H-011 = NEGLIGIBLE dentro del protocolo. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
-R-011: DSU-S reduce 22.281× el payload tensorial del modelo, 21.737× el checkpoint de modelo, 44.080× el estado Adam y 30.752× el checkpoint de entrenamiento frente a Fixed-dANN equivalente. Forward batch 1 favorece DSU-S, batches 128/512 favorecen Fixed; Adam batch 128 es similar. RAM pico CPU no medida fiablemente. Detalle en `docs/EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md`.
+R-012: `4×16 − 1×64` con las mismas 64 entradas/soma produjo +0.023 ± 0.138 pp de test accuracy y −0.005051 ± 0.001043 de test loss en N=3. Sólo una seed favoreció 4×16 en accuracy. H-011 = NEGLIGIBLE; la diferencia de loss es pequeña y los parámetros difieren. Detalle en `docs/EXPERIMENT_007_DENDRITIC_COMPARTMENT_ABLATION.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -31,7 +31,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 
 ## ACTIVE HYPOTHESIS
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
-H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = UNTESTED. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
+H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -53,13 +53,14 @@ H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo de
 - S2-REVIEW confirma que la comparación DSU-S/dANN-R confunde fan-in variable vs fijo, topología, inicialización y representación. Sprint 3 debe diseñar controles antes de atribuir causalidad; el GO no autoriza modelos nuevos por sí mismo.
 - S3-T02 verificó equivalencia paired con datos sintéticos y cinco pasos Adam en CPU float32. S3-T04 añadió checkpoint, estado Adam y microbenchmarks CPU; CUDA, trayectoria larga y RAM pico siguen sin evidencia.
 - S3-T03 N=5 encontró efecto medio despreciable de regularizar fan-in/topología a K=16. Las aristas A/B difieren y la dispersión entre seeds supera el delta medio; no generalizar fuera del protocolo.
+- S3-T05 N=3 igualó conectividad por soma pero no parámetros totales, número de activaciones ni escala exacta de logits iniciales. `4×16` usó topología sin solapamiento distinta de DSU-S v0. La clasificación NEGLIGIBLE es exploratoria y no demuestra que la compartimentalización sea inútil en general.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T05 — Diseñar y ejecutar la ablación de compartimentalización dendrítica con 64 conexiones por soma: 1×64 vs 2×32 vs 4×16 vs 8×8. No iniciado.
+S3-T06 — Diseñar, antes de ejecutarlo, un diagnóstico de por qué la compartimentalización no produjo ventaja material de accuracy en S3-T05. Priorizar control de parámetros extra y escala inicial; no extender seeds automáticamente.
 
 ## LAST UPDATE
 2026-10-09
