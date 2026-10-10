@@ -194,3 +194,21 @@ S3-T05 mezcló partición, 256B parámetros adicionales y escala de logits. La r
 ### Consequence
 
 El control sigue teniendo distinta cantidad de activaciones y operaciones fijas; media/DE igualadas del agregado no implican logits iguales. H-014/H-015 quedan UNTESTED hasta S3-T07. [Diseño y diagnóstico](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+
+---
+
+## ADR-013 — Priorizar sparse architecture y posponer dendritas estáticas adicionales
+
+**Status:** ACCEPTED para dirección de investigación en S3-T08; no autoriza nuevos entrenamientos.
+
+### Decision
+
+Organizar el trabajo en Línea A (sparse architecture, baseline PointSparse) y Línea B (dinámica neuronal, empezando en el futuro por PointSparse vs PointSparse + estado). Conservar DSU-T/DSU-A/DSU-AIS/DSU-R como candidatos posteriores de Línea B. Reabrir compartimentos estáticos sólo con hipótesis causal y control nuevos. [Programa A/B](RESEARCH_PROGRAM_A_B.md).
+
+### Reason
+
+H-009 negligible, H-010 equivalencia funcional, H-011 negligible, H-014 supported sólo en contraste histórico acotado, H-015 contrary y H-016 inconclusive. H-012 apoya almacenamiento compacto B/C, H-013 no apoya ventaja general de latencia. La evidencia no atribuye capacidad extra a más ramas estáticas bajo el control neutral estudiado; sparse width/topology es una explicación prioritaria todavía por verificar.
+
+### Consequence
+
+S3-T08 introduce contabilidad y registro, no cambia arquitecturas existentes. S3-T09 validará proxies. Sprint 3 requiere revisión posterior antes de cerrarse.

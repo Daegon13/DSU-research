@@ -7,13 +7,15 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T07 completada. La siguiente decisión científica de Sprint 3 está pendiente; no se definió S3-T08 ni se inició DSU-T.
+S3-T08 completada como especificación y base analítica; Sprint 3 sigue abierto. S3-T09 es la siguiente tarea propuesta, sin ejecución aún. No se inició DSU-T.
 
 ## LAST COMPLETED TASK
-S3-T07: PASS técnico, 15 corridas Fashion-MNIST N=3, cinco brazos de 9610 parámetros y 9472 MAC principales, calibración S3-T06 congelada y hashes pareados. H-014 SUPPORTED en comparación histórica acotada; H-015 CONTRARY; H-016 INCONCLUSIVE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
+S3-T08: PASS de documentación y contabilidad. Programa A/B, framework de cuatro capas, 30 filas históricas agrupadas por protocolo (incluidas diagnóstico S0 y S3-T06), funnel 0–4 y modelo estructural con tests. No hubo entrenamiento ni búsqueda. S3-T07 permanece como último resultado experimental: H-014 SUPPORTED en comparación histórica acotada, H-015 CONTRARY, H-016 INCONCLUSIVE. Sprint 2: PASS; Gate REPRODUCTION_001 = REPRODUCED y Gate Sprint 1 = PASS permanecen vigentes.
 
 ## LAST RESULT
 R-013: PointSparse obtuvo test accuracy 86.913 ± .125% y NLL .372309 ± .001408. `1×64 − PointSparse` dio −.273 pp/+ .003573 NLL; `4×16 − 1×64` dio −.397 pp/+ .011383 NLL, con loss adversa en 3/3 seeds. La tendencia de menor NLL con B de S3-T05 no reapareció. Detalle en `docs/EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md`.
+
+S3-T08 no generó resultados de aprendizaje. Formalizó Línea A (sparse architecture) y Línea B (dynamic neuron), y reprodujo contabilidad conocida PointSparse 9610/9472, DSU-S 10634/9984/8192 índices, Fixed-dANN 468874 almacenados/10634 efectivos/468224 MAC GEMM y vANN 468874. Registro: `data/historical_experiments.json`; especificación: `docs/ANALYTICAL_SCREENING_FRAMEWORK.md`.
 
 ## CURRENT BEST MODEL
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
@@ -63,7 +65,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-Decidir formalmente entre confirmar una señal con N=5, cerrar la hipótesis dendrítica estática, probar sparse topology como explicación dominante o cerrar Sprint 3. No ejecutar ninguna opción sin una tarea nueva y protocolo congelado. La evidencia S3-T07 favorece priorizar sparse width/topology y no ampliar ahora la familia estática.
+S3-T09 — Implementar y validar los primeros zero-cost architecture proxies contra el registro histórico. Congelar lotes train, semillas, métricas, presupuesto y evaluación en validation antes de inspeccionar resultados. No usar test para seleccionar; no cerrar Sprint 3 automáticamente. El diseño está en `docs/ANALYTICAL_SCREENING_FRAMEWORK.md`.
 
 ## LAST UPDATE
 2026-10-10

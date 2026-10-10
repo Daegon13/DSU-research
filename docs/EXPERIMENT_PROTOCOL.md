@@ -114,3 +114,17 @@ Los resultados importantes deben incluir:
 No optimizar extensivamente DSU sin otorgar un presupuesto comparable al baseline.
 
 Si los presupuestos de tuning son distintos, documentarlo claramente.
+
+## 13. Funnel de selección analítica (desde S3-T08)
+
+Este funnel guía tareas **futuras**; no autoriza búsquedas ni entrenamiento por sí mismo. Registrar en cada etapa candidatos, rechazos, criterio prefijado, coste y protocolo. Mantener `experiment_id`, `protocol_family` y `paired_comparison_group` para impedir contrastes causales entre runs históricos incompatibles.
+
+| Etapa | Presupuesto | Decisión |
+|---|---|---|
+| 0 — restricciones analíticas | Sin entrenamiento | Revisar parámetros, bytes de pesos/topología/estado, MAC y redundancia; descartar dominancia bajo el presupuesto declarado |
+| 1 — proxies zero-cost | Uno o pocos lotes train y, como máximo, backward prefijado | Medir señal/representación/gradientes; descartar degeneración con umbrales congelados |
+| 2 — piloto barato | Sólo supervivientes; ejemplo futuro 1 seed, 2–3 épocas | Comprobar aprendizaje inicial sin tocar test |
+| 3 — experimento | N=3, 25 épocas según protocolo congelado | Medir calidad y costes, con selección `final_epoch_25` cuando corresponda |
+| 4 — confirmación | Señales relevantes; N=5 o más | Replicar efecto y controles antes de afirmación fuerte |
+
+El orden no convierte proxies en predictores de accuracy exacta. No sumar métricas en un score arbitrario; calibrar reglas sólo con validation y dejar test cerrado durante búsqueda. Si el protocolo de una nueva tarea difiere, documentar la razón antes de ejecutar. [Diseño del framework](ANALYTICAL_SCREENING_FRAMEWORK.md).

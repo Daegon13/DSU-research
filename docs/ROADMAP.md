@@ -89,11 +89,17 @@ Implementar la primera unidad propia.
 
 **S3-T03 / S3-E01: PASS técnico (2026-10-08).** dANN-R vs Fixed-dANN completó N=5 con inicialización y minibatches pareados. El efecto medio fue despreciable según criterios prefijados; H-009 = NOT SUPPORTED / NEGLIGIBLE. Véase [EXPERIMENT_005_FIXED_FANIN_ABLATION.md](EXPERIMENT_005_FIXED_FANIN_ABLATION.md).
 
-**S3-T04, siguiente tarea:** ejecutar S3-E02, benchmark físico controlado Fixed-dANN vs DSU-S. Mantener separadas equivalencia funcional, almacenamiento, operaciones, latencia y RAM.
+**S3-T04: PASS técnico (2026-10-09).** Benchmark físico B/C: H-012 storage SUPPORTED; H-013 runtime MIXED / NOT SUPPORTED como ventaja general. [Resultados](EXPERIMENT_006_PHYSICAL_REPRESENTATION_BENCHMARK.md).
 
-**Experimentos siguientes:** S3-E02 B/C primero equivalencia y luego accounting, trayectoria y rendimiento físico. Segunda fase: barridos separados `B∈{1,2,4,8}` y `K∈{8,16,32}`. **Alta prioridad:** `1×64 vs 2×32 vs 4×16 vs 8×8`, 64 conexiones por soma con cobertura controlada, para estudiar compartimentalización dendrítica; sus conteos de sesgos/pesos soma difieren y deben declararse.
+**S3-T05: PASS técnico (2026-10-09).** Familia original `1×64/2×32/4×16/8×8`, 64 conexiones por soma: H-011 NEGLIGIBLE bajo su protocolo. [Resultados](EXPERIMENT_007_DENDRITIC_COMPARTMENT_ABLATION.md).
+
+**S3-T06: PASS de diseño/diagnóstico (2026-10-10).** Controles PointSparse y compartimentos con presupuesto neutral de 9610 parámetros, sin entrenamiento. [Diseño](S3_T06_SPARSE_VS_COMPARTMENT_CONTROLS.md).
+
+**S3-T07: PASS técnico (2026-10-10).** N=3, H-014 SUPPORTED en contraste histórico acotado, H-015 CONTRARY, H-016 INCONCLUSIVE. [Resultados](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).
 
 **Backlog de topología:** estudiar regeneración desde seed, checkpoint sin `G`, metadata int32/int16 empaquetada, topología implícita y topología estructurada/por bloques. Distinguir ahorro de checkpoint de memoria residente/runtime; no cambiar dtype hasta una tarea propia. No introducir todavía estado temporal, DSU-T, AIS, inhibición, rewiring, gating apical, spikes, otros datasets ni Transformers.
+
+**Actualización S3-T08 (2026-10-10):** S3-T04/T05/T06/T07 ya se ejecutaron o cerraron según [PROJECT_STATE](../PROJECT_STATE.md). La evidencia de S3-T07 favorece investigar sparse width/topology y deja la expansión dendrítica estática en pausa. [Programa A/B](RESEARCH_PROGRAM_A_B.md), [framework analítico](ANALYTICAL_SCREENING_FRAMEWORK.md) y funnel del [protocolo](EXPERIMENT_PROTOCOL.md) fijan la nueva dirección. **S3-T09 siguiente:** implementar y validar primeros proxies zero-cost contra el registro histórico, sin nuevas búsquedas o entrenamiento en T08. Revisar el cierre de Sprint 3 después de T09; no queda cerrado automáticamente. Las líneas dinámicas y Sprint 4 requieren gate separado.
 
 ---
 
