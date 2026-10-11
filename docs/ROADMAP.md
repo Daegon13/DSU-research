@@ -107,11 +107,23 @@ Implementar la primera unidad propia.
 
 **S3-T11: PASS técnico (2026-10-11).** Shortlist congelada, anchor S3-T07 reutilizado tras auditoría y seis corridas nuevas N=3/25 épocas. Las tres medias de validation final fueron near-ties; anchor ganó test accuracy media, `160×49` ganó validation y NLL. `EARLY-PILOT-3E = WEAK`, `H-WIDTH-FANIN = INCONCLUSIVE` para calidad final del rango probado. [Resultados](EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md). **S3-REVIEW recomendado** como cierre formal separado; no se inició Línea B.
 
+**S3-REVIEW: PASS; SPRINT 3: CLOSED (2026-10-11).** [Review formal](SPRINT_3_REVIEW.md): fan-in fijo negligible en A/B, representación compacta equivalente y menor storage B/C, latencia mixta, compartimentos estáticos sin ventaja causal suficiente, PointSparse `128×64` como baseline experimental por defecto, ER prospectivo fallido y piloto de tres épocas débil. No quedan preguntas necesarias para el objetivo original Topology and Causal Ablations. Lo pendiente se asigna a Research Track A/B y requiere gates nuevos.
+
+---
+
+## Research Track A — Sparse Architecture (después de S3)
+
+Baseline: PointSparse `128×64`. Secuencia propuesta, no aprobada para ejecución: **A1** diseño causal para separar ancho de conectividad/topología; **A2** topología aleatoria frente a alternativa prefijada; **A3** solapamiento entre receptive fields; **A4** aprendizaje/reorganización de `G`; **A5** implementación y coste físico medido; **A6** otros datasets/tareas. A1 es la siguiente decisión recomendada y empieza como tarea de sólo diseño. No ampliar ahora un grid H×K: T11 halló diferencias finales pequeñas y discordantes. Esta línea puede preceder o coexistir con S4 sin renumerarlo. [Programa](RESEARCH_PROGRAM_A_B.md).
+
+## Research Track B — Dynamic Neuron (separado)
+
+Primer contraste futuro: PointSparse-static vs PointSparse-stateful en tarea temporal con coste de estado y reset definidos. Sólo tras señal positiva, estudiar PointSparse-stateful vs dendritic-stateful; luego heterogeneidad temporal, AIS/excitabilidad, compartimentos dinámicos y plasticidad según [programa A/B](RESEARCH_PROGRAM_A_B.md). Ninguna tarea B se inicia con S3-REVIEW.
+
 ---
 
 ## Sprint 4 — DSU-T
 
-Añadir memoria sólo si DSU-S lo justifica.
+**Reserva histórica para Línea B; NO INICIADO.** Añadir memoria sólo tras un gate separado que pruebe primero el efecto de estado en PointSparse estática frente a PointSparse-stateful. La numeración S4 se conserva, pero las tareas A1/A2 pueden realizarse antes o de forma independiente. No usar dendritas stateful como primer contraste porque mezclarían efecto de estado y compartimentos.
 
 ### Tareas
 - estado básico;

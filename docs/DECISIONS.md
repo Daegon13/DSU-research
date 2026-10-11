@@ -212,3 +212,39 @@ H-009 negligible, H-010 equivalencia funcional, H-011 negligible, H-014 supporte
 ### Consequence
 
 S3-T08 introduce contabilidad y registro, no cambia arquitecturas existentes. S3-T09 validará proxies. Sprint 3 requiere revisión posterior antes de cerrarse.
+
+---
+
+## ADR-014 — Cierre S3 y baseline PointSparse
+
+**Status:** ACCEPTED en S3-REVIEW (2026-10-11).
+
+### Decision
+
+Cerrar Sprint 3 como PASS / CLOSED. Fijar PointSparse `128×64` como **default experimental baseline within the tested budget** para futuros controles de Línea A y B: 9610 parámetros, 9472 MAC principales por muestra y N=3/25 épocas disponibles. Conservar DSU-S v0, Fixed-dANN y MLP históricos para sus comparaciones propias. Pausar y despriorizar más compartimentos dendríticos **estáticos** bajo Fashion-MNIST hasta tener una predicción causal nueva. No declarar óptimo global ni abrir S4/DSU-T automáticamente. [Review](SPRINT_3_REVIEW.md).
+
+### Reason
+
+PointSparse retuvo descriptivamente 0.752 del gap histórico DSU-S−MLP pequeño sin compartimentos. En S3-T11 las tres variantes H/K fueron near-ties en validation y ninguna superó al anchor con el efecto material coherente preregistrado; `160×49` sí obtuvo mejor validation loss y test NLL, por lo que la selección del anchor no es una afirmación de dominancia. H-011 fue negligible, H-015 contrary y H-016 inconclusive bajo los controles probados. Compactar B/C explica bytes, no calidad; H-013 no sustenta speedup general.
+
+### Consequence
+
+La próxima decisión recomendada es A1 de sólo diseño, con presupuesto y contraste causal prefijados. Reabrir dendritas estáticas requiere tarea/mecanismo específico (temporal, contextual/apical, plasticidad local u otra predicción) y control nuevo. Línea B empieza, si se aprueba por gate propio, con PointSparse-static vs PointSparse-stateful en tarea temporal antes de añadir compartimentos dinámicos. S4 conserva su etiqueta histórica DSU-T como reserva, no como tarea iniciada.
+
+---
+
+## ADR-015 — Proxies y pilotos como filtros auxiliares
+
+**Status:** ACCEPTED en S3-REVIEW (2026-10-11).
+
+### Decision
+
+Mantener el Structural Cost Model para contabilidad; tratar signal propagation como diagnóstico y zero-cost/pilotos baratos como filtros auxiliares. Ningún proxy pasa a criterio primario de selección hasta superar validación prospectiva preregistrada en cohorte nueva y target pertinente. Tres épocas no se usan como oracle para ranking final ni para descartar near-ties. Mantener separación entre parámetros, bytes, MAC, latencia, RAM y energía, y entre familias de protocolo.
+
+### Reason
+
+ER raw ordenó bien retrospectivamente S3-T07, pero falló frente a validation temprana en la cohorte completa T10; la correlación favorable de tres candidatos T11 no lo rehabilita. `activation_pattern_logdet` fue misleading. El piloto de época 3 fue WEAK entre familias y Spearman −.50 frente a las medias finales de la shortlist. El modelo estructural sí reprodujo conteos conocidos y los límites de payload/temporales están declarados. [Review](SPRINT_3_REVIEW.md).
+
+### Consequence
+
+El funnel de [EXPERIMENT_PROTOCOL](EXPERIMENT_PROTOCOL.md) sigue siendo orientativo. Cada promoción de candidato o proxy exige preregistro, presupuesto y criterio adverso; el test no calibra reglas de selección. No se autoriza aquí ningún proxy nuevo ni entrenamiento.

@@ -6,9 +6,15 @@ Estados permitidos:
 - SUPPORTED
 - WEAK SUPPORT
 - NOT SUPPORTED / NEGLIGIBLE
+- NEGLIGIBLE
+- MIXED / NOT SUPPORTED
 - CONTRARY
 - REFUTED
 - INCONCLUSIVE
+- FAILED (validación prospectiva de proxy)
+- WEAK (predictividad de piloto)
+
+**Cierre S3-REVIEW (2026-10-11):** los estados finales de H-009–H-016, H-ZEROCOST-ER, H-WIDTH-FANIN y EARLY-PILOT-3E están reunidos con evidencia, alcance y límites en [SPRINT_3_REVIEW.md](SPRINT_3_REVIEW.md). Sprint 3 = PASS / CLOSED; ninguna hipótesis abierta se promueve por ello a SUPPORTED. H-002/H-006 continúan abiertas para RAM/runtime y eficiencia física general.
 
 ---
 
@@ -279,3 +285,11 @@ ER raw puede priorizar prospectivamente arquitecturas PointSparse de presupuesto
 ER raw obtuvo Spearman −.190 y 5/15 pares no near-tie correctos contra accuracy; width H obtuvo −.048 y 6/15. No agregó información al baseline trivial en esta cohorte. El resultado retrospectivo acotado de S3-T09 queda registrado separadamente.
 
 S3-T11 no cambia esta clasificación de la cohorte T10 completa. Dentro de la shortlist de sólo tres brazos, ER raw correlacionó positivamente con las medias finales, pero validation tuvo cero pares no near-tie y test sólo uno; el subconjunto fue seleccionado por la regla T10. No interpretar esto como una validación general de ER.
+
+---
+
+## EARLY-PILOT-3E — ranking temprano de calidad final
+
+**Status S3-T11:** WEAK como predictor entre las familias estudiadas.
+
+La validation accuracy de época 3 se fijó antes del análisis como proxy primario de calidad final. Ordenó bien S3-T07, fue parcial en la familia MLP S2-T06 y adversa en la familia casi plana S3-T05. En la shortlist prospectiva T10→T11, su ranking tuvo Spearman −.50 frente a las medias finales de validation y test; los tres pares de validation fueron near-ties. Es un filtro exploratorio de aprendizaje inicial, no una regla general para elegir el mejor modelo o descartar arquitecturas cercanas. [Protocolo, curvas y límites](EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md).

@@ -1,18 +1,20 @@
 # PROJECT_STATE
 
 ## CURRENT PHASE
-Sprint 3 — Topology and Causal Ablations
+Sprint 3 cerrado. Decisión separada pendiente entre Research Track A — Sparse Architecture y Research Track B — Dynamic Neuron; no se inició ninguna tarea nueva.
 
 ## CURRENT SPRINT
-S3
+Ninguno activo; S3 = PASS / CLOSED.
 
 ## CURRENT TASK
-S3-T11 completada con PASS técnico. Sprint 3 sigue abierto hasta S3-REVIEW formal, recomendado como siguiente tarea. No se inició Línea B ni DSU-T.
+S3-REVIEW completada: PASS. Cierre formal en `docs/SPRINT_3_REVIEW.md`. No se inició Línea A experimental, Línea B ni DSU-T.
 
 ## LAST COMPLETED TASK
-S3-T11: PASS técnico. Shortlist T10 `80×109`, `160×49`, `128×64` sellada antes de entrenar; auditoría objetiva reutilizó el anchor N=3 de S3-T07. Se completaron seis corridas nuevas de 25 épocas, con test sólo tras época 25. Las medias de validation final de los tres brazos son near-ties (<.20 pp), mientras test accuracy favorece al anchor. H-WIDTH-FANIN = INCONCLUSIVE para calidad final dentro del rango ensayado. EARLY-PILOT-3E = WEAK al combinar tres familias históricas sin mezclarlas. Recomendación: S3-REVIEW separado, sin iniciar Línea B.
+S3-REVIEW: PASS documental; Sprint 3 CLOSED. Se auditaron S3-T01–T11 sin nuevos experimentos. PointSparse `128×64` es el baseline experimental por defecto dentro del presupuesto probado; compartimentalización estática PAUSED / DEPRIORITIZED. El próximo paso es una decisión separada de diseño A1, no un experimento automático.
 
 ## LAST RESULT
+R-017: revisión de S3-T01–T11; gate S3-REVIEW PASS y Sprint 3 CLOSED. Los resultados causales y prospectivos mantienen sus estados previos. `docs/SPRINT_3_REVIEW.md`.
+
 R-016: PointSparse 80×109/160×49/128×64 obtuvo validation accuracy época 25 `88.178 ± .331%` / `88.267 ± .109%` / `88.172 ± .416%`; test accuracy `86.680 ± .105%` / `86.803 ± .115%` / `86.913 ± .125%`. 160×49 tuvo menor NLL test `.366624 ± .002695`; el anchor mayor test accuracy. El piloto T10 de época 3 no preservó ranking final (Spearman −.50 en la shortlist); early-pilot histórico es WEAK. T10+T11 ejecutaron 174 epoch-equivalents incrementales frente a 600 ingenuos, reutilizando 75 épocas históricas del anchor. `docs/EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md`, `data/s3_t11_confirmation_results.json`.
 
 R-015: mejor validation accuracy de época 3: PointSparse 80×109, 84.817%; mejor validation loss: 240×29, .432157. ER raw vs accuracy: Spearman −.190, Kendall −.214, 5/15 pares no near-tie; width H: −.048, .000, 6/15. Los ocho pilotos sumaron 24 epoch-equivalents, frente a 600 de búsqueda ingenua completa. `docs/EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md` y `data/s3_t10_pilot_results.json`.
@@ -27,6 +29,8 @@ R-014: en S3-T07, effective rank y participation ratio ordenaron 9/9 pares no ne
 En S2-T06 se seleccionó por validation el MLP `784→20→26→10` dentro de la familia prefijada; test se evaluó sólo después de congelarlo. Todos los modelos se evaluaron en época 25; no se eligió un checkpoint por mínimo de validation ni se declaró un mejor modelo global.
 
 ## CURRENT BASELINE
+Para investigación futura A/B: **PointSparse `128×64`**, baseline experimental por defecto dentro del presupuesto probado: 9610 parámetros, 9472 MAC principales/muestra, N=3 a 25 épocas. No es óptimo global. Los controles históricos siguientes mantienen sus roles originales y no se sustituyen en sus experimentos.
+
 Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 1: vANN LeakyReLU 784→512→128→10 sobre Fashion-MNIST, 468874 parámetros; la pareja vANN/dANN-R tiene igual anchura oculta, no igual presupuesto efectivo. S2-T05: MLP denso LeakyReLU 784→13→17→10, 10623 parámetros y 10583 MAC principales, aproximadamente igualado a DSU-S por parámetros. S2-T06: MLP quality-matched en validation `784→20→26→10`, 16516 parámetros y 16460 MAC principales. Hardware CPU AMD Ryzen 5 5600G, Windows 11, float32, PyTorch 2.14.1+cpu.
 
 ## IMPORTANT NUMBERS
@@ -38,6 +42,8 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
   - >= 1.25–1.5x de mejora de throughput o reducción equivalente de latencia.
 
 ## ACTIVE HYPOTHESIS
+La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. No hay nuevo experimento aprobado. Línea A investigaría sparse architecture; Línea B, por separado, el efecto del estado temporal. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
+
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
 H-014 (H-SPARSE) = SUPPORTED frente al MLP histórico dentro del alcance acotado: +1.030 pp, 0.752 del gap histórico retenido. H-015 (H-COMPARTMENT-PURE) = CONTRARY por deterioro consistente de NLL de 4×16 respecto de 1×64. H-016 (H-DENDRITIC-STAGE) = INCONCLUSIVE; 1×64 pierde frente a PointSparse sin alcanzar umbral contrario.
@@ -45,10 +51,11 @@ H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
-- ¿Cuánto de la señal observada proviene del fan-in fijo frente a la organización dendrita→soma, inicialización y representación compacta?
+- ¿Qué contribución causal separable tienen ancho, topología, solapamiento y fan-in restringido frente al MLP probado?
 - ¿Cuánto cuesta `G` en checkpoint y RAM runtime y qué cambiarían regeneración, índices compactos o topología implícita?
-- ¿La ventaja paramétrica se convierte en ventaja real de memoria y latencia?
-- ¿El estado temporal por dendrita aporta capacidad suficiente para justificar su coste?
+- ¿Puede una implementación sparse obtener ventaja de memoria residente o latencia bajo batches declarados?
+- ¿Generaliza la señal fuera de Fashion-MNIST y de la familia MLP estudiada?
+- ¿El estado temporal por unidad sparse aporta capacidad suficiente para justificar su coste, antes de añadir compartimentos dinámicos?
 
 ## KNOWN PROBLEMS
 - RAM pico de CPU no medida fiablemente; el benchmark S3-T04 registra explícitamente esta limitación.
@@ -75,7 +82,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-REVIEW — cerrar formalmente Topology and Causal Ablations, auditar evidencias y límites de S3-T01–T11, y decidir el inicio separado de Línea A y Línea B. No iniciar Línea B automáticamente.
+Decidir y especificar **A1-DESIGN — contraste causal acotado de ancho frente a conectividad/topología sparse**, con PointSparse `128×64` como control, presupuesto y criterios prefijados. Sólo diseño/preregistro; no entrenar ni iniciar Línea B/S4 automáticamente.
 
 ## LAST UPDATE
 2026-10-11

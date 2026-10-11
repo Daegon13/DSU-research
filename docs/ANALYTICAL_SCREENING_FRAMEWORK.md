@@ -1,4 +1,6 @@
-# DSU Analytical Screening Framework — especificación S3-T08
+# DSU Analytical Screening Framework — evaluación tras S3-REVIEW
+
+**Estado de cierre:** [S3-REVIEW PASS](SPRINT_3_REVIEW.md), Sprint 3 CLOSED. Coste estructural **USEFUL / VALIDATED FOR ACCOUNTING**; propagación de señal **PARTIAL / DIAGNOSTIC**; zero-cost **sin selector primario validado**; piloto de tres épocas **WEAK / filtro exploratorio**. Los detalles siguientes conservan diseño y resultados históricos.
 
 **Propósito:** descartar configuraciones estructuralmente pobres y priorizar candidatas antes de entrenamientos completos. No predice accuracy exacta ni combina métricas en un score con pesos arbitrarios. Entrada: `ArchitectureSpec` inmutable; salida: `StructuralCost` más, en tareas futuras, medidas de señal, proxies y clasificación cualitativa de hardware. El [registro histórico](../data/historical_experiments.json) conserva `experiment_id`, `protocol_family` y `paired_comparison_group`; `null` significa no medido/reportado, nunca cero. El snapshot está versionado. El generador `python -m dsu_research.analysis.experiment_registry` reconstruye las filas desde los JSON locales de `runs/`, que el repositorio ignora; el snapshot permite inspección en clones sin ellos.
 
@@ -33,7 +35,7 @@ Primer fingerprint empírico: AMD Ryzen 5 5600G, Windows 11, PyTorch CPU float32
 
 ## Política de decisión
 
-Conservar métricas independientes y frente de Pareto condicionado a presupuesto: una arquitectura sólo se descarta por dominancia cuando sus costes comparables no mejoran y la incertidumbre de calidad/proxy está declarada. Nunca descartar por test retrospectivo, ni usar protocolos históricos distintos como pares causales. [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md) define las etapas 0–4. S3-T09 pasó técnicamente; effective rank raw quedó PROMISING en alcance acotado y otros proxies dieron señales débiles o negativas. Sprint 3 no se cierra automáticamente.
+Conservar métricas independientes y frente de Pareto condicionado a presupuesto: una arquitectura sólo se descarta por dominancia cuando sus costes comparables no mejoran y la incertidumbre de calidad/proxy está declarada. Nunca descartar por test retrospectivo, ni usar protocolos históricos distintos como pares causales. [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md) define las etapas 0–4. S3-T09 pasó técnicamente; effective rank raw quedó PROMISING **sólo retrospectivamente** y otros proxies dieron señales débiles o negativas. El resultado prospectivo T10 prevalece para cualquier regla de selección futura; véase ADR-015.
 
 ## Evidencia prospectiva S3-T10/T11
 
@@ -42,3 +44,5 @@ S3-T10 probó ocho PointSparse iso-presupuesto (9610 parámetros) con ER raw pre
 La evaluación histórica de la **accuracy de validation en época 3** fue WEAK: ordenó bien S3-T07, dio señal parcial en los MLP de S2-T06 y falló en la familia casi plana S3-T05. En la shortlist prospectiva T10→T11 tuvo Spearman −.50 frente a las medias finales de validation y test; las tres diferencias finales de validation fueron near-ties. Por tanto Stage 2 sigue siendo un filtro exploratorio y no una regla validada para descartar arquitecturas cercanas. El [protocolo](EXPERIMENT_PROTOCOL.md) conserva su carácter orientativo; no se eleva el piloto a gate universal.
 
 Una próxima evaluación de proxies deberá congelar una **cohorte nueva** y un presupuesto de train batches/seeds antes de medir calidad. Prioridades de diseño: norma de gradientes por bloque, sensibilidad tipo SNIP y pendiente inicial de aprendizaje; estadísticas Jacobianas/NTK o SynFlow-like requieren coste y semántica definidos. No ajustar un score sobre S3-T07/T10/T11 ni combinar familias incompatibles en una sola correlación.
+
+**Política post-S3:** Stage 0 usa contabilidad analítica; Stage 1 diagnósticos forward/zero-cost como filtros auxiliares; Stage 2 piloto corto sólo cuando el conjunto de candidatos lo justifique, sin suponer preservación del ranking; Stage 3 N=3/protocolo completo de shortlist; Stage 4 N≥5 sólo para efectos relevantes que requieran confirmación. Un proxy no será criterio primario hasta pasar validación prospectiva preregistrada sobre cohorte y target nuevos. Signal propagation puede descartar escalas claramente degeneradas, pero no predice por ahora calidad final. El fingerprint de S3-T04 no valida un predictor de hardware general. La revisión completa de las cuatro capas está en [SPRINT_3_REVIEW.md](SPRINT_3_REVIEW.md).
