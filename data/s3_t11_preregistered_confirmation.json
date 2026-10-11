@@ -1,0 +1,391 @@
+{
+  "schema": "s3_t11_prereg_v1",
+  "created_utc": "2026-10-11T04:10:06.077126+00:00",
+  "source_commit_before_prereg": "f5b8e893c750db314a0f122b3a40e7ee708a81d5",
+  "shortlist": [
+    {
+      "H": 80,
+      "K": 109,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9520,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 69760,
+        "persistent_buffer_bytes": 69760,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 108200,
+        "main_macs_per_sample": 9520,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4464640,
+          "soma_preactivation": 40960,
+          "soma_activation": 40960,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8720,
+        "fixed_aggregate_additions_per_sample": 0
+      }
+    },
+    {
+      "H": 160,
+      "K": 49,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9440,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 62720,
+        "persistent_buffer_bytes": 62720,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 101160,
+        "main_macs_per_sample": 9440,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4014080,
+          "soma_preactivation": 81920,
+          "soma_activation": 81920,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 7840,
+        "fixed_aggregate_additions_per_sample": 0
+      }
+    },
+    {
+      "H": 128,
+      "K": 64,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9472,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 65536,
+        "persistent_buffer_bytes": 65536,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 103976,
+        "main_macs_per_sample": 9472,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4194304,
+          "soma_preactivation": 65536,
+          "soma_activation": 65536,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8192,
+        "fixed_aggregate_additions_per_sample": 0
+      }
+    }
+  ],
+  "anchor_audit": {
+    "decision": "REUSE_S3_T07_N3",
+    "reason": "same PointSparse class, function, initialized state and topology per seed; frozen 54k/6k split, optimizer and 25-epoch protocol; T10 seed-1 first-three batch hashes and validation accuracy match",
+    "seeds": [
+      {
+        "seed": 1,
+        "historical_file": "runs/sparse_compartment_s3_t07/PointSparse_seed1.json",
+        "historical_file_sha256": "0d591abaa13fb7fae2e1d60a4a38a6c1c6ebe079ce620732372ef6fc771bcfd4",
+        "state_initial_sha256": "ed6d1497bbca17989bc65a17b14cac42cc27794507eaf460d8fb527f16144a23",
+        "topology_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "minibatch_order_combined_sha256": "85b5a2cda9d1483e3b3ff00686c33144d15478ac13ed3736ca08f47ceccef5f6",
+        "epoch_3_validation_accuracy": 0.8476666666666667
+      },
+      {
+        "seed": 2,
+        "historical_file": "runs/sparse_compartment_s3_t07/PointSparse_seed2.json",
+        "historical_file_sha256": "23def9c188401419b9c8e68bbc80535c36c6e3df6f35d1b21fac62ac1ee00517",
+        "state_initial_sha256": "095d7d0f28f263706eb75317b206c3043fbbcb9cc7a0f4e7f7d535b42da139d7",
+        "topology_sha256": "982abdee19b1ec106cc46e18b1488bac09b1af16ddbe038892c67540fa88b3bb",
+        "train_indices_sha256": "acf787f92794e9268917dc93b6f4d4cfbbeadfe1b615dc9f61dc6a3365b6f4b8",
+        "validation_indices_sha256": "56fbaf61830f73d2cedff231c5241b11424ad284c070b56dd8d5872583b2c027",
+        "minibatch_order_combined_sha256": "b71f47453629f5149b0f8df89dcdef5c7e28060c1e9dad29db1c9cb7dc9c279e",
+        "epoch_3_validation_accuracy": 0.8491666666666666
+      },
+      {
+        "seed": 3,
+        "historical_file": "runs/sparse_compartment_s3_t07/PointSparse_seed3.json",
+        "historical_file_sha256": "22ec967c376db264ecac4fab4e508fd19cba57677a2e56149e7facdb896b3287",
+        "state_initial_sha256": "bbced83e00ebee1a7b6d4e4b9e946c5436601f2443a32d8aeb3b070a208633c3",
+        "topology_sha256": "67056be9e35b3aa397ce6be46925983bf5ee2bce42cd0af565fbdba7e069d7c9",
+        "train_indices_sha256": "ad16d1e1628fa31055911a4c372dd8aceeb9bfae10f2d0cfa90fd3a12ea4fc0e",
+        "validation_indices_sha256": "22a1e84521fc0530406c994d452b7939ca71265a7b08e3b1997496a1acac3581",
+        "minibatch_order_combined_sha256": "63d93539e7bdf33a6291215894bdd0a772fb5082b872d29cb9dc1ad92f35ea8d",
+        "epoch_3_validation_accuracy": 0.8445
+      }
+    ],
+    "cpu_thread_note": "T10 used one CPU thread; S3-T07 did not freeze thread count. Epoch-3 losses differ at small floating-point scale while accuracy matches."
+  },
+  "new_runs": [
+    "80x109",
+    "160x49"
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "training_seed_equals_topology_seed": true,
+  "protocol": {
+    "dataset": "Fashion-MNIST",
+    "split": "NumPy seed shuffle 60000; final 6000 validation",
+    "train": 54000,
+    "validation": 6000,
+    "test": 10000,
+    "transform": "ToTensor /255",
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-07,
+    "weight_decay": 0,
+    "batch_size": 128,
+    "epochs": 25,
+    "checkpoint": "final_epoch_25",
+    "activation": "LeakyReLU 0.1",
+    "loss": "CrossEntropyLoss",
+    "test_rule": "selected before T11; evaluate once per fixed seed/architecture after epoch 25; no tuning or repeats from test"
+  },
+  "pilot_predictiveness": {
+    "primary": "epoch_3_validation_accuracy",
+    "secondary_epochs": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "targets": [
+      "final_epoch_25_validation_accuracy",
+      "final_epoch_25_test_accuracy_when_all_arms_have_it"
+    ],
+    "aggregation": "within each protocol family, average each architecture over seeds 1,2,3 at each epoch; compute rank correlations over architectures; report per-seed diagnostics separately",
+    "statistics": [
+      "Spearman",
+      "Kendall_tau_b",
+      "pairwise_accuracy"
+    ],
+    "accuracy_near_tie_strict_less_than": 0.002,
+    "pairwise_near_tie_credit": 0.5,
+    "cohorts": [
+      "s3_t07_parameter_neutral",
+      "s3_t05_original_compartments",
+      "s2_t06_mlp_capacity"
+    ],
+    "no_cross_family_global_correlation": true
+  },
+  "historical_source_files": {
+    "s3_t07_parameter_neutral": [
+      {
+        "file": "runs/sparse_compartment_s3_t07/PointSparse_seed1.json",
+        "sha256": "0d591abaa13fb7fae2e1d60a4a38a6c1c6ebe079ce620732372ef6fc771bcfd4"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/PointSparse_seed2.json",
+        "sha256": "23def9c188401419b9c8e68bbc80535c36c6e3df6f35d1b21fac62ac1ee00517"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/PointSparse_seed3.json",
+        "sha256": "22ec967c376db264ecac4fab4e508fd19cba57677a2e56149e7facdb896b3287"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/1x64_seed1.json",
+        "sha256": "8f6890fefdfbf2985df913e19c602d8584de1718dc860c13f6a861f1c090fe77"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/1x64_seed2.json",
+        "sha256": "cf18bb20d63ebde69dad8d6d9a3f5b6e195001cfbbdc14671547fc2de30c188a"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/1x64_seed3.json",
+        "sha256": "b81e64e4bf94fbec1920c4ca93b480f3f5035bd40bd388224ce96228d10f4bb3"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/2x32_seed1.json",
+        "sha256": "5da68e2fdb7ac7bb609e24f20e5dfc5f760489481e5234d902951e192c846c3a"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/2x32_seed2.json",
+        "sha256": "99331fed2c9fa67af6a744dba5d60163a27f8275e2950c4b188811f6915d63f6"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/2x32_seed3.json",
+        "sha256": "f27de725525a5fbb3c60fa951e25d3e52915305e831e30b7d98ceb89737a2a61"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/4x16_seed1.json",
+        "sha256": "4738f5539474993dcf5ba786057c43c0b1c45ec39ced8f0984e587a7760b1a21"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/4x16_seed2.json",
+        "sha256": "bd70cf05d2f04abe8b33dba3e512d03b829aa3bea391cb5f7d967b2f615d83cf"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/4x16_seed3.json",
+        "sha256": "2aaa4e49fdfb78db5a3680471fd71f3f12375b2952f92fd88fe98fc7fe111cc3"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/8x8_seed1.json",
+        "sha256": "88b67b6cae68693b977dbe86ce82b818112e9f563a026391dd7b9bde874f12f5"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/8x8_seed2.json",
+        "sha256": "80d8e44add8d6915f124506fde6f12e9e0fc40c4e0e63797c0d381e9a06b01d1"
+      },
+      {
+        "file": "runs/sparse_compartment_s3_t07/8x8_seed3.json",
+        "sha256": "f9b8d00308a29be06120538ceb71ebbf194010ba629c6b95cb8dd16dbd36304f"
+      }
+    ],
+    "s3_t05_original_compartments": [
+      {
+        "file": "runs/compartment_s3_t05/1x64_seed1.json",
+        "sha256": "aa2747c1065f067dfa0712894664b310a9484c07f384abe5f068f70d2caa5957"
+      },
+      {
+        "file": "runs/compartment_s3_t05/1x64_seed2.json",
+        "sha256": "e52366f752113cc239f41c00f6f52b25fe1217297d8c5994caf7fbc95e8a816a"
+      },
+      {
+        "file": "runs/compartment_s3_t05/1x64_seed3.json",
+        "sha256": "732cd6ce482882d7b19e764662994f6c6b8095c979df4ab300ff76e6456e6e42"
+      },
+      {
+        "file": "runs/compartment_s3_t05/2x32_seed1.json",
+        "sha256": "d7ca222c685c051d2bb059cfaa5c81496d7453bb6ad41eb6af4e1524bc13451f"
+      },
+      {
+        "file": "runs/compartment_s3_t05/2x32_seed2.json",
+        "sha256": "741c14d808651d2b5c1ce6e56a99dc3b111a0c4baddc4ba45ffabcbbee717ee6"
+      },
+      {
+        "file": "runs/compartment_s3_t05/2x32_seed3.json",
+        "sha256": "0eeea7c5089e587fe1ba83742af59726806fd9f7f8f433126429d03f70062fc1"
+      },
+      {
+        "file": "runs/compartment_s3_t05/4x16_seed1.json",
+        "sha256": "57d3dc1350180258f70db924245c51a38954222ddd4d00c456bf44c07382bb73"
+      },
+      {
+        "file": "runs/compartment_s3_t05/4x16_seed2.json",
+        "sha256": "c61112898a2ff6ab25d9aedb9b6958957c3092905710b03de6e8ed3487a559ef"
+      },
+      {
+        "file": "runs/compartment_s3_t05/4x16_seed3.json",
+        "sha256": "bd156b53406231045d87273474ca88769da105e31d6697ae64586a468f5ff225"
+      },
+      {
+        "file": "runs/compartment_s3_t05/8x8_seed1.json",
+        "sha256": "3af2c746db06d97c216c27beb17eef094334a9be39de8564e50fa6455792296e"
+      },
+      {
+        "file": "runs/compartment_s3_t05/8x8_seed2.json",
+        "sha256": "0197921c2a7f21d1d6e0d453a3f754a7278bf8c1feaf705883b9143860c5e649"
+      },
+      {
+        "file": "runs/compartment_s3_t05/8x8_seed3.json",
+        "sha256": "4e257cfceef7536a1295ebef147abcfd8dbdb1f810621605b1e463076387f114"
+      }
+    ],
+    "s2_t06_mlp_capacity": [
+      {
+        "file": "runs/mlp_capacity_s2_t06/h16_seed1.json",
+        "sha256": "5f7fd7f8c5f7c06ab4a296cdfcbc151e3c94f3588f1f4a76e3059e9ba0d0401a"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h16_seed2.json",
+        "sha256": "0176fe509151a553c8c16bab1bddac5990399e8a7a4f046b42500f70c9a175c0"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h16_seed3.json",
+        "sha256": "981b829253fd949c6ebb44ff3e5f8adabc63765a796303d66570482b6665e3fe"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h19_seed1.json",
+        "sha256": "f3252144a3a47a318aca60721eb6f1c7c4156ff09a45bb85c2819c55ec01d65b"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h19_seed2.json",
+        "sha256": "ba2b3cc78a46a94b8268edf4202111e4a1c3f18e891ae29f547a0f83e42614d9"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h19_seed3.json",
+        "sha256": "cd217dfef817a6403007c4482df43abf8f543d9aab6896b9c716185bbca0c040"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h20_seed1.json",
+        "sha256": "653320819fdc2af85b64a199b5fbd7edd0bdaad70386d2dff37fe31cdf90973a"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h20_seed2.json",
+        "sha256": "f57132701526f682e57a151f590e29ee7df2f8cf269ad39a48c7c29c2bf25dac"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h20_seed3.json",
+        "sha256": "1d11ee5afb90e0d7cbfeb0cf85bdec2bed3a91e1c2cc32373ff8737ecb16d4d1"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h21_seed1.json",
+        "sha256": "36a0895eb80f03b423ed2ce1136a7c2ca8425b5dd8330307200e49e8a59a6985"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h21_seed2.json",
+        "sha256": "373c3e81c02a8001daa51c29ff250a8235772e8b78f0b29aae5e712a8e7319fb"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h21_seed3.json",
+        "sha256": "c6c011e0b12653cbd5f9201e4710c08e4b56e764b9cde7739e1701fbb3155270"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h22_seed1.json",
+        "sha256": "9c922b27ebe30d728b96636855a5611920d3a2575d41da5d247f7dee2c387cf8"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h22_seed2.json",
+        "sha256": "71e4e5952d82c0b82e1bd08f0edba33fdd400b11d872451d5c6dadf174308b59"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h22_seed3.json",
+        "sha256": "cc27846d2723810ffba86e9660d57dc839cd9c01943c3492ed6ff6b77cdcbad1"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h25_seed1.json",
+        "sha256": "5d83c5fc56abb859d30e06a7ae6ec0e221c15f189895821c582ed4074c3621a9"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h25_seed2.json",
+        "sha256": "9100fe2837d3fae6043c3a780d4e1372dc58d83a28d02c90630f2bc02281bb25"
+      },
+      {
+        "file": "runs/mlp_capacity_s2_t06/h25_seed3.json",
+        "sha256": "446f7bb2504aa69dc3475dd79a85a835cde9bb34333f68a4ab0c4119f9295498"
+      }
+    ]
+  },
+  "t10_results_sha256": "9aeaba7a49f17fa15c7838a64389965f12478980dbd392a54deedfb2acb960e7",
+  "t10_shortlist_epoch3_ranking": [
+    "PointSparse_80x109",
+    "PointSparse_128x64",
+    "PointSparse_160x49"
+  ],
+  "zero_cost_comparison": "ER raw mean over proxy seeds vs epoch-3 validation accuracy, same cohort and target; S3-T07/S3-T05 use T09 proxy records, T11 shortlist uses T10 proxy records; S2-T06 has no complete ER group",
+  "interpretation": {
+    "H_WIDTH_FANIN": "SUPPORTED_WITHIN_TESTED_RANGE if either candidate-anchor pair has abs mean validation and test accuracy delta >=0.50 pp in same direction, >=2/3 paired seed directions, and NLL difference not opposed by >=0.005; WEAK_SUPPORT with >=0.20 pp same direction and >=2/3 seeds; NOT_SUPPORTED if both candidate-anchor abs deltas <0.20 pp for validation/test and abs NLL <0.005; otherwise INCONCLUSIVE",
+    "EARLY_PILOT_3E": "PROMISING if >=2 historical groups have rho>=0.50 and pairwise>0.70 for final validation and no group has rho<0 or pairwise<0.50; WEAK if >=2 groups are positive but any material inconsistency; FAILED otherwise or if any group is systematically inverse (rho<=-0.50 and pairwise<=0.30). T11 shortlist is prospective stress test, not an extra historical group"
+  },
+  "compute": {
+    "naive_epoch_equivalents": 600,
+    "t10": 24,
+    "new_t11_planned": 150,
+    "total_planned": 174
+  },
+  "no_new_proxy_fitting": true,
+  "no_new_candidates": true
+}

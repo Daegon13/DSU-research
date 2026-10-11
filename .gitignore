@@ -17,6 +17,8 @@ data/*
 !data/zero_cost_validation.json
 !data/s3_t10_preregistered_screen.json
 !data/s3_t10_pilot_results.json
+!data/s3_t11_preregistered_confirmation.json
+!data/s3_t11_confirmation_results.json
 checkpoints/
 *.pt
 *.pth
