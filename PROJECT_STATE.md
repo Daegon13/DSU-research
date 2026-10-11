@@ -1,16 +1,16 @@
 # PROJECT_STATE
 
 ## CURRENT PHASE
-Sprint 3 cerrado. Decisión separada pendiente entre Research Track A — Sparse Architecture y Research Track B — Dynamic Neuron; no se inició ninguna tarea nueva.
+Sprint 3 CLOSED. Track A: A1-DESIGN completada como diseño/preregistro estructural de topología PointSparse `128×64`; A1-E01 pendiente, sin entrenamiento. Track B/S4 no iniciados.
 
 ## CURRENT SPRINT
 Ninguno activo; S3 = PASS / CLOSED.
 
 ## CURRENT TASK
-S3-REVIEW completada: PASS. Cierre formal en `docs/SPRINT_3_REVIEW.md`. No se inició Línea A experimental, Línea B ni DSU-T.
+A1-DESIGN completada: PASS estructural. Diseño en `docs/A1_POINTSPARSE_TOPOLOGY_DESIGN.md`. No se ejecutó A1-E01, Línea B ni DSU-T.
 
 ## LAST COMPLETED TASK
-S3-REVIEW: PASS documental; Sprint 3 CLOSED. Se auditaron S3-T01–T11 sin nuevos experimentos. PointSparse `128×64` es el baseline experimental por defecto dentro del presupuesto probado; compartimentalización estática PAUSED / DEPRIORITIZED. El próximo paso es una decisión separada de diseño A1, no un experimento automático.
+A1-DESIGN: PASS estructural; cuatro brazos A0 IID, A1 balanceado, A2 menor overlap y A3 mayor overlap definidos a H/K fijo. A1/A2/A3 mantienen vector exacto de grados, cobertura, presupuesto y modelo. H-A1-TOPOLOGY = UNTESTED. S3 permanece CLOSED; PointSparse `128×64` sigue como baseline experimental. A1-E01 requiere gate separado.
 
 ## LAST RESULT
 R-017: revisión de S3-T01–T11; gate S3-REVIEW PASS y Sprint 3 CLOSED. Los resultados causales y prospectivos mantienen sus estados previos. `docs/SPRINT_3_REVIEW.md`.
@@ -42,7 +42,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
   - >= 1.25–1.5x de mejora de throughput o reducción equivalente de latencia.
 
 ## ACTIVE HYPOTHESIS
-La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. No hay nuevo experimento aprobado. Línea A investigaría sparse architecture; Línea B, por separado, el efecto del estado temporal. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
+La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. H-A1-TOPOLOGY = UNTESTED: A1-E01 examinaría organización de G a H/K fijo, sin resolver H-WIDTH-FANIN. No hay nuevo entrenamiento iniciado. Línea B permanece separada. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
 
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
@@ -82,7 +82,7 @@ Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-Decidir y especificar **A1-DESIGN — contraste causal acotado de ancho frente a conectividad/topología sparse**, con PointSparse `128×64` como control, presupuesto y criterios prefijados. Sólo diseño/preregistro; no entrenar ni iniciar Línea B/S4 automáticamente.
+**A1-E01 — ejecutar el contraste causal de topología PointSparse `128×64`** sólo después de revalidar los hashes, el contraste estructural y el reuse A0 según `docs/A1_POINTSPARSE_TOPOLOGY_DESIGN.md`. No iniciar Line B/S4 desde A1-DESIGN.
 
 ## LAST UPDATE
 2026-10-11

@@ -248,3 +248,21 @@ ER raw ordenó bien retrospectivamente S3-T07, pero falló frente a validation t
 ### Consequence
 
 El funnel de [EXPERIMENT_PROTOCOL](EXPERIMENT_PROTOCOL.md) sigue siendo orientativo. Cada promoción de candidato o proxy exige preregistro, presupuesto y criterio adverso; el test no calibra reglas de selección. No se autoriza aquí ningún proxy nuevo ni entrenamiento.
+
+---
+
+## ADR-016 — A1, topología de PointSparse con H/K fijos
+
+**Status:** ACCEPTED para diseño estructural (2026-10-11); H-A1-TOPOLOGY UNTESTED.
+
+### Decision
+
+Preregistrar A0 IID histórico, A1 balanceado, A2 de menor overlap y A3 de mayor overlap con PointSparse `128×64`. A1/A2/A3 comparten el mismo grafo balanceado base por seed y conservan exactamente vector de grados 352×11 + 432×10, cobertura completa, 8192 aristas, 9610 parámetros y 9472 MAC principales. A2/A3 sólo aceptan swaps que preservan grados. Fijar separaciones estructurales, protocolo futuro N=3/25 épocas, criterios de calidad, reglas de reuse A0 y cierre de Track A en [A1-DESIGN](A1_POINTSPARSE_TOPOLOGY_DESIGN.md). No ejecutar entrenamiento ni iniciar Line B/S4 mediante esta decisión.
+
+### Reason
+
+S3-T11 dejó H-WIDTH-FANIN INCONCLUSIVE. A H/K fijos se puede estudiar cuánto cambia la calidad por organización de G antes de proponer mecanismos neuronales dinámicos. La suma de intersecciones es fija bajo grados fijos, por lo que Jaccard y su distribución sirven como diagnóstico de organización, no como selector de calidad.
+
+### Consequence
+
+PointSparse IID `128×64` sigue siendo baseline. La siguiente tarea exacta es A1-E01 bajo gate propio, con validación de hashes y equivalencia histórica antes de reutilizar A0. Un efecto pequeño sólo acota las topologías ensayadas y no demuestra que width sea la causa.

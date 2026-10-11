@@ -14,6 +14,14 @@ Estados permitidos:
 - FAILED (validación prospectiva de proxy)
 - WEAK (predictividad de piloto)
 
+## H-A1-TOPOLOGY — organización del grafo sparse
+
+**Status:** UNTESTED.
+
+Con H=128, K=64, 9610 parámetros, 9472 MAC principales, cobertura completa y vector de grados de input 352×11 + 432×10 controlados, la organización de overlap/topología de G cambia materialmente la calidad de PointSparse. Los contrastes A1→A2/A3 y A2→A3 son los que controlan todos esos factores. A0→A1 prueba el régimen IID frente a balanceado, con grados distintos. Criterios y límites en [A1-DESIGN](A1_POINTSPARSE_TOPOLOGY_DESIGN.md). No hay resultados de aprendizaje.
+
+---
+
 **Cierre S3-REVIEW (2026-10-11):** los estados finales de H-009–H-016, H-ZEROCOST-ER, H-WIDTH-FANIN y EARLY-PILOT-3E están reunidos con evidencia, alcance y límites en [SPRINT_3_REVIEW.md](SPRINT_3_REVIEW.md). Sprint 3 = PASS / CLOSED; ninguna hipótesis abierta se promueve por ello a SUPPORTED. H-002/H-006 continúan abiertas para RAM/runtime y eficiencia física general.
 
 ---

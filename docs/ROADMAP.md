@@ -113,7 +113,7 @@ Implementar la primera unidad propia.
 
 ## Research Track A — Sparse Architecture (después de S3)
 
-Baseline: PointSparse `128×64`. Secuencia propuesta, no aprobada para ejecución: **A1** diseño causal para separar ancho de conectividad/topología; **A2** topología aleatoria frente a alternativa prefijada; **A3** solapamiento entre receptive fields; **A4** aprendizaje/reorganización de `G`; **A5** implementación y coste físico medido; **A6** otros datasets/tareas. A1 es la siguiente decisión recomendada y empieza como tarea de sólo diseño. No ampliar ahora un grid H×K: T11 halló diferencias finales pequeñas y discordantes. Esta línea puede preceder o coexistir con S4 sin renumerarlo. [Programa](RESEARCH_PROGRAM_A_B.md).
+Baseline: PointSparse `128×64`. **A1-DESIGN: PASS estructural (2026-10-11).** [Preregistro](A1_POINTSPARSE_TOPOLOGY_DESIGN.md) de cuatro brazos a H/K fijos: A0 IID, A1 balanceado, A2 menor overlap y A3 mayor overlap. A1/A2/A3 conservan vector de grados, coverage, parámetros y MAC. H-WIDTH-FANIN sigue INCONCLUSIVE; no se entrenó. Las preguntas anteriores A2/A3 de topología/solapamiento quedan concentradas en A1 y no son tareas adicionales comprometidas. A4 reorganización de `G`, A5 coste físico y A6 generalización siguen en backlog. Siguiente tarea exacta: **A1-E01**, sólo mediante gate propio y revalidación de A0. Esta línea puede preceder o coexistir con S4 sin renumerarlo. [Programa](RESEARCH_PROGRAM_A_B.md).
 
 ## Research Track B — Dynamic Neuron (separado)
 
