@@ -52,6 +52,43 @@ H-WIDTH-FANIN comienza `UNTESTED`: el piloto puede dar `PRELIMINARY_SIGNAL` si e
 
 Shortlist prefijada para Stage 3 futura: mejor accuracy de piloto, mejor ER raw si difiere y anchor `128×64`, eliminando duplicados; máximo tres. Una arquitectura mala sólo se conservaría como control documental si aporta valor científico, sin entrenarla aquí. Coste comparativo: 24 epoch-equivalents realizados frente a 600 para ocho brazos × 25 épocas × 3 seeds ingenuos; reducción de 96% **antes de seleccionar**, sin inferir joules ni ahorro total de una Stage 3 futura.
 
-## Resultados del piloto
+## Resultados del piloto (después del commit de preregistro)
 
-Pendiente hasta que el preregistro esté versionado en Git.
+El [preregistro](../data/s3_t10_preregistered_screen.json) quedó sellado en `55164174a99404f4054982309f8c34874baa6dfb`; SHA-256 del blob Git `d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb`. Los pilotos comenzaron sólo después de ese commit. Los ocho JSON individuales se guardaron bajo `runs/s3_t10_point_sparse_iso_budget/`; el [artefacto versionado](../data/s3_t10_pilot_results.json) contiene cada curva, duración, hashes y análisis. Los ocho brazos comparten los mismos hashes de índices train/validation y los mismos tres hashes de orden de minibatches. El loader fue invocado con `include_test=False`; ningún resultado de test se abrió o guardó. Una diferencia CRLF/LF de Windows detuvo el primer intento **antes de entrenar**; la verificación se corrigió para comparar contenido normalizado con el blob Git y conservar el hash del blob. No se reescribió el primer commit.
+
+| H×K | Train loss e3 | Val loss e3 | Val acc. e3 | Duración s |
+|---|---:|---:|---:|---:|
+| 64×139 | .4539 | .4355 | 84.650% | 20.3 |
+| 80×109 | .4592 | .4389 | **84.817%** | 20.4 |
+| 96×89 | .4621 | .4481 | 84.400% | 20.5 |
+| 120×69 | .4568 | .4413 | 84.233% | 20.3 |
+| 128×64 | .4605 | .4411 | 84.767% | 20.3 |
+| 160×49 | .4532 | .4383 | 84.417% | 20.3 |
+| 192×39 | .4562 | .4387 | 84.567% | 20.6 |
+| 240×29 | .4462 | **.4322** | 84.683% | 20.8 |
+
+La suma de tiempo de entrenamiento con validation por época fue 163.5 s en este equipo; no es una medición comparativa de latencia del modelo. Las curvas de épocas 1–3 se conservan por brazo. Ranking real por accuracy de época 3: `80×109 > 128×64 > 240×29 > 64×139 > 192×39 > 160×49 > 96×89 > 120×69`. Entre primero y último hay 0.583 pp, pero 13 de 28 pares son near-ties según el umbral predefinido. El mínimo loss pertenece a `240×29`, diferente al máximo accuracy.
+
+### Validación de proxies frente al piloto
+
+`ρ` = Spearman, `τ` = Kendall tau-b. Los pares excluyen near-ties; la columna final los incluye con 0.5 crédito. Para accuracy el umbral es `<0.20 pp`; para loss `<.005`. Más alto es mejor para proxies y ambos targets; el segundo target usa `−validation loss`.
+
+| Predictor | Accuracy ρ | Accuracy τ | Pares acc. sin near-tie | Pares acc. con near-tie | −Loss ρ | −Loss τ | Pares −loss sin near-tie | Pares −loss con near-tie |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| ER raw | −.190 | −.214 | 5/15 (.333) | 11.5/28 (.411) | .286 | .214 | 9/14 (.643) | 16/28 (.571) |
+| ER norm | −.048 | −.071 | 8/15 (.533) | 14.5/28 (.518) | −.262 | −.214 | 4/14 (.286) | 11/28 (.393) |
+| PR raw | −.048 | −.071 | 5/15 (.333) | 11.5/28 (.411) | .024 | .071 | 7/14 (.500) | 14/28 (.500) |
+| PR norm | −.048 | −.071 | 8/15 (.533) | 14.5/28 (.518) | −.262 | −.214 | 4/14 (.286) | 11/28 (.393) |
+| Width H | −.048 | .000 | 6/15 (.400) | 12.5/28 (.446) | .333 | .286 | 10/14 (.714) | 17/28 (.607) |
+
+**H-ZEROCOST-ER = FAILED en este piloto prospectivo.** ER raw tiene correlación negativa con el target primario, menos aciertos por pares que width H y no añade información demostrada sobre ancho bajo el criterio fijado. Su débil señal positiva con `−loss` no revierte el fallo del target primario; width también lo supera allí. Esto refuta la utilidad de ER raw para este *piloto y cohorte*, no el framework completo ni el resultado retrospectivo de S3-T09.
+
+**H-WIDTH-FANIN = PRELIMINARY_SIGNAL**, porque el rango de accuracy de 0.583 pp supera el umbral preregistrado de 0.20 pp. La curva no es monótona: la mejor accuracy fue `80×109`, el mejor loss `240×29`, y ambos extremos de ancho quedaron cerca de otros brazos. No hay base para declarar un óptimo H/K ni una ventaja de H o K; con 3 épocas y una seed, el ranking puede reflejar velocidad inicial de aprendizaje y variación estocástica, no capacidad final. `ER/H` y la normalización se mantienen como diagnósticos, sin ajustar un score post-hoc.
+
+### Shortlist, coste y gate
+
+Regla prefijada aplicada sin elegir best epoch: `80×109` (mejor accuracy de piloto), `160×49` (primera por ER raw) y `128×64` (anchor histórico). Máximo tres, sin entrenamiento completo. `120×69` fue la menor accuracy, pero la distancia con otras candidatas y el carácter temprano del piloto no justifican agregar un control malo a Stage 3 por ahora.
+
+Se realizaron **24 epoch-equivalents** (`8×3×1`) frente a **600** (`8×25×3`) en una evaluación ingenua de toda la cohorte, 96% menos épocas **antes de la selección**. Es una comparación de presupuestos del funnel, no ahorro de energía ni coste total futuro.
+
+**Gate técnico S3-T10: PASS.** La cohorte matemática, parámetros, proxies y ranking se sellaron antes del piloto; los ocho pilotos usaron sólo train/validation y mantuvieron seeds, split y orden; ER se comparó con ancho sin tuning posterior; la shortlist quedó fijada y Stage 3 no se ejecutó. El resultado científico del proxy es negativo. Limitaciones: una sola seed y 3 épocas, 13 near-ties de accuracy, inicializaciones y topologías distintas entre H/K, presupuesto de parámetros igual pero MAC y bytes de topología ligeramente distintos, sin medida de RAM pico/latencia/energía ni test prospectivo. La tarea siguiente es **S3-T11 — confirmar la shortlist seleccionada por piloto y diseñar mejores proxies**, sin ejecutarla aquí.

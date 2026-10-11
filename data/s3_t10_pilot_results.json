@@ -1,0 +1,900 @@
+{
+  "schema": "s3_t10_results_v1",
+  "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+  "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+  "pilot_records": [
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_64x139",
+      "H": 64,
+      "K": 139,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "6f05b563e8dd9263bfb7bda0c9e01da6de1d4d75016fdacdfd0a096a5c52eeac",
+      "initialization_sha256": "d23fde81384e151221aba8239610d85f37faff0d0b760d210dcd2d323bfd296c",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9536,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 71168,
+        "persistent_buffer_bytes": 71168,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 109608,
+        "main_macs_per_sample": 9536,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4554752,
+          "soma_preactivation": 32768,
+          "soma_activation": 32768,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8896,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8437390164092735,
+          "validation": {
+            "loss": 0.5342002207438151,
+            "accuracy": 0.8205
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5034010408807684,
+          "validation": {
+            "loss": 0.4689529991149902,
+            "accuracy": 0.8355
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4539387394763805,
+          "validation": {
+            "loss": 0.43554835764567057,
+            "accuracy": 0.8465
+          }
+        }
+      ],
+      "duration_seconds": 20.32826319999731
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_80x109",
+      "H": 80,
+      "K": 109,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "f43f5ae1fc0231a25a831da61e5f7a7baacc1c1849d6003ac5f7f6a8c1fad51d",
+      "initialization_sha256": "6a241b580668693197268a870d8889dfa3ac3f7c15ee5db85ec4ef9327ce8e3f",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9520,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 69760,
+        "persistent_buffer_bytes": 69760,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 108200,
+        "main_macs_per_sample": 9520,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4464640,
+          "soma_preactivation": 40960,
+          "soma_activation": 40960,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8720,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8257667357303478,
+          "validation": {
+            "loss": 0.5366422030131022,
+            "accuracy": 0.8193333333333334
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.507094303952323,
+          "validation": {
+            "loss": 0.46826250330607094,
+            "accuracy": 0.8373333333333334
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4591980967256758,
+          "validation": {
+            "loss": 0.43885285504659016,
+            "accuracy": 0.8481666666666666
+          }
+        }
+      ],
+      "duration_seconds": 20.384997599998314
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_96x89",
+      "H": 96,
+      "K": 89,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "9b1708dd3b31587b0bbbd0fc295904a27d19bf00503e6c85cc6b97adff0c2ad9",
+      "initialization_sha256": "8623cd8bae7b04a2557f7bbf9a9b229fa7b0d9a7347504557ebb980ec74c6153",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9504,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 68352,
+        "persistent_buffer_bytes": 68352,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 106792,
+        "main_macs_per_sample": 9504,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4374528,
+          "soma_preactivation": 49152,
+          "soma_activation": 49152,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8544,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8326790179323267,
+          "validation": {
+            "loss": 0.5446123046875,
+            "accuracy": 0.8136666666666666
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5099440277152592,
+          "validation": {
+            "loss": 0.4821454111735026,
+            "accuracy": 0.8293333333333334
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4620812766375365,
+          "validation": {
+            "loss": 0.44810398038228355,
+            "accuracy": 0.844
+          }
+        }
+      ],
+      "duration_seconds": 20.45007700000133
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_120x69",
+      "H": 120,
+      "K": 69,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "f9e622b4c4815d7c01f815922c6be4d53865518acf5e8c1694c05432555c5c47",
+      "initialization_sha256": "84e76ef9949f7464b1b3bab340de228bdb92f00478bef2aad7fc4d328655cd90",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9480,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 66240,
+        "persistent_buffer_bytes": 66240,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 104680,
+        "main_macs_per_sample": 9480,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4239360,
+          "soma_preactivation": 61440,
+          "soma_activation": 61440,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8280,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8413565556738112,
+          "validation": {
+            "loss": 0.5388368574778238,
+            "accuracy": 0.8153333333333334
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5055378358540712,
+          "validation": {
+            "loss": 0.4698740272521973,
+            "accuracy": 0.836
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.45682779023382397,
+          "validation": {
+            "loss": 0.4412987912495931,
+            "accuracy": 0.8423333333333334
+          }
+        }
+      ],
+      "duration_seconds": 20.316097000002628
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_128x64",
+      "H": 128,
+      "K": 64,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+      "initialization_sha256": "ed6d1497bbca17989bc65a17b14cac42cc27794507eaf460d8fb527f16144a23",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9472,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 65536,
+        "persistent_buffer_bytes": 65536,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 103976,
+        "main_macs_per_sample": 9472,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4194304,
+          "soma_preactivation": 65536,
+          "soma_activation": 65536,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8192,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8517628391936973,
+          "validation": {
+            "loss": 0.5457522538503011,
+            "accuracy": 0.8151666666666667
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5111155004324737,
+          "validation": {
+            "loss": 0.4750360946655273,
+            "accuracy": 0.8328333333333333
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4604773046263942,
+          "validation": {
+            "loss": 0.44112348874409996,
+            "accuracy": 0.8476666666666667
+          }
+        }
+      ],
+      "duration_seconds": 20.283883800002513
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_160x49",
+      "H": 160,
+      "K": 49,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "49924b00edcf86940db310094159dc24a814bc2b3b5fa6f49d8e676d2605ded4",
+      "initialization_sha256": "a447033edad423118477c93eafb84056b48855a41cda4f4995b616f4c80a211a",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9440,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 62720,
+        "persistent_buffer_bytes": 62720,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 101160,
+        "main_macs_per_sample": 9440,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4014080,
+          "soma_preactivation": 81920,
+          "soma_activation": 81920,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 7840,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8088976358307732,
+          "validation": {
+            "loss": 0.531698782602946,
+            "accuracy": 0.8153333333333334
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.4985457764819816,
+          "validation": {
+            "loss": 0.46837946319580076,
+            "accuracy": 0.8338333333333333
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4532486678141135,
+          "validation": {
+            "loss": 0.4382951882680257,
+            "accuracy": 0.8441666666666666
+          }
+        }
+      ],
+      "duration_seconds": 20.34839849999844
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_192x39",
+      "H": 192,
+      "K": 39,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "b18def3577aa731ddd8e40e5b5795d2fd43bf3d0c5020b2c567da287d8b3bba8",
+      "initialization_sha256": "22982b743e7d0d42298a45d45e1c1d1bf2ca0c87d52297bd667b51abfa646b8f",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9408,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 59904,
+        "persistent_buffer_bytes": 59904,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 98344,
+        "main_macs_per_sample": 9408,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 3833856,
+          "soma_preactivation": 98304,
+          "soma_activation": 98304,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 7488,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8478932364605091,
+          "validation": {
+            "loss": 0.5427096551259358,
+            "accuracy": 0.8155
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5065763570291024,
+          "validation": {
+            "loss": 0.4715911610921224,
+            "accuracy": 0.8341666666666666
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.4562052320374383,
+          "validation": {
+            "loss": 0.43868008867899577,
+            "accuracy": 0.8456666666666667
+          }
+        }
+      ],
+      "duration_seconds": 20.570499699999345
+    },
+    {
+      "schema": "s3_t10_pilot_v1",
+      "architecture_id": "PointSparse_240x29",
+      "H": 240,
+      "K": 29,
+      "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+      "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+      "seeds": {
+        "python": 1,
+        "numpy": 1,
+        "torch": 1,
+        "cuda": null,
+        "training_seed": 1,
+        "topology_seed": 1
+      },
+      "dataset": {
+        "name": "Fashion-MNIST",
+        "source": "torchvision.datasets.FashionMNIST",
+        "source_version": "0.29.1+cpu",
+        "splits": {
+          "train": 54000,
+          "validation": 6000,
+          "test": 10000
+        },
+        "split_rule": "np.random.default_rng(seed).shuffle(arange(60000)); last 6000 validation",
+        "train_indices_sha256": "f3838eee6ae916e4cb9a41b585966f0e1f089433a0abd66f48ef7d03fbed25ea",
+        "validation_indices_sha256": "d363e9447f471005e766deb8b12f656c26b6954268c4ad498151b6db2ebf561f",
+        "transform": "ToTensor() scales uint8 pixels to float32 by 255; no other normalization"
+      },
+      "test_access": false,
+      "topology_sha256": "305f3cf24a62444f0acb919a6973a5ef3fe87e3078d16075c7c6a9db743110a6",
+      "initialization_sha256": "3352f61cffab1ea92bfff62c4ad653f64db975147080d492c651614e03230075",
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9360,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 55680,
+        "persistent_buffer_bytes": 55680,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 94120,
+        "main_macs_per_sample": 9360,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 3563520,
+          "soma_preactivation": 122880,
+          "soma_activation": 122880,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 6960,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "batch_order": [
+        "8b36121587b6d27d04e47140d7ebc7bf23c4bf6c9493d101b8f1c4be911217c6",
+        "7f1fe83af8e5ae78243628307fb5b402d480e015a52ef4fea788bd6c943beec9",
+        "d5f93f27f4e758a1cde35524c988b6b8e406d5b2324140938dc564f366cddb19"
+      ],
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.8031102458989179,
+          "validation": {
+            "loss": 0.5297995478312174,
+            "accuracy": 0.816
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.49398005807841266,
+          "validation": {
+            "loss": 0.46174732271830243,
+            "accuracy": 0.8355
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.44616412885983786,
+          "validation": {
+            "loss": 0.4321565392812093,
+            "accuracy": 0.8468333333333333
+          }
+        }
+      ],
+      "duration_seconds": 20.831070599997474
+    }
+  ],
+  "analysis": {
+    "schema": "s3_t10_analysis_v1",
+    "prereg_sha256": "d1bf698332741a88c53181a8e6cae0cc3a3fb42db2d16c8803b5dc329a1073fb",
+    "prereg_commit": "55164174a99404f4054982309f8c34874baa6dfb",
+    "pilot_target_values": [
+      {
+        "architecture_id": "PointSparse_64x139",
+        "accuracy": 0.8465,
+        "validation_loss": 0.43554835764567057
+      },
+      {
+        "architecture_id": "PointSparse_80x109",
+        "accuracy": 0.8481666666666666,
+        "validation_loss": 0.43885285504659016
+      },
+      {
+        "architecture_id": "PointSparse_96x89",
+        "accuracy": 0.844,
+        "validation_loss": 0.44810398038228355
+      },
+      {
+        "architecture_id": "PointSparse_120x69",
+        "accuracy": 0.8423333333333334,
+        "validation_loss": 0.4412987912495931
+      },
+      {
+        "architecture_id": "PointSparse_128x64",
+        "accuracy": 0.8476666666666667,
+        "validation_loss": 0.44112348874409996
+      },
+      {
+        "architecture_id": "PointSparse_160x49",
+        "accuracy": 0.8441666666666666,
+        "validation_loss": 0.4382951882680257
+      },
+      {
+        "architecture_id": "PointSparse_192x39",
+        "accuracy": 0.8456666666666667,
+        "validation_loss": 0.43868008867899577
+      },
+      {
+        "architecture_id": "PointSparse_240x29",
+        "accuracy": 0.8468333333333333,
+        "validation_loss": 0.4321565392812093
+      }
+    ],
+    "actual_accuracy_ranking": [
+      "PointSparse_80x109",
+      "PointSparse_128x64",
+      "PointSparse_240x29",
+      "PointSparse_64x139",
+      "PointSparse_192x39",
+      "PointSparse_160x49",
+      "PointSparse_96x89",
+      "PointSparse_120x69"
+    ],
+    "comparisons": {
+      "validation_accuracy_epoch_3": {
+        "effective_rank_raw": {
+          "spearman": -0.19047619047619047,
+          "kendall_tau_b": -0.21428571428571427,
+          "pairwise": {
+            "correct_pairs": 5,
+            "scored_pairs": 15,
+            "near_tie_pairs": 13,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.3333333333333333,
+            "accuracy_including_near_ties": 0.4107142857142857
+          }
+        },
+        "effective_rank_norm": {
+          "spearman": -0.047619047619047616,
+          "kendall_tau_b": -0.07142857142857142,
+          "pairwise": {
+            "correct_pairs": 8,
+            "scored_pairs": 15,
+            "near_tie_pairs": 13,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.5333333333333333,
+            "accuracy_including_near_ties": 0.5178571428571429
+          }
+        },
+        "participation_ratio_raw": {
+          "spearman": -0.047619047619047616,
+          "kendall_tau_b": -0.07142857142857142,
+          "pairwise": {
+            "correct_pairs": 5,
+            "scored_pairs": 15,
+            "near_tie_pairs": 13,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.3333333333333333,
+            "accuracy_including_near_ties": 0.4107142857142857
+          }
+        },
+        "participation_ratio_norm": {
+          "spearman": -0.047619047619047616,
+          "kendall_tau_b": -0.07142857142857142,
+          "pairwise": {
+            "correct_pairs": 8,
+            "scored_pairs": 15,
+            "near_tie_pairs": 13,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.5333333333333333,
+            "accuracy_including_near_ties": 0.5178571428571429
+          }
+        },
+        "width_H": {
+          "spearman": -0.047619047619047616,
+          "kendall_tau_b": 0.0,
+          "pairwise": {
+            "correct_pairs": 6,
+            "scored_pairs": 15,
+            "near_tie_pairs": 13,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.4,
+            "accuracy_including_near_ties": 0.44642857142857145
+          }
+        }
+      },
+      "negative_validation_loss_epoch_3": {
+        "effective_rank_raw": {
+          "spearman": 0.2857142857142857,
+          "kendall_tau_b": 0.21428571428571427,
+          "pairwise": {
+            "correct_pairs": 9,
+            "scored_pairs": 14,
+            "near_tie_pairs": 14,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.6428571428571429,
+            "accuracy_including_near_ties": 0.5714285714285714
+          }
+        },
+        "effective_rank_norm": {
+          "spearman": -0.2619047619047619,
+          "kendall_tau_b": -0.21428571428571427,
+          "pairwise": {
+            "correct_pairs": 4,
+            "scored_pairs": 14,
+            "near_tie_pairs": 14,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.2857142857142857,
+            "accuracy_including_near_ties": 0.39285714285714285
+          }
+        },
+        "participation_ratio_raw": {
+          "spearman": 0.023809523809523808,
+          "kendall_tau_b": 0.07142857142857142,
+          "pairwise": {
+            "correct_pairs": 7,
+            "scored_pairs": 14,
+            "near_tie_pairs": 14,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.5,
+            "accuracy_including_near_ties": 0.5
+          }
+        },
+        "participation_ratio_norm": {
+          "spearman": -0.2619047619047619,
+          "kendall_tau_b": -0.21428571428571427,
+          "pairwise": {
+            "correct_pairs": 4,
+            "scored_pairs": 14,
+            "near_tie_pairs": 14,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.2857142857142857,
+            "accuracy_including_near_ties": 0.39285714285714285
+          }
+        },
+        "width_H": {
+          "spearman": 0.3333333333333333,
+          "kendall_tau_b": 0.2857142857142857,
+          "pairwise": {
+            "correct_pairs": 10,
+            "scored_pairs": 14,
+            "near_tie_pairs": 14,
+            "proxy_tie_pairs": 0,
+            "accuracy_excluding_near_ties": 0.7142857142857143,
+            "accuracy_including_near_ties": 0.6071428571428571
+          }
+        }
+      }
+    },
+    "er_adds_over_width": false,
+    "H-ZEROCOST-ER": "FAILED",
+    "H-WIDTH-FANIN": "PRELIMINARY_SIGNAL",
+    "pilot_accuracy_spread_pp": 0.5833333333333246,
+    "stage_3_shortlist": [
+      "PointSparse_80x109",
+      "PointSparse_160x49",
+      "PointSparse_128x64"
+    ],
+    "epoch_equivalents": {
+      "realized": 24,
+      "naive": 600,
+      "reduction_fraction": 0.96
+    }
+  }
+}

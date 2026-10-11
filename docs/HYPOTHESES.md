@@ -258,14 +258,18 @@ Con la misma conectividad sparse y el mismo presupuesto entrenable, insertar una
 
 ## H-WIDTH-FANIN — distribución del presupuesto PointSparse
 
-**Status preregistro S3-T10:** UNTESTED.
+**Status S3-T10:** PRELIMINARY_SIGNAL; era UNTESTED en el preregistro.
 
 Con un presupuesto PointSparse fijo de 9610 parámetros, distribuirlo entre ancho H y fan-in K afecta materialmente la capacidad. El piloto de 3 épocas y 1 seed sólo permitirá PRELIMINARY_SIGNAL, NO_PRELIMINARY_SIGNAL o INCONCLUSIVE. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
+
+El rango de validation accuracy de época 3 fue 0.583 pp; 80×109 tuvo el máximo de accuracy y 240×29 el mínimo loss. La curva no fue monótona y 13/28 pares fueron near-ties. La señal temprana no establece un óptimo ni capacidad final.
 
 ---
 
 ## H-ZEROCOST-ER — ranking prospectivo por effective rank
 
-**Status preregistro S3-T10:** UNTESTED.
+**Status S3-T10:** FAILED en el piloto prospectivo; era UNTESTED en el preregistro.
 
 ER raw puede priorizar prospectivamente arquitecturas PointSparse de presupuesto fijo mejor que ordenar sólo por ancho H. Se evaluará frente al target de validation en época 3 y al baseline width con los criterios preregistrados. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
+
+ER raw obtuvo Spearman −.190 y 5/15 pares no near-tie correctos contra accuracy; width H obtuvo −.048 y 6/15. No agregó información al baseline trivial en esta cohorte. El resultado retrospectivo acotado de S3-T09 queda registrado separadamente.

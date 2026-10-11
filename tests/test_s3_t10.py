@@ -5,9 +5,8 @@ import json
 import pytest
 import torch
 
-from dsu_research.analysis.structural_cost import ArchitectureSpec, calculate_cost
-from dsu_research.s3_t10 import (COHORT, _validate_pilot, architecture_id, build_model,
-                                pilot, structural, topology)
+from dsu_research.s3_t10 import (COHORT, architecture_id, build_model, pilot,
+                                structural, topology)
 
 
 @pytest.mark.parametrize("h,k", COHORT)
@@ -31,6 +30,15 @@ def test_topology_deterministic_unique_and_seed_separation():
         y = build_model(h, k, 2, 1)
         assert torch.equal(x.G64, y.G64)
         assert not torch.equal(x.W_in, y.W_in)
+
+
+def test_variable_point_sparse_forward_and_gradients():
+    model = build_model(160, 49, 1, 2)
+    outputs = model(torch.rand(4, 784))
+    assert outputs.shape == (4, 10)
+    outputs.square().mean().backward()
+    assert all(parameter.grad is not None and torch.isfinite(parameter.grad).all()
+               for parameter in model.parameters())
 
 
 def test_pilot_uses_only_train_and_validation(monkeypatch, tmp_path):
@@ -102,4 +110,4 @@ def test_prereg_must_be_committed_before_pilot(monkeypatch, tmp_path):
     monkeypatch.setattr(s3_t10, "_git", lambda *args: "prereg_commit")
     monkeypatch.setattr(s3_t10.subprocess, "check_output", lambda *a, **k: b"different")
     with pytest.raises(RuntimeError, match="committed unchanged"):
-        s3_t10.sealed_prereg()
+        s3_t10.pilot()

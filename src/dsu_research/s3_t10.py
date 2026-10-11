@@ -193,12 +193,12 @@ def sealed_prereg():
     if not commit:
         raise RuntimeError("preregistration must be committed before pilot")
     committed = subprocess.check_output(["git", "show", f"{commit}:data/s3_t10_preregistered_screen.json"], cwd=ROOT)
-    if raw != committed:
+    if raw.replace(b"\r\n", b"\n") != committed:
         raise RuntimeError("preregistration must be committed unchanged before pilot")
     data = json.loads(raw)
     if data["schema"] != "s3_t10_prereg_v1" or data["primary_proxy"] != "effective_rank_raw":
         raise ValueError("invalid preregistration")
-    return data, hashlib.sha256(raw).hexdigest(), commit
+    return data, hashlib.sha256(committed).hexdigest(), commit
 
 
 def _pilot_config():
@@ -288,6 +288,14 @@ def analyze(prereg, records, prereg_sha, commit):
     rows = prereg["architectures"]
     for row, record in zip(rows, records):
         _validate_pilot(record, row, prereg_sha, commit)
+    for field in ("train_indices_sha256", "validation_indices_sha256"):
+        if len({record["dataset"][field] for record in records}) != 1:
+            raise ValueError(f"pilot split mismatch: {field}")
+    if any(record["dataset"]["splits"] != {"train": 54000, "validation": 6000, "test": 10000}
+           for record in records):
+        raise ValueError("pilot split sizes changed")
+    if len({tuple(record["batch_order"]) for record in records}) != 1:
+        raise ValueError("pilot minibatch order mismatch")
     acc = [r["history"][-1]["validation"]["accuracy"] for r in records]
     neg_loss = [-r["history"][-1]["validation"]["loss"] for r in records]
     comparisons = {}
