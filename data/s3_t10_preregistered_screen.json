@@ -1,0 +1,1624 @@
+{
+  "schema": "s3_t10_prereg_v1",
+  "created_utc": "2026-10-11T03:54:34.608237+00:00",
+  "source_commit_before_prereg": "a4643d34566039f0a6a62fdfeb2a2bba8d2e4b27",
+  "cohort": [
+    {
+      "H": 64,
+      "K": 139
+    },
+    {
+      "H": 80,
+      "K": 109
+    },
+    {
+      "H": 96,
+      "K": 89
+    },
+    {
+      "H": 120,
+      "K": 69
+    },
+    {
+      "H": 128,
+      "K": 64
+    },
+    {
+      "H": 160,
+      "K": 49
+    },
+    {
+      "H": 192,
+      "K": 39
+    },
+    {
+      "H": 240,
+      "K": 29
+    }
+  ],
+  "protocol": {
+    "proxy_seeds": [
+      1,
+      2,
+      3
+    ],
+    "proxy_train_samples": 256,
+    "proxy_model_dtype": "float32",
+    "proxy_statistics_dtype": "float64",
+    "pilot_training_seed": 1,
+    "pilot_topology_seed": 1,
+    "pilot_epochs": 3,
+    "pilot_batch_size": 128,
+    "pilot_lr": 0.001,
+    "pilot_optimizer": "Adam(betas=(0.9,0.999),eps=1e-7,weight_decay=0)",
+    "pilot_loss": "CrossEntropyLoss",
+    "activation": "LeakyReLU(0.1)",
+    "pilot_target": "validation_accuracy_epoch_3",
+    "secondary_target": "negative_validation_loss_epoch_3",
+    "accuracy_near_tie_strict_less_than": 0.002,
+    "negative_loss_near_tie_strict_less_than": 0.005,
+    "test_access": false
+  },
+  "hypotheses_before_pilot": {
+    "H-WIDTH-FANIN": "UNTESTED",
+    "H-ZEROCOST-ER": "UNTESTED"
+  },
+  "primary_proxy": "effective_rank_raw",
+  "rankings": {
+    "effective_rank_raw": [
+      "PointSparse_160x49",
+      "PointSparse_192x39",
+      "PointSparse_240x29",
+      "PointSparse_120x69",
+      "PointSparse_128x64",
+      "PointSparse_80x109",
+      "PointSparse_96x89",
+      "PointSparse_64x139"
+    ],
+    "effective_rank_norm": [
+      "PointSparse_64x139",
+      "PointSparse_80x109",
+      "PointSparse_96x89",
+      "PointSparse_120x69",
+      "PointSparse_160x49",
+      "PointSparse_128x64",
+      "PointSparse_192x39",
+      "PointSparse_240x29"
+    ],
+    "participation_ratio_raw": [
+      "PointSparse_160x49",
+      "PointSparse_80x109",
+      "PointSparse_120x69",
+      "PointSparse_192x39",
+      "PointSparse_240x29",
+      "PointSparse_128x64",
+      "PointSparse_96x89",
+      "PointSparse_64x139"
+    ],
+    "participation_ratio_norm": [
+      "PointSparse_64x139",
+      "PointSparse_80x109",
+      "PointSparse_96x89",
+      "PointSparse_120x69",
+      "PointSparse_160x49",
+      "PointSparse_128x64",
+      "PointSparse_192x39",
+      "PointSparse_240x29"
+    ],
+    "mean_abs_corr": [
+      "PointSparse_160x49",
+      "PointSparse_120x69",
+      "PointSparse_192x39",
+      "PointSparse_80x109",
+      "PointSparse_64x139",
+      "PointSparse_128x64",
+      "PointSparse_96x89",
+      "PointSparse_240x29"
+    ],
+    "width_H": [
+      "PointSparse_240x29",
+      "PointSparse_192x39",
+      "PointSparse_160x49",
+      "PointSparse_128x64",
+      "PointSparse_120x69",
+      "PointSparse_96x89",
+      "PointSparse_80x109",
+      "PointSparse_64x139"
+    ]
+  },
+  "predicted_top_3": [
+    "PointSparse_160x49",
+    "PointSparse_192x39",
+    "PointSparse_240x29"
+  ],
+  "predicted_bottom_2": [
+    "PointSparse_96x89",
+    "PointSparse_64x139"
+  ],
+  "success_criteria": {
+    "VALIDATED_PROMISING": "Spearman >=0.60; pairwise >0.70 excluding accuracy near-ties; ER clearly equals or exceeds width H",
+    "PARTIAL": "positive but Spearman <0.60, or ER does not clearly exceed width",
+    "FAILED": "near-zero/negative correlation or materially misleading ranking"
+  },
+  "batch_fingerprints": [
+    {
+      "seed": 1,
+      "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+      "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+    },
+    {
+      "seed": 2,
+      "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+      "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+    },
+    {
+      "seed": 3,
+      "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+      "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+    }
+  ],
+  "architectures": [
+    {
+      "architecture_id": "PointSparse_64x139",
+      "H": 64,
+      "K": 139,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9536,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 71168,
+        "persistent_buffer_bytes": 71168,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 109608,
+        "main_macs_per_sample": 9536,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4554752,
+          "soma_preactivation": 32768,
+          "soma_activation": 32768,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8896,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "6f05b563e8dd9263bfb7bda0c9e01da6de1d4d75016fdacdfd0a096a5c52eeac",
+          "initialization_sha256": "d23fde81384e151221aba8239610d85f37faff0d0b760d210dcd2d323bfd296c",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.014094500002101995,
+          "metrics": {
+            "effective_rank_raw": 14.082490099602953,
+            "effective_rank_norm": 0.22003890780629615,
+            "participation_ratio_raw": 7.041907590459719,
+            "participation_ratio_norm": 0.1100298061009331,
+            "mean_abs_corr": 0.21913043469707322,
+            "activation_std": 0.38216650881183734,
+            "logit_std": 0.5870153864043882,
+            "entropy": 2.1682266810298416,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.346938775510203,
+            "reference_count_sd": 3.1048087811780194,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.09781747867845407
+          },
+          "er_per_width": 0.22003890780629615
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "bc4f5feb3481deb254c1323e7b9aaa9e1052dddaff7745d703628dcacfa098f6",
+          "initialization_sha256": "cd5f72476b9222c21292b4aa12d518086d43b13fcd8b1fea7d235761257da4d5",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.010191300003498327,
+          "metrics": {
+            "effective_rank_raw": 11.553582425434916,
+            "effective_rank_norm": 0.18052472539742057,
+            "participation_ratio_raw": 5.067114838997621,
+            "participation_ratio_norm": 0.07917366935933783,
+            "mean_abs_corr": 0.2115289051645496,
+            "activation_std": 0.44412372027392566,
+            "logit_std": 0.5213767771473178,
+            "entropy": 2.1966125607857987,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.346938775510203,
+            "reference_count_sd": 3.06927512819853,
+            "max_reference_count": 23,
+            "mean_jaccard_between_units": 0.09763489312806344
+          },
+          "er_per_width": 0.18052472539742057
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "95198fcbb77b1a74c973f8d7f756c72e8a2cea0cd75b266e3d4ac6521af77fd9",
+          "initialization_sha256": "ca0ecff04ec471c45f53f505511994c9d71b3003af216f1d45be724ef831357e",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.009207700000843033,
+          "metrics": {
+            "effective_rank_raw": 11.89877022028208,
+            "effective_rank_norm": 0.1859182846919075,
+            "participation_ratio_raw": 5.337179257979471,
+            "participation_ratio_norm": 0.08339342590592923,
+            "mean_abs_corr": 0.2113084420577953,
+            "activation_std": 0.45955228337827886,
+            "logit_std": 0.6381342340366584,
+            "entropy": 2.1433997868789265,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.346938775510203,
+            "reference_count_sd": 3.0924596934212802,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.09775228591810695
+          },
+          "er_per_width": 0.1859182846919075
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 12.511614248439983,
+          "sample_sd": 1.3713230320581296
+        },
+        "effective_rank_norm": {
+          "mean": 0.19549397263187474,
+          "sample_sd": 0.021426922375908274
+        },
+        "participation_ratio_raw": {
+          "mean": 5.815400562478937,
+          "sample_sd": 1.0707349414606255
+        },
+        "participation_ratio_norm": {
+          "mean": 0.09086563378873339,
+          "sample_sd": 0.016730233460322274
+        },
+        "mean_abs_corr": {
+          "mean": 0.21398926063980606,
+          "sample_sd": 0.004453751678158278
+        },
+        "activation_std": {
+          "mean": 0.4286141708213473,
+          "sample_sd": 0.04095789447076726
+        },
+        "logit_std": {
+          "mean": 0.5821754658627881,
+          "sample_sd": 0.05852900612476952
+        },
+        "entropy": {
+          "mean": 2.1694130095648556,
+          "sample_sd": 0.026626215620337703
+        },
+        "near_zero_fraction": {
+          "mean": 0.0,
+          "sample_sd": 0.0
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 11.346938775510203,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.0888478675992768,
+          "sample_sd": 0.018040068953389818
+        },
+        "max_reference_count": {
+          "mean": 22.333333333333332,
+          "sample_sd": 0.5773502691896257
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.09773488590820816,
+          "sample_sd": 9.252805553572063e-05
+        }
+      },
+      "er_per_width": {
+        "mean": 0.19549397263187474,
+        "sample_sd": 0.021426922375908274
+      }
+    },
+    {
+      "architecture_id": "PointSparse_80x109",
+      "H": 80,
+      "K": 109,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9520,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 69760,
+        "persistent_buffer_bytes": 69760,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 108200,
+        "main_macs_per_sample": 9520,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4464640,
+          "soma_preactivation": 40960,
+          "soma_activation": 40960,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8720,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "f43f5ae1fc0231a25a831da61e5f7a7baacc1c1849d6003ac5f7f6a8c1fad51d",
+          "initialization_sha256": "6a241b580668693197268a870d8889dfa3ac3f7c15ee5db85ec4ef9327ce8e3f",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.010379599996667821,
+          "metrics": {
+            "effective_rank_raw": 17.396736316038524,
+            "effective_rank_norm": 0.21745920395048154,
+            "participation_ratio_raw": 8.113237999688621,
+            "participation_ratio_norm": 0.10141547499610777,
+            "mean_abs_corr": 0.20009146328327485,
+            "activation_std": 0.38156054120374955,
+            "logit_std": 0.5131853312635937,
+            "entropy": 2.186491639492259,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.122448979591837,
+            "reference_count_sd": 3.061496586546801,
+            "max_reference_count": 23,
+            "mean_jaccard_between_units": 0.07486413844895755
+          },
+          "er_per_width": 0.21745920395048154
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "91d622e52a63cd5f6eb95cce97e28e477d6a11e3778a23720592cbd0995fbbd2",
+          "initialization_sha256": "599c93e0b3d6d0c71e8c5df7202e8bd48b16d103d85a9ea9b46c7a8e3aa55fe3",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.00987639999948442,
+          "metrics": {
+            "effective_rank_raw": 13.584727713174821,
+            "effective_rank_norm": 0.16980909641468528,
+            "participation_ratio_raw": 5.838173588950656,
+            "participation_ratio_norm": 0.0729771698618832,
+            "mean_abs_corr": 0.2431607205231336,
+            "activation_std": 0.41913779293382925,
+            "logit_std": 0.6167782501079415,
+            "entropy": 2.130311762491721,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.122448979591837,
+            "reference_count_sd": 3.136000006906133,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.07516526676393655
+          },
+          "er_per_width": 0.16980909641468528
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "6a212b6cd264d81146da8d0ea13d578a3f3dbf3620dcdd0ff0a74cee22b40852",
+          "initialization_sha256": "db66e9868e51d0e53f773cffb92b23b8602b21e714ee542cf874089977f5b371",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.010190999993938021,
+          "metrics": {
+            "effective_rank_raw": 15.303750705772474,
+            "effective_rank_norm": 0.19129688382215593,
+            "participation_ratio_raw": 6.3999220424121415,
+            "participation_ratio_norm": 0.07999902553015177,
+            "mean_abs_corr": 0.19469970875780138,
+            "activation_std": 0.40744733084272206,
+            "logit_std": 0.6320238577806611,
+            "entropy": 2.1159292973874155,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 11.122448979591837,
+            "reference_count_sd": 3.1376265113853044,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.07517470014598622
+          },
+          "er_per_width": 0.19129688382215593
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 15.42840491166194,
+          "sample_sd": 1.9090590353263488
+        },
+        "effective_rank_norm": {
+          "mean": 0.19285506139577424,
+          "sample_sd": 0.02386323794157935
+        },
+        "participation_ratio_raw": {
+          "mean": 6.7837778770171395,
+          "sample_sd": 1.1851111739292
+        },
+        "participation_ratio_norm": {
+          "mean": 0.08479722346271425,
+          "sample_sd": 0.014813889674115
+        },
+        "mean_abs_corr": {
+          "mean": 0.2126506308547366,
+          "sample_sd": 0.0265596862348929
+        },
+        "activation_std": {
+          "mean": 0.40271522166010026,
+          "sample_sd": 0.019230369338201343
+        },
+        "logit_std": {
+          "mean": 0.5873291463840654,
+          "sample_sd": 0.06466131864408305
+        },
+        "entropy": {
+          "mean": 2.1442442331237985,
+          "sample_sd": 0.0372873481795838
+        },
+        "near_zero_fraction": {
+          "mean": 0.0,
+          "sample_sd": 0.0
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 11.122448979591837,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.111707701612746,
+          "sample_sd": 0.04349170537389152
+        },
+        "max_reference_count": {
+          "mean": 22.333333333333332,
+          "sample_sd": 0.5773502691896257
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.07506803511962677,
+          "sample_sd": 0.0001766426800258622
+        }
+      },
+      "er_per_width": {
+        "mean": 0.19285506139577424,
+        "sample_sd": 0.02386323794157935
+      }
+    },
+    {
+      "architecture_id": "PointSparse_96x89",
+      "H": 96,
+      "K": 89,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9504,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 68352,
+        "persistent_buffer_bytes": 68352,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 106792,
+        "main_macs_per_sample": 9504,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4374528,
+          "soma_preactivation": 49152,
+          "soma_activation": 49152,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8544,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "9b1708dd3b31587b0bbbd0fc295904a27d19bf00503e6c85cc6b97adff0c2ad9",
+          "initialization_sha256": "8623cd8bae7b04a2557f7bbf9a9b229fa7b0d9a7347504557ebb980ec74c6153",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.01046170000336133,
+          "metrics": {
+            "effective_rank_raw": 16.246599620524158,
+            "effective_rank_norm": 0.1692354127137933,
+            "participation_ratio_raw": 6.984529703827293,
+            "participation_ratio_norm": 0.07275551774820097,
+            "mean_abs_corr": 0.20285715521489947,
+            "activation_std": 0.38522527089996206,
+            "logit_std": 0.5628213869377213,
+            "entropy": 2.1681947366049785,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.89795918367347,
+            "reference_count_sd": 3.157804700887354,
+            "max_reference_count": 23,
+            "mean_jaccard_between_units": 0.060650658028308206
+          },
+          "er_per_width": 0.1692354127137933
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "f0a225cf99e4e2b4a8f186b61c331d61fe5a6ac7fcc99c26bac0218627e23b8c",
+          "initialization_sha256": "790e19afa6e10322b17c34bad95313ce00f4c121c609b58b4bdae66b8989648b",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.010351099997933488,
+          "metrics": {
+            "effective_rank_raw": 12.496186346349639,
+            "effective_rank_norm": 0.1301686077744754,
+            "participation_ratio_raw": 4.926272124760575,
+            "participation_ratio_norm": 0.051315334632922656,
+            "mean_abs_corr": 0.23141241148323569,
+            "activation_std": 0.44400615052234715,
+            "logit_std": 0.682219153581244,
+            "entropy": 2.0964014039535552,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.89795918367347,
+            "reference_count_sd": 3.1064935148037396,
+            "max_reference_count": 21,
+            "mean_jaccard_between_units": 0.06046992522391602
+          },
+          "er_per_width": 0.1301686077744754
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "a5191bc7703477bedb14099e663450c503c2064b87fdb4eecc1c652017961ec1",
+          "initialization_sha256": "05e60e1e509622b90c1942d4aeb12e2df50499bf426823e2d7dae5ba68640a5f",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.010194099995715078,
+          "metrics": {
+            "effective_rank_raw": 15.993398355684612,
+            "effective_rank_norm": 0.16659789953838136,
+            "participation_ratio_raw": 6.7614216862781875,
+            "participation_ratio_norm": 0.07043147589873112,
+            "mean_abs_corr": 0.21022081733688555,
+            "activation_std": 0.40201856114415646,
+            "logit_std": 0.5754432429076416,
+            "entropy": 2.128932836092518,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.89795918367347,
+            "reference_count_sd": 3.141606231312214,
+            "max_reference_count": 21,
+            "mean_jaccard_between_units": 0.06058678882553752
+          },
+          "er_per_width": 0.16659789953838136
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 14.912061440852803,
+          "sample_sd": 2.0960360384090704
+        },
+        "effective_rank_norm": {
+          "mean": 0.15533397334221669,
+          "sample_sd": 0.02183370873342782
+        },
+        "participation_ratio_raw": {
+          "mean": 6.224074504955352,
+          "sample_sd": 1.1294523276363166
+        },
+        "participation_ratio_norm": {
+          "mean": 0.06483410942661824,
+          "sample_sd": 0.0117651284128783
+        },
+        "mean_abs_corr": {
+          "mean": 0.21483012801167356,
+          "sample_sd": 0.01482514667077951
+        },
+        "activation_std": {
+          "mean": 0.41041666085548856,
+          "sample_sd": 0.030276955120461486
+        },
+        "logit_std": {
+          "mean": 0.606827927808869,
+          "sample_sd": 0.06559501127850553
+        },
+        "entropy": {
+          "mean": 2.1311763255503506,
+          "sample_sd": 0.03594920843370594
+        },
+        "near_zero_fraction": {
+          "mean": 0.0,
+          "sample_sd": 0.0
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 10.89795918367347,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.135301482334436,
+          "sample_sd": 0.026230170588111376
+        },
+        "max_reference_count": {
+          "mean": 21.666666666666668,
+          "sample_sd": 1.1547005383792515
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.06056912402592058,
+          "sample_sd": 9.165217130540982e-05
+        }
+      },
+      "er_per_width": {
+        "mean": 0.15533397334221669,
+        "sample_sd": 0.02183370873342782
+      }
+    },
+    {
+      "architecture_id": "PointSparse_120x69",
+      "H": 120,
+      "K": 69,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9480,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 66240,
+        "persistent_buffer_bytes": 66240,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 104680,
+        "main_macs_per_sample": 9480,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4239360,
+          "soma_preactivation": 61440,
+          "soma_activation": 61440,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8280,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "f9e622b4c4815d7c01f815922c6be4d53865518acf5e8c1694c05432555c5c47",
+          "initialization_sha256": "84e76ef9949f7464b1b3bab340de228bdb92f00478bef2aad7fc4d328655cd90",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.011796899998444133,
+          "metrics": {
+            "effective_rank_raw": 16.225751299724827,
+            "effective_rank_norm": 0.13521459416437356,
+            "participation_ratio_raw": 6.511303039809923,
+            "participation_ratio_norm": 0.05426085866508269,
+            "mean_abs_corr": 0.21601828447112698,
+            "activation_std": 0.41032398565474715,
+            "logit_std": 0.6840063792727248,
+            "entropy": 2.0863169541507425,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.561224489795919,
+            "reference_count_sd": 3.1430724813586073,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.04643935584958836
+          },
+          "er_per_width": 0.13521459416437356
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "40d4ec715922e01199308c69be87eff92a7fd9fff996092f82ecc8d1da13c805",
+          "initialization_sha256": "9bd6e39e7ed09389722fd4d4c5ba44d15198f71d0e3894e0b6b8485706c1efcd",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.012373200006550178,
+          "metrics": {
+            "effective_rank_raw": 15.737493515129428,
+            "effective_rank_norm": 0.13114577929274523,
+            "participation_ratio_raw": 6.009959213689859,
+            "participation_ratio_norm": 0.05008299344741549,
+            "mean_abs_corr": 0.21496314865229837,
+            "activation_std": 0.43235924923281516,
+            "logit_std": 0.6331450003165626,
+            "entropy": 2.096242857429276,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.561224489795919,
+            "reference_count_sd": 3.01464563365964,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.04609948736642774
+          },
+          "er_per_width": 0.13114577929274523
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "f41502e453c892e46fa072fae348006565ddc1ebe436d665ae4533a0e307c99a",
+          "initialization_sha256": "c769b17e8bdcc6847c60da13db5285bb559eb36478732bb2af37872f0c9a7e3a",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.011549000002560206,
+          "metrics": {
+            "effective_rank_raw": 18.451079801551252,
+            "effective_rank_norm": 0.15375899834626044,
+            "participation_ratio_raw": 7.770453635424668,
+            "participation_ratio_norm": 0.06475378029520557,
+            "mean_abs_corr": 0.20030782093827718,
+            "activation_std": 0.3928608342415362,
+            "logit_std": 0.5329570282840052,
+            "entropy": 2.1728839271575655,
+            "near_zero_fraction": 3.255208333333333e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.561224489795919,
+            "reference_count_sd": 3.17014557874251,
+            "max_reference_count": 21,
+            "mean_jaccard_between_units": 0.04651866139137908
+          },
+          "er_per_width": 0.15375899834626044
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 16.80477487213517,
+          "sample_sd": 1.4464919137414052
+        },
+        "effective_rank_norm": {
+          "mean": 0.14003979060112642,
+          "sample_sd": 0.01205409928117838
+        },
+        "participation_ratio_raw": {
+          "mean": 6.76390529630815,
+          "sample_sd": 0.907023195530766
+        },
+        "participation_ratio_norm": {
+          "mean": 0.056365877469234583,
+          "sample_sd": 0.007558526629423048
+        },
+        "mean_abs_corr": {
+          "mean": 0.21042975135390085,
+          "sample_sd": 0.008781710220856151
+        },
+        "activation_std": {
+          "mean": 0.41184802304303286,
+          "sample_sd": 0.019793261837718703
+        },
+        "logit_std": {
+          "mean": 0.6167028026244309,
+          "sample_sd": 0.076855292642984
+        },
+        "entropy": {
+          "mean": 2.1184812462458615,
+          "sample_sd": 0.04737477869878891
+        },
+        "near_zero_fraction": {
+          "mean": 1.0850694444444445e-05,
+          "sample_sd": 1.879395407518313e-05
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 10.561224489795919,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.1092878979202525,
+          "sample_sd": 0.08307290044756632
+        },
+        "max_reference_count": {
+          "mean": 21.666666666666668,
+          "sample_sd": 0.5773502691896257
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.04635250153579839,
+          "sample_sd": 0.00022267570515532568
+        }
+      },
+      "er_per_width": {
+        "mean": 0.14003979060112642,
+        "sample_sd": 0.01205409928117838
+      }
+    },
+    {
+      "architecture_id": "PointSparse_128x64",
+      "H": 128,
+      "K": 64,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9472,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 65536,
+        "persistent_buffer_bytes": 65536,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 103976,
+        "main_macs_per_sample": 9472,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4194304,
+          "soma_preactivation": 65536,
+          "soma_activation": 65536,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 8192,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "fd7f2469a457bad1daa506df4df5bc4604dfc5ff39b6fc2f21b285a45acaaf1d",
+          "initialization_sha256": "ed6d1497bbca17989bc65a17b14cac42cc27794507eaf460d8fb527f16144a23",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.012714200005575549,
+          "metrics": {
+            "effective_rank_raw": 16.67207255762034,
+            "effective_rank_norm": 0.1302505668564089,
+            "participation_ratio_raw": 6.4377099840207315,
+            "participation_ratio_norm": 0.050294609250161965,
+            "mean_abs_corr": 0.2227579491521446,
+            "activation_std": 0.43018799961630294,
+            "logit_std": 0.680645956623611,
+            "entropy": 2.1019607943080856,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.448979591836734,
+            "reference_count_sd": 2.9999913230472846,
+            "max_reference_count": 20,
+            "mean_jaccard_between_units": 0.042609980736691984
+          },
+          "er_per_width": 0.1302505668564089
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "982abdee19b1ec106cc46e18b1488bac09b1af16ddbe038892c67540fa88b3bb",
+          "initialization_sha256": "095d7d0f28f263706eb75317b206c3043fbbcb9cc7a0f4e7f7d535b42da139d7",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.012454100004106294,
+          "metrics": {
+            "effective_rank_raw": 13.057213616144027,
+            "effective_rank_norm": 0.10200948137612521,
+            "participation_ratio_raw": 4.9928842052230245,
+            "participation_ratio_norm": 0.03900690785330488,
+            "mean_abs_corr": 0.2113417674539125,
+            "activation_std": 0.4407783330714847,
+            "logit_std": 0.5749679067281888,
+            "entropy": 2.13837431922486,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.448979591836734,
+            "reference_count_sd": 3.0430497892725414,
+            "max_reference_count": 20,
+            "mean_jaccard_between_units": 0.04273357130504056
+          },
+          "er_per_width": 0.10200948137612521
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "67056be9e35b3aa397ce6be46925983bf5ee2bce42cd0af565fbdba7e069d7c9",
+          "initialization_sha256": "bbced83e00ebee1a7b6d4e4b9e946c5436601f2443a32d8aeb3b070a208633c3",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.012940400003571995,
+          "metrics": {
+            "effective_rank_raw": 18.097758115689995,
+            "effective_rank_norm": 0.1413887352788281,
+            "participation_ratio_raw": 7.568524219448901,
+            "participation_ratio_norm": 0.05912909546444454,
+            "mean_abs_corr": 0.20849657507371994,
+            "activation_std": 0.40278088699860093,
+            "logit_std": 0.5407108972150798,
+            "entropy": 2.1795814007123964,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.448979591836734,
+            "reference_count_sd": 3.1294273094765708,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.04294462483168821
+          },
+          "er_per_width": 0.1413887352788281
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 15.942348096484787,
+          "sample_sd": 2.5982966641360368
+        },
+        "effective_rank_norm": {
+          "mean": 0.1245495945037874,
+          "sample_sd": 0.020299192688562787
+        },
+        "participation_ratio_raw": {
+          "mean": 6.333039469564219,
+          "sample_sd": 1.2910063160836245
+        },
+        "participation_ratio_norm": {
+          "mean": 0.04947687085597046,
+          "sample_sd": 0.010085986844403316
+        },
+        "mean_abs_corr": {
+          "mean": 0.214198763893259,
+          "sample_sd": 0.007547749276573767
+        },
+        "activation_std": {
+          "mean": 0.42458240656212953,
+          "sample_sd": 0.01960914281992395
+        },
+        "logit_std": {
+          "mean": 0.5987749201889598,
+          "sample_sd": 0.07294200182582251
+        },
+        "entropy": {
+          "mean": 2.139972171415114,
+          "sample_sd": 0.038834964701408674
+        },
+        "near_zero_fraction": {
+          "mean": 0.0,
+          "sample_sd": 0.0
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 10.448979591836734,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.057489473932132,
+          "sample_sd": 0.06591507426630049
+        },
+        "max_reference_count": {
+          "mean": 20.666666666666668,
+          "sample_sd": 1.1547005383792515
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.042762725624473585,
+          "sample_sd": 0.0001692162768032771
+        }
+      },
+      "er_per_width": {
+        "mean": 0.1245495945037874,
+        "sample_sd": 0.020299192688562787
+      }
+    },
+    {
+      "architecture_id": "PointSparse_160x49",
+      "H": 160,
+      "K": 49,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9440,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 62720,
+        "persistent_buffer_bytes": 62720,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 101160,
+        "main_macs_per_sample": 9440,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 4014080,
+          "soma_preactivation": 81920,
+          "soma_activation": 81920,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 7840,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "49924b00edcf86940db310094159dc24a814bc2b3b5fa6f49d8e676d2605ded4",
+          "initialization_sha256": "a447033edad423118477c93eafb84056b48855a41cda4f4995b616f4c80a211a",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.013727199999266304,
+          "metrics": {
+            "effective_rank_raw": 19.641180096507718,
+            "effective_rank_norm": 0.12275737560317324,
+            "participation_ratio_raw": 7.274360593923254,
+            "participation_ratio_norm": 0.04546475371202034,
+            "mean_abs_corr": 0.18475368291954988,
+            "activation_std": 0.3819017100490369,
+            "logit_std": 0.5169645380066088,
+            "entropy": 2.2047304777780936,
+            "near_zero_fraction": 2.44140625e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.0,
+            "reference_count_sd": 3.178772064293804,
+            "max_reference_count": 24,
+            "mean_jaccard_between_units": 0.03281693674451424
+          },
+          "er_per_width": 0.12275737560317324
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "8f2997f224591825ce0ea42d532a5f0e2960394fef6e397071648ecece3540ca",
+          "initialization_sha256": "297388a0f43426501322f7b0db2e34e6049dc47206b46b44d3d2ffdf6c4d3eb2",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.013966600003186613,
+          "metrics": {
+            "effective_rank_raw": 20.08192368713893,
+            "effective_rank_norm": 0.1255120230446183,
+            "participation_ratio_raw": 7.559183379291358,
+            "participation_ratio_norm": 0.04724489612057099,
+            "mean_abs_corr": 0.21435456598517214,
+            "activation_std": 0.3748792966235487,
+            "logit_std": 0.5289952394727367,
+            "entropy": 2.167370007355027,
+            "near_zero_fraction": 0.0,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.0,
+            "reference_count_sd": 2.9442091207892784,
+            "max_reference_count": 19,
+            "mean_jaccard_between_units": 0.032331341603960145
+          },
+          "er_per_width": 0.1255120230446183
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "24f6ed9f4a5f65aadcbb82254cfb7199d16cfbd9bbb9c8031064da5c5f4653d5",
+          "initialization_sha256": "b9fcfcc840757b66512c0a587385b5e8d186258915e565311c354dc382b6d81b",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.012962599997990765,
+          "metrics": {
+            "effective_rank_raw": 23.90363322541688,
+            "effective_rank_norm": 0.1493977076588555,
+            "participation_ratio_raw": 9.596733758600818,
+            "participation_ratio_norm": 0.059979585991255115,
+            "mean_abs_corr": 0.19814701865522633,
+            "activation_std": 0.37490999924394725,
+            "logit_std": 0.73547736103181,
+            "entropy": 2.0031651733554905,
+            "near_zero_fraction": 2.44140625e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 10.0,
+            "reference_count_sd": 3.1192293658425783,
+            "max_reference_count": 21,
+            "mean_jaccard_between_units": 0.032691275991072875
+          },
+          "er_per_width": 0.1493977076588555
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 21.20891233635451,
+          "sample_sd": 2.3440785461738356
+        },
+        "effective_rank_norm": {
+          "mean": 0.13255570210221568,
+          "sample_sd": 0.014650490913586469
+        },
+        "participation_ratio_raw": {
+          "mean": 8.143425910605144,
+          "sample_sd": 1.2666328515203509
+        },
+        "participation_ratio_norm": {
+          "mean": 0.05089641194128215,
+          "sample_sd": 0.007916455322002192
+        },
+        "mean_abs_corr": {
+          "mean": 0.19908508918664944,
+          "sample_sd": 0.014822720796385658
+        },
+        "activation_std": {
+          "mean": 0.3772303353055109,
+          "sample_sd": 0.004045558324701788
+        },
+        "logit_std": {
+          "mean": 0.5938123795037186,
+          "sample_sd": 0.1228328526411304
+        },
+        "entropy": {
+          "mean": 2.125088552829537,
+          "sample_sd": 0.10722841990040452
+        },
+        "near_zero_fraction": {
+          "mean": 1.6276041666666666e-05,
+          "sample_sd": 1.4095465556387349e-05
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 10.0,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.0807368503085537,
+          "sample_sd": 0.12192702297062641
+        },
+        "max_reference_count": {
+          "mean": 21.333333333333332,
+          "sample_sd": 2.516611478423583
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.032613184779849085,
+          "sample_sd": 0.00025204035011330324
+        }
+      },
+      "er_per_width": {
+        "mean": 0.13255570210221568,
+        "sample_sd": 0.014650490913586469
+      }
+    },
+    {
+      "architecture_id": "PointSparse_192x39",
+      "H": 192,
+      "K": 39,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9408,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 59904,
+        "persistent_buffer_bytes": 59904,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 98344,
+        "main_macs_per_sample": 9408,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 3833856,
+          "soma_preactivation": 98304,
+          "soma_activation": 98304,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 7488,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "b18def3577aa731ddd8e40e5b5795d2fd43bf3d0c5020b2c567da287d8b3bba8",
+          "initialization_sha256": "22982b743e7d0d42298a45d45e1c1d1bf2ca0c87d52297bd667b51abfa646b8f",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.015433200002007652,
+          "metrics": {
+            "effective_rank_raw": 17.256921707925233,
+            "effective_rank_norm": 0.08987980056211059,
+            "participation_ratio_raw": 6.171884529478456,
+            "participation_ratio_norm": 0.03214523192436696,
+            "mean_abs_corr": 0.21441523858018427,
+            "activation_std": 0.4237059505043978,
+            "logit_std": 0.696800659354025,
+            "entropy": 2.075426822045772,
+            "near_zero_fraction": 2.0345052083333332e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 9.551020408163266,
+            "reference_count_sd": 3.020330597459631,
+            "max_reference_count": 20,
+            "mean_jaccard_between_units": 0.02583282436265887
+          },
+          "er_per_width": 0.08987980056211059
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "6fa6f5a6ccd8ee4ba5c5353d0d300f51d060f462dc4ed285ddb10667336b23d4",
+          "initialization_sha256": "574e5b93ec751e328e4d119a833df4e0e9abf78f1ed2fb13401f5c91ad72e4a4",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.01519160000316333,
+          "metrics": {
+            "effective_rank_raw": 19.57871519503152,
+            "effective_rank_norm": 0.1019724749741225,
+            "participation_ratio_raw": 7.036738386013486,
+            "participation_ratio_norm": 0.03664967909382024,
+            "mean_abs_corr": 0.2029676371395476,
+            "activation_std": 0.3773758766769569,
+            "logit_std": 0.5779159162268572,
+            "entropy": 2.1331516782211675,
+            "near_zero_fraction": 2.0345052083333332e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 9.551020408163266,
+            "reference_count_sd": 3.071835351732726,
+            "max_reference_count": 19,
+            "mean_jaccard_between_units": 0.025933708000606265
+          },
+          "er_per_width": 0.1019724749741225
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "a39ecae59ae67890f67586b6869d14f81a7c62f759c1b582960882cbb7bb32e1",
+          "initialization_sha256": "4bae074354a984875538605ccc166d9f802be5a77252e10366806b9f1c7b0b10",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.014747699999134056,
+          "metrics": {
+            "effective_rank_raw": 18.803778062251894,
+            "effective_rank_norm": 0.09793634407422862,
+            "participation_ratio_raw": 6.87744097058548,
+            "participation_ratio_norm": 0.03582000505513271,
+            "mean_abs_corr": 0.21956746311968287,
+            "activation_std": 0.4115511489281555,
+            "logit_std": 0.5808407306741254,
+            "entropy": 2.1040315538971512,
+            "near_zero_fraction": 2.0345052083333332e-05,
+            "unique_input_features": 783,
+            "coverage_ratio": 0.9987244897959183,
+            "mean_references_per_feature": 9.551020408163266,
+            "reference_count_sd": 3.1015876414415073,
+            "max_reference_count": 22,
+            "mean_jaccard_between_units": 0.025979470748123182
+          },
+          "er_per_width": 0.09793634407422862
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 18.54647165506955,
+          "sample_sd": 1.1820897552957255
+        },
+        "effective_rank_norm": {
+          "mean": 0.09659620653682056,
+          "sample_sd": 0.006156717475498569
+        },
+        "participation_ratio_raw": {
+          "mean": 6.695354628692474,
+          "sample_sd": 0.4602821148153174
+        },
+        "participation_ratio_norm": {
+          "mean": 0.03487163869110664,
+          "sample_sd": 0.002397302681329778
+        },
+        "mean_abs_corr": {
+          "mean": 0.21231677961313825,
+          "sample_sd": 0.008496540658996184
+        },
+        "activation_std": {
+          "mean": 0.4042109920365034,
+          "sample_sd": 0.024021393852347167
+        },
+        "logit_std": {
+          "mean": 0.6185191020850026,
+          "sample_sd": 0.06780958849038364
+        },
+        "entropy": {
+          "mean": 2.1042033513880303,
+          "sample_sd": 0.028862811555718616
+        },
+        "near_zero_fraction": {
+          "mean": 2.0345052083333332e-05,
+          "sample_sd": 0.0
+        },
+        "unique_input_features": {
+          "mean": 783.6666666666666,
+          "sample_sd": 0.5773502691896257
+        },
+        "coverage_ratio": {
+          "mean": 0.9995748299319728,
+          "sample_sd": 0.00073641615968067
+        },
+        "mean_references_per_feature": {
+          "mean": 9.551020408163266,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 3.064584530211288,
+          "sample_sd": 0.04111091836385992
+        },
+        "max_reference_count": {
+          "mean": 20.333333333333332,
+          "sample_sd": 1.5275252316519468
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.025915334370462773,
+          "sample_sd": 7.502988275296986e-05
+        }
+      },
+      "er_per_width": {
+        "mean": 0.09659620653682056,
+        "sample_sd": 0.006156717475498569
+      }
+    },
+    {
+      "architecture_id": "PointSparse_240x29",
+      "H": 240,
+      "K": 29,
+      "structural_cost": {
+        "trainable_parameters": 9610,
+        "stored_parameters": 9610,
+        "effective_parameters": 9610,
+        "effective_connections": 9360,
+        "stored_parameter_bytes": 38440,
+        "topology_bytes": 55680,
+        "persistent_buffer_bytes": 55680,
+        "optimizer_state_bytes_estimate": 76880,
+        "model_checkpoint_tensor_payload_bytes": 94120,
+        "main_macs_per_sample": 9360,
+        "executed_dense_main_macs_per_sample": null,
+        "temporary_activation_tensor_bytes": {
+          "selected_inputs": 3563520,
+          "soma_preactivation": 122880,
+          "soma_activation": 122880,
+          "logits": 5120
+        },
+        "state_bytes": 0,
+        "gather_indices_per_sample": 6960,
+        "fixed_aggregate_additions_per_sample": 0
+      },
+      "proxy_seeds": [
+        {
+          "seed": 1,
+          "topology_sha256": "305f3cf24a62444f0acb919a6973a5ef3fe87e3078d16075c7c6a9db743110a6",
+          "initialization_sha256": "3352f61cffab1ea92bfff62c4ad653f64db975147080d492c651614e03230075",
+          "sample_fingerprint": {
+            "seed": 1,
+            "train_indices_sha256": "6e2834ad32df56e807eea828b8a145aae32499c94b77fa0ed33c985d563a32b5",
+            "pixel_sha256": "d80ebd05549d49957163fe30993f4d9c5a605ab2f522675a2c95ea9d0b886caa"
+          },
+          "proxy_runtime_seconds": 0.0185810000039055,
+          "metrics": {
+            "effective_rank_raw": 18.591234940080263,
+            "effective_rank_norm": 0.07746347891700109,
+            "participation_ratio_raw": 6.579367026983041,
+            "participation_ratio_norm": 0.027414029279096006,
+            "mean_abs_corr": 0.22504900805524514,
+            "activation_std": 0.4076546362074469,
+            "logit_std": 0.6527272689378605,
+            "entropy": 2.1240552919616036,
+            "near_zero_fraction": 8.138020833333333e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 8.877551020408163,
+            "reference_count_sd": 3.023767436940714,
+            "max_reference_count": 20,
+            "mean_jaccard_between_units": 0.01931197681243936
+          },
+          "er_per_width": 0.07746347891700109
+        },
+        {
+          "seed": 2,
+          "topology_sha256": "e56e56a57cbcee1e850db9fc271fec020a568a4988971a337e842a1e82802df6",
+          "initialization_sha256": "ba31b175ec5aa280e1f8ad805510f18ec20068633ae75be228c56be26591dfce",
+          "sample_fingerprint": {
+            "seed": 2,
+            "train_indices_sha256": "6eba57d8b9164deac6c2901a70c1b84fcbdeb4153cd8d8bfe6aa9c93d8e91ddb",
+            "pixel_sha256": "8be0c1f3344805f7ad36f6270935cd019f1ab1c74b59f601c882e072d43282cb"
+          },
+          "proxy_runtime_seconds": 0.018062800001644064,
+          "metrics": {
+            "effective_rank_raw": 15.558086367890056,
+            "effective_rank_norm": 0.06482535986620856,
+            "participation_ratio_raw": 5.299678586709351,
+            "participation_ratio_norm": 0.022081994111288965,
+            "mean_abs_corr": 0.23471908049964627,
+            "activation_std": 0.43555197038639526,
+            "logit_std": 0.551924988992495,
+            "entropy": 2.148665705429775,
+            "near_zero_fraction": 0.00013020833333333333,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 8.877551020408163,
+            "reference_count_sd": 2.8185439363022695,
+            "max_reference_count": 21,
+            "mean_jaccard_between_units": 0.019013716751739573
+          },
+          "er_per_width": 0.06482535986620856
+        },
+        {
+          "seed": 3,
+          "topology_sha256": "65545247a37a7a950fda9b01d414dea73e42316c4fbec6f20af86f8151c48b0b",
+          "initialization_sha256": "6f36fa62a5cb922429630a6f522ae438b68b05ba54909a55bd720f161789b98b",
+          "sample_fingerprint": {
+            "seed": 3,
+            "train_indices_sha256": "fb8fc4e41fb641f7f285a3ff492af5eab584df728abcd4e51b866c635ad05442",
+            "pixel_sha256": "c1e66cc3f88769334b231c99b8c7071e409af302d0eb94bb0b6d178095e71dab"
+          },
+          "proxy_runtime_seconds": 0.018166800000471994,
+          "metrics": {
+            "effective_rank_raw": 19.552379828024545,
+            "effective_rank_norm": 0.0814682492834356,
+            "participation_ratio_raw": 7.222034342583162,
+            "participation_ratio_norm": 0.030091809760763175,
+            "mean_abs_corr": 0.1993624033883607,
+            "activation_std": 0.41248586114623964,
+            "logit_std": 0.5816100878562143,
+            "entropy": 2.1541357269314734,
+            "near_zero_fraction": 9.765625e-05,
+            "unique_input_features": 784,
+            "coverage_ratio": 1.0,
+            "mean_references_per_feature": 8.877551020408163,
+            "reference_count_sd": 2.9001770041775305,
+            "max_reference_count": 19,
+            "mean_jaccard_between_units": 0.019129412375070303
+          },
+          "er_per_width": 0.0814682492834356
+        }
+      ],
+      "proxy_summary": {
+        "effective_rank_raw": {
+          "mean": 17.90056704533162,
+          "sample_sd": 2.084792955438424
+        },
+        "effective_rank_norm": {
+          "mean": 0.07458569602221508,
+          "sample_sd": 0.008686637314326767
+        },
+        "participation_ratio_raw": {
+          "mean": 6.367026652091852,
+          "sample_sd": 0.9786108721764695
+        },
+        "participation_ratio_norm": {
+          "mean": 0.026529277717049382,
+          "sample_sd": 0.00407754530073529
+        },
+        "mean_abs_corr": {
+          "mean": 0.21971016398108403,
+          "sample_sd": 0.01827296079249556
+        },
+        "activation_std": {
+          "mean": 0.4185641559133606,
+          "sample_sd": 0.014908875344236652
+        },
+        "logit_std": {
+          "mean": 0.5954207819288566,
+          "sample_sd": 0.051800833618987706
+        },
+        "entropy": {
+          "mean": 2.142285574774284,
+          "sample_sd": 0.016023036303397447
+        },
+        "near_zero_fraction": {
+          "mean": 0.00010308159722222222,
+          "sample_sd": 2.4862064317251737e-05
+        },
+        "unique_input_features": {
+          "mean": 784,
+          "sample_sd": 0.0
+        },
+        "coverage_ratio": {
+          "mean": 1.0,
+          "sample_sd": 0.0
+        },
+        "mean_references_per_feature": {
+          "mean": 8.877551020408163,
+          "sample_sd": 0.0
+        },
+        "reference_count_sd": {
+          "mean": 2.9141627924735047,
+          "sample_sd": 0.10332411630045174
+        },
+        "max_reference_count": {
+          "mean": 20,
+          "sample_sd": 1.0
+        },
+        "mean_jaccard_between_units": {
+          "mean": 0.019151701979749747,
+          "sample_sd": 0.00015037415273156
+        }
+      },
+      "er_per_width": {
+        "mean": 0.07458569602221508,
+        "sample_sd": 0.008686637314326767
+      }
+    }
+  ],
+  "environment": {
+    "cpu": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "os": "Windows-11-10.0.26200-SP0",
+    "torch": "2.14.1+cpu",
+    "torch_num_threads": 1
+  }
+}

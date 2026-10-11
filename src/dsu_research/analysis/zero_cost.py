@@ -95,7 +95,7 @@ def state_fingerprint(model: torch.nn.Module) -> str:
 def input_presence(model: torch.nn.Module, input_dim: int = 784) -> torch.Tensor | None:
     """Boolean [soma, input] map; dense models return None."""
     if isinstance(model, (PointSparse, NeutralCompartments)):
-        indices = model.G64.reshape(128, -1)
+        indices = model.G64.reshape(model.G64.shape[0], -1)
     elif isinstance(model, (CompartmentalDSU, DSUSv0)):
         indices = model.G.reshape(128, -1)
     elif isinstance(model, (FixedDANN, DendriticANNRandom)):

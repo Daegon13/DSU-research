@@ -15,6 +15,8 @@ data/*
 !data/historical_experiments.json
 !data/zero_cost_proxy_results.json
 !data/zero_cost_validation.json
+!data/s3_t10_preregistered_screen.json
+!data/s3_t10_pilot_results.json
 checkpoints/
 *.pt
 *.pth

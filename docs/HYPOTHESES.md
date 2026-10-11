@@ -253,3 +253,19 @@ Con la misma conectividad sparse y el mismo presupuesto entrenable, insertar una
 
 ### Resultado S3-T07 (2026-10-10)
 **INCONCLUSIVE.** `1×64 − PointSparse` = −.273 pp accuracy y +.003573 NLL; ambas direcciones desfavorecen la etapa extra, pero no alcanzan el umbral contrario prefijado. [Detalle](EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md).
+
+---
+
+## H-WIDTH-FANIN — distribución del presupuesto PointSparse
+
+**Status preregistro S3-T10:** UNTESTED.
+
+Con un presupuesto PointSparse fijo de 9610 parámetros, distribuirlo entre ancho H y fan-in K afecta materialmente la capacidad. El piloto de 3 épocas y 1 seed sólo permitirá PRELIMINARY_SIGNAL, NO_PRELIMINARY_SIGNAL o INCONCLUSIVE. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
+
+---
+
+## H-ZEROCOST-ER — ranking prospectivo por effective rank
+
+**Status preregistro S3-T10:** UNTESTED.
+
+ER raw puede priorizar prospectivamente arquitecturas PointSparse de presupuesto fijo mejor que ordenar sólo por ancho H. Se evaluará frente al target de validation en época 3 y al baseline width con los criterios preregistrados. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
