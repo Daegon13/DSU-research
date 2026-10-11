@@ -7,12 +7,14 @@ Sprint 3 — Topology and Causal Ablations
 S3
 
 ## CURRENT TASK
-S3-T10 completada con PASS técnico y resultado prospectivo negativo para ER raw. Sprint 3 sigue abierto. S3-T11 no se inició; DSU-T tampoco.
+S3-T11 completada con PASS técnico. Sprint 3 sigue abierto hasta S3-REVIEW formal, recomendado como siguiente tarea. No se inició Línea B ni DSU-T.
 
 ## LAST COMPLETED TASK
-S3-T10: PASS técnico. Nueva cohorte PointSparse iso-presupuesto de ocho H/K con 9610 parámetros, proxy forward-only en seeds 1–3 y ranking ER raw sellados en commit `5516417` antes de entrenar. Piloto train/validation de 3 épocas y seed 1 por brazo; test cerrado. ER raw falló prospectivamente frente a accuracy de época 3 y no superó ancho H. H-ZEROCOST-ER = FAILED dentro del piloto; H-WIDTH-FANIN = PRELIMINARY_SIGNAL. Shortlist futura: 80×109, 160×49 y anchor 128×64. No se ejecutaron 25 épocas ni N=3 completo. S3-T09 permanece como señal retrospectiva acotada; H-014/015/016 no cambian.
+S3-T11: PASS técnico. Shortlist T10 `80×109`, `160×49`, `128×64` sellada antes de entrenar; auditoría objetiva reutilizó el anchor N=3 de S3-T07. Se completaron seis corridas nuevas de 25 épocas, con test sólo tras época 25. Las medias de validation final de los tres brazos son near-ties (<.20 pp), mientras test accuracy favorece al anchor. H-WIDTH-FANIN = INCONCLUSIVE para calidad final dentro del rango ensayado. EARLY-PILOT-3E = WEAK al combinar tres familias históricas sin mezclarlas. Recomendación: S3-REVIEW separado, sin iniciar Línea B.
 
 ## LAST RESULT
+R-016: PointSparse 80×109/160×49/128×64 obtuvo validation accuracy época 25 `88.178 ± .331%` / `88.267 ± .109%` / `88.172 ± .416%`; test accuracy `86.680 ± .105%` / `86.803 ± .115%` / `86.913 ± .125%`. 160×49 tuvo menor NLL test `.366624 ± .002695`; el anchor mayor test accuracy. El piloto T10 de época 3 no preservó ranking final (Spearman −.50 en la shortlist); early-pilot histórico es WEAK. T10+T11 ejecutaron 174 epoch-equivalents incrementales frente a 600 ingenuos, reutilizando 75 épocas históricas del anchor. `docs/EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md`, `data/s3_t11_confirmation_results.json`.
+
 R-015: mejor validation accuracy de época 3: PointSparse 80×109, 84.817%; mejor validation loss: 240×29, .432157. ER raw vs accuracy: Spearman −.190, Kendall −.214, 5/15 pares no near-tie; width H: −.048, .000, 6/15. Los ocho pilotos sumaron 24 epoch-equivalents, frente a 600 de búsqueda ingenua completa. `docs/EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md` y `data/s3_t10_pilot_results.json`.
 
 R-013: PointSparse obtuvo test accuracy 86.913 ± .125% y NLL .372309 ± .001408. `1×64 − PointSparse` dio −.273 pp/+ .003573 NLL; `4×16 − 1×64` dio −.397 pp/+ .011383 NLL, con loss adversa en 3/3 seeds. La tendencia de menor NLL con B de S3-T05 no reapareció. Detalle en `docs/EXPERIMENT_008_SPARSE_VS_COMPARTMENT_CAUSAL.md`.
@@ -39,7 +41,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
 H-014 (H-SPARSE) = SUPPORTED frente al MLP histórico dentro del alcance acotado: +1.030 pp, 0.752 del gap histórico retenido. H-015 (H-COMPARTMENT-PURE) = CONTRARY por deterioro consistente de NLL de 4×16 respecto de 1×64. H-016 (H-DENDRITIC-STAGE) = INCONCLUSIVE; 1×64 pierde frente a PointSparse sin alcanzar umbral contrario.
-H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el resultado retrospectivo S3-T09. H-WIDTH-FANIN = PRELIMINARY_SIGNAL sólo en 3 épocas/1 seed; no hay conclusión de capacidad final.
+H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el resultado retrospectivo S3-T09. H-WIDTH-FANIN = INCONCLUSIVE para calidad final de la shortlist T11; la señal de T10 quedó preliminar. EARLY-PILOT-3E = WEAK como predictor entre familias históricas, con fracaso para ordenar la shortlist prospectiva cercana.
 
 ## OPEN QUESTIONS
 - ¿Cuánto difiere la reproducción PyTorch de la semántica Keras de inicialización, máscara y shuffle?
@@ -66,13 +68,14 @@ H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el
 - S3-T07 N=3 muestra que PointSparse retiene gran parte del gap de accuracy histórico, pero MLP/DSU-S históricos no están completamente pareados con él. La familia neutral aumenta activaciones y operaciones fijas con B; NLL y top-1 empeoran al aumentar B, mientras ECE mejora. No se infiere causa única, menor FLOPs totales ni ventaja de runtime.
 - S3-T09 usa targets de test históricos sólo después de sellar proxies, para auditoría retrospectiva. S3-T05 tiene varios near-ties; MLP y PointSparse pertenecen a protocolos distintos. La señal de effective rank no es prueba prospectiva ni causal y no justifica optimizar un score con las mismas filas.
 - S3-T10 muestra correlación negativa de ER raw con validation accuracy temprana; 13/28 pares son near-ties. El piloto de una seed puede reflejar velocidad de aprendizaje, no calidad final; MAC y bytes de topología varían ligeramente entre H/K pese a parámetros iguales. No extrapolar a test, N=3 completo, latencia, memoria runtime ni energía.
+- S3-T11 reutiliza resultados S3-T07 tras auditar equivalencia, pero T07 no congeló número de hilos CPU. Las curvas T10/T07 del anchor coinciden en accuracy y orden de minibatches; las pérdidas difieren levemente por aritmética. La shortlist sólo tiene tres brazos y todas sus medias de validation final son near-ties. No declarar predictor validado por correlaciones de tres puntos, ni ventaja global desde NLL, test accuracy o coste analítico aislados. El cálculo de ahorro incremental depende del trabajo histórico de 75 épocas del anchor.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-S3-T11 — Confirmar la shortlist seleccionada por piloto (80×109, 160×49, anchor 128×64) y diseñar mejores proxies tras el fallo prospectivo de ER raw. Congelar el protocolo antes de entrenar; no reabrir test durante selección. Sprint 3 sigue abierto; no iniciar Línea B automáticamente.
+S3-REVIEW — cerrar formalmente Topology and Causal Ablations, auditar evidencias y límites de S3-T01–T11, y decidir el inicio separado de Línea A y Línea B. No iniciar Línea B automáticamente.
 
 ## LAST UPDATE
 2026-10-11

@@ -258,11 +258,15 @@ Con la misma conectividad sparse y el mismo presupuesto entrenable, insertar una
 
 ## H-WIDTH-FANIN — distribución del presupuesto PointSparse
 
-**Status S3-T10:** PRELIMINARY_SIGNAL; era UNTESTED en el preregistro.
+**Status final tras S3-T11:** INCONCLUSIVE para calidad final dentro de la shortlist; T10 había dado PRELIMINARY_SIGNAL temprano.
 
 Con un presupuesto PointSparse fijo de 9610 parámetros, distribuirlo entre ancho H y fan-in K afecta materialmente la capacidad. El piloto de 3 épocas y 1 seed sólo permitirá PRELIMINARY_SIGNAL, NO_PRELIMINARY_SIGNAL o INCONCLUSIVE. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
 
 El rango de validation accuracy de época 3 fue 0.583 pp; 80×109 tuvo el máximo de accuracy y 240×29 el mínimo loss. La curva no fue monótona y 13/28 pares fueron near-ties. La señal temprana no establece un óptimo ni capacidad final.
+
+### Resultado S3-T11 (2026-10-11)
+
+`160×49` obtuvo la mayor validation accuracy media (88.267%) y menor test NLL (.366624), pero `128×64` obtuvo la mayor test accuracy media (86.913%); las tres medias de validation son near-ties bajo 0.20 pp. Ningún contraste candidato–anchor cumplió el criterio preregistrado de efecto material coherente entre validation y test. [Detalle](EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md).
 
 ---
 
@@ -273,3 +277,5 @@ El rango de validation accuracy de época 3 fue 0.583 pp; 80×109 tuvo el máxim
 ER raw puede priorizar prospectivamente arquitecturas PointSparse de presupuesto fijo mejor que ordenar sólo por ancho H. Se evaluará frente al target de validation en época 3 y al baseline width con los criterios preregistrados. [Protocolo](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md).
 
 ER raw obtuvo Spearman −.190 y 5/15 pares no near-tie correctos contra accuracy; width H obtuvo −.048 y 6/15. No agregó información al baseline trivial en esta cohorte. El resultado retrospectivo acotado de S3-T09 queda registrado separadamente.
+
+S3-T11 no cambia esta clasificación de la cohorte T10 completa. Dentro de la shortlist de sólo tres brazos, ER raw correlacionó positivamente con las medias finales, pero validation tuvo cero pares no near-tie y test sólo uno; el subconjunto fue seleccionado por la regla T10. No interpretar esto como una validación general de ER.

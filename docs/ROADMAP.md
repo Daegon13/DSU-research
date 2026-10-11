@@ -103,7 +103,9 @@ Implementar la primera unidad propia.
 
 **S3-T09: PASS técnico (2026-10-10).** Primera tanda forward-only, 16 arquitecturas, tres seeds y validación retrospectiva por grupo. Effective rank raw es prometedor sólo en alcance acotado; pattern logdet falló. [Resultados](EXPERIMENT_009_ZERO_COST_FORWARD_PROXIES.md). Su señal motivó la validación prospectiva S3-T10. Sprint 3 continúa abierto.
 
-**S3-T10: PASS técnico (2026-10-11).** Preregistro prospectivo sellado antes de entrenar, ocho PointSparse iso-presupuesto y piloto de tres épocas/una seed sólo con train/validation. ER raw falló frente a accuracy temprana y no superó la heurística de ancho; shortlist futura 80×109, 160×49 y 128×64. [Resultados](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md). **S3-T11 siguiente:** confirmar esa shortlist y diseñar mejores proxies con protocolo congelado. No se ejecutó S3-T11 ni se abrió Línea B.
+**S3-T10: PASS técnico (2026-10-11).** Preregistro prospectivo sellado antes de entrenar, ocho PointSparse iso-presupuesto y piloto de tres épocas/una seed sólo con train/validation. ER raw falló frente a accuracy temprana y no superó la heurística de ancho; shortlist fijada: 80×109, 160×49 y 128×64. [Resultados](EXPERIMENT_010_PROSPECTIVE_ZERO_COST_SCREEN.md). Esta tarea no ejecutó S3-T11 ni abrió Línea B.
+
+**S3-T11: PASS técnico (2026-10-11).** Shortlist congelada, anchor S3-T07 reutilizado tras auditoría y seis corridas nuevas N=3/25 épocas. Las tres medias de validation final fueron near-ties; anchor ganó test accuracy media, `160×49` ganó validation y NLL. `EARLY-PILOT-3E = WEAK`, `H-WIDTH-FANIN = INCONCLUSIVE` para calidad final del rango probado. [Resultados](EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md). **S3-REVIEW recomendado** como cierre formal separado; no se inició Línea B.
 
 ---
 
