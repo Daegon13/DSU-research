@@ -1,18 +1,20 @@
 # PROJECT_STATE
 
 ## CURRENT PHASE
-Sprint 3 CLOSED. Track A: A1-DESIGN completada como diseño/preregistro estructural de topología PointSparse `128×64`; A1-E01 pendiente, sin entrenamiento. Track B/S4 no iniciados.
+Sprint 3 CLOSED. Track A: A1-E01 completada; topologías de grados controlados NEGLIGIBLE bajo el protocolo probado y Track A en BACKLOG / DEPRIORITIZED. PointSparse IID `128×64` sigue como baseline. Track B/S4 no iniciados.
 
 ## CURRENT SPRINT
 Ninguno activo; S3 = PASS / CLOSED.
 
 ## CURRENT TASK
-A1-DESIGN completada: PASS estructural. Diseño en `docs/A1_POINTSPARSE_TOPOLOGY_DESIGN.md`. No se ejecutó A1-E01, Línea B ni DSU-T.
+A1-E01 completada: PASS técnico. Informe en `docs/EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md`; no se inició Línea B ni S4.
 
 ## LAST COMPLETED TASK
-A1-DESIGN: PASS estructural; cuatro brazos A0 IID, A1 balanceado, A2 menor overlap y A3 mayor overlap definidos a H/K fijo. A1/A2/A3 mantienen vector exacto de grados, cobertura, presupuesto y modelo. H-A1-TOPOLOGY = UNTESTED. S3 permanece CLOSED; PointSparse `128×64` sigue como baseline experimental. A1-E01 requiere gate separado.
+A1-E01: PASS técnico; A0 reutilizado tras auditoría, nueve corridas nuevas N=3/25 épocas completas y pareadas. C1 A1−A0 = INCONCLUSIVE por accuracy casi igual y NLL menor; C2/C3/C4 entre grados idénticos = NEGLIGIBLE. H-A1-TOPOLOGY = NEGLIGIBLE en el alcance probado. Track A pasa a BACKLOG / DEPRIORITIZED; como máximo una tarea diagnóstica futura podría tratar la discordancia C1. Sprint 3 sigue CLOSED y PointSparse IID `128×64` continúa como baseline.
 
 ## LAST RESULT
+R-018: A1-E01: A0/A1/A2/A3 test accuracy `86.913 ± .125` / `86.940 ± .144` / `86.977 ± .047` / `86.873 ± .199` %, NLL `.372309 ± .001408` / `.364639 ± .002804` / `.368247 ± .001863` / `.365156 ± .004636`. C1 = INCONCLUSIVE; C2/C3/C4 = NEGLIGIBLE; ningún efecto material. Nueve corridas nuevas, 225 epoch-equivalents. `docs/EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md`, `data/a1_e01_results.json`.
+
 R-017: revisión de S3-T01–T11; gate S3-REVIEW PASS y Sprint 3 CLOSED. Los resultados causales y prospectivos mantienen sus estados previos. `docs/SPRINT_3_REVIEW.md`.
 
 R-016: PointSparse 80×109/160×49/128×64 obtuvo validation accuracy época 25 `88.178 ± .331%` / `88.267 ± .109%` / `88.172 ± .416%`; test accuracy `86.680 ± .105%` / `86.803 ± .115%` / `86.913 ± .125%`. 160×49 tuvo menor NLL test `.366624 ± .002695`; el anchor mayor test accuracy. El piloto T10 de época 3 no preservó ranking final (Spearman −.50 en la shortlist); early-pilot histórico es WEAK. T10+T11 ejecutaron 174 epoch-equivalents incrementales frente a 600 ingenuos, reutilizando 75 épocas históricas del anchor. `docs/EXPERIMENT_011_POINTSPARSE_SHORTLIST_CONFIRMATION.md`, `data/s3_t11_confirmation_results.json`.
@@ -42,7 +44,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
   - >= 1.25–1.5x de mejora de throughput o reducción equivalente de latencia.
 
 ## ACTIVE HYPOTHESIS
-La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. H-A1-TOPOLOGY = UNTESTED: A1-E01 examinaría organización de G a H/K fijo, sin resolver H-WIDTH-FANIN. No hay nuevo entrenamiento iniciado. Línea B permanece separada. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
+La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. H-A1-TOPOLOGY = NEGLIGIBLE: a H/K y grados fijos, las reorganizaciones A2/A3 no cambiaron materialmente la calidad bajo A1-E01. C1 balance IID→regular queda INCONCLUSIVE por NLL/accuracy discordantes. H-WIDTH-FANIN sigue INCONCLUSIVE; no se atribuye el resultado a width. Línea B permanece separada y no iniciada. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
 
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
@@ -76,13 +78,14 @@ H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el
 - S3-T09 usa targets de test históricos sólo después de sellar proxies, para auditoría retrospectiva. S3-T05 tiene varios near-ties; MLP y PointSparse pertenecen a protocolos distintos. La señal de effective rank no es prueba prospectiva ni causal y no justifica optimizar un score con las mismas filas.
 - S3-T10 muestra correlación negativa de ER raw con validation accuracy temprana; 13/28 pares son near-ties. El piloto de una seed puede reflejar velocidad de aprendizaje, no calidad final; MAC y bytes de topología varían ligeramente entre H/K pese a parámetros iguales. No extrapolar a test, N=3 completo, latencia, memoria runtime ni energía.
 - S3-T11 reutiliza resultados S3-T07 tras auditar equivalencia, pero T07 no congeló número de hilos CPU. Las curvas T10/T07 del anchor coinciden en accuracy y orden de minibatches; las pérdidas difieren levemente por aritmética. La shortlist sólo tiene tres brazos y todas sus medias de validation final son near-ties. No declarar predictor validado por correlaciones de tres puntos, ni ventaja global desde NLL, test accuracy o coste analítico aislados. El cálculo de ahorro incremental depende del trabajo histórico de 75 épocas del anchor.
+- A1-E01 reutiliza A0 S3-T07 con threads históricos no fijados frente a un thread en corridas nuevas. El contraste C1 mezcló régimen de grados y aristas concretas: +.027 pp de accuracy media pero −.007670 de NLL, por lo que es INCONCLUSIVE, no evidencia causal pura de balance. C2/C3/C4 NEGLIGIBLE sólo acotan las topologías y tres seeds probadas; no prueban equivalencia universal de G ni resuelven width. No se midieron RAM, latencia ni energía.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-**A1-E01 — ejecutar el contraste causal de topología PointSparse `128×64`** sólo después de revalidar los hashes, el contraste estructural y el reuse A0 según `docs/A1_POINTSPARSE_TOPOLOGY_DESIGN.md`. No iniciar Line B/S4 desde A1-DESIGN.
+**B1-DESIGN — preregistrar un contraste PointSparse-static vs PointSparse-stateful** en una tarea temporal con secuencias/reset, baseline temporal, presupuesto y criterio de coste definidos. Requiere gate separado; Line B/S4 aún no se inició. Track A queda en backlog, con máximo una tarea diagnóstica futura sólo si se necesita aclarar C1, sin búsqueda general de topologías.
 
 ## LAST UPDATE
 2026-10-11

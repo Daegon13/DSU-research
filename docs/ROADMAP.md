@@ -115,9 +115,13 @@ Implementar la primera unidad propia.
 
 Baseline: PointSparse `128×64`. **A1-DESIGN: PASS estructural (2026-10-11).** [Preregistro](A1_POINTSPARSE_TOPOLOGY_DESIGN.md) de cuatro brazos a H/K fijos: A0 IID, A1 balanceado, A2 menor overlap y A3 mayor overlap. A1/A2/A3 conservan vector de grados, coverage, parámetros y MAC. H-WIDTH-FANIN sigue INCONCLUSIVE; no se entrenó. Las preguntas anteriores A2/A3 de topología/solapamiento quedan concentradas en A1 y no son tareas adicionales comprometidas. A4 reorganización de `G`, A5 coste físico y A6 generalización siguen en backlog. Siguiente tarea exacta: **A1-E01**, sólo mediante gate propio y revalidación de A0. Esta línea puede preceder o coexistir con S4 sin renumerarlo. [Programa](RESEARCH_PROGRAM_A_B.md).
 
+**A1-E01: PASS técnico (2026-10-11).** [Informe](EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md): A0 reutilizado, nueve corridas nuevas N=3/25; C1 IID→balanceado INCONCLUSIVE y C2/C3/C4 con grados idénticos NEGLIGIBLE. No hubo efecto MATERIAL. H-A1-TOPOLOGY = NEGLIGIBLE dentro de las topologías probadas. Track A pasa a BACKLOG / DEPRIORITIZED; máximo una tarea diagnóstica futura si la discordancia NLL/accuracy de C1 requiere resolución. Baseline PointSparse IID `128×64` conservado. No iniciar búsqueda de G ni reabrir H/K.
+
 ## Research Track B — Dynamic Neuron (separado)
 
 Primer contraste futuro: PointSparse-static vs PointSparse-stateful en tarea temporal con coste de estado y reset definidos. Sólo tras señal positiva, estudiar PointSparse-stateful vs dendritic-stateful; luego heterogeneidad temporal, AIS/excitabilidad, compartimentos dinámicos y plasticidad según [programa A/B](RESEARCH_PROGRAM_A_B.md). Ninguna tarea B se inicia con S3-REVIEW.
+
+**Siguiente tarea recomendada: B1-DESIGN**, preregistro separado del contraste temporal estático/stateful. A1-E01 no ejecutó Line B ni abrió S4.
 
 ---
 

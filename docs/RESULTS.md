@@ -30,6 +30,7 @@ No borrar resultados por no coincidir con la hipótesis.
 | R-008 | Revisión Sprint 2 | Evidencia acumulada S2-T02–T06 | no aplica | señal acotada de capacidad por parámetro | no medida de forma controlada | sin ventaja de payload total frente al MLP 20→26 | S2-REVIEW PASS; Sprint 2 PASS; GO causal Sprint 3 |
 | R-009 | Fixed-dANN / DSU-S paired | Sintético determinista, CPU float32 | 468874 / 10634 almacenados; 10634 efectivos ambos | max forward 1.19e-7; max grad 3.73e-9; max delta tras 5 Adam 3.35e-8 | no medida | no medida; máscaras/índices no contabilizados como RAM | COMPLETE (S3-T02 PASS) |
 | R-010 | dANN-R vs Fixed-dANN | Fashion-MNIST, 54000/6000/10000, N=5 paired | 468874 almacenados y 10634 efectivos ambos | A/B test loss 0.358606 / 0.359673; accuracy 87.216 / 87.174%; Δ B−A +0.001066 loss, −0.042 pp | no interpretar duraciones como performance | RAM no medida | COMPLETE (S3-T03 PASS; H-009 NOT SUPPORTED / NEGLIGIBLE) |
+| R-018 | PointSparse A0/A1/A2/A3 topología | Fashion-MNIST, 54000/6000/10000, N=3 paired | 9610 cada brazo | C1 INCONCLUSIVE; C2/C3/C4 NEGLIGIBLE; sin efecto MATERIAL | no comparada como latencia | RAM no medida; G int64 igual tamaño | COMPLETE (A1-E01 PASS; Track A BACKLOG) |
 
 ---
 
@@ -253,3 +254,9 @@ Effective rank raw queda **PROMISING sólo para cribado retrospectivo acotado**;
 ## R-017 — Cierre documental de Sprint 3 (S3-REVIEW)
 
 **Gate S3-REVIEW: PASS. Sprint 3: CLOSED (2026-10-11).** No se generaron resultados de aprendizaje ni medidas nuevas. La revisión consolida H-009–H-016, H-ZEROCOST-ER, H-WIDTH-FANIN y EARLY-PILOT-3E sin cambiar sus clasificaciones; separa calidad, bytes, MAC, latencia, RAM y energía. PointSparse `128×64` queda como baseline experimental por defecto dentro del presupuesto probado; la expansión de compartimentos estáticos queda PAUSED / DEPRIORITIZED. Structural Cost Model sirve para contabilidad; ER raw falló en T10 y el piloto de tres épocas sólo sirve como filtro exploratorio. La siguiente decisión es A1 de diseño, sin ejecución automática de Línea A/B ni cambio de la reserva S4 = DSU-T. [Revisión, ledger, scorecard y claims](SPRINT_3_REVIEW.md).
+
+---
+
+## R-018 — PointSparse topología con grados controlados (A1-E01)
+
+**Gate técnico: PASS (2026-10-11).** A0 S3-T07 se reutilizó tras auditoría; A1/A2/A3 completaron nueve corridas nuevas de 25 épocas, 225 epoch-equivalents. Las 12 G coincidieron con el preregistro A1-DESIGN; las topologías balanceadas conservaron vector 352×11 + 432×10, cobertura 784/784 y diferencias de overlap verificadas. Accuracy test A0/A1/A2/A3: **86.913 ± .125 / 86.940 ± .144 / 86.977 ± .047 / 86.873 ± .199 %**; NLL: **.372309 ± .001408 / .364639 ± .002804 / .368247 ± .001863 / .365156 ± .004636**. Deltas pareados C1=A1−A0 **+.027 ± .247 pp / −.007670 ± .004208 NLL, INCONCLUSIVE**; C2=A2−A1 **+.037 ± .153 pp / +.003608 ± .004083, NEGLIGIBLE**; C3=A3−A1 **−.067 ± .091 pp / +.000517 ± .002134, NEGLIGIBLE**; C4=A3−A2 **−.103 ± .224 pp / −.003091 ± .005377, NEGLIGIBLE**. Ningún efecto MATERIAL. H-A1-TOPOLOGY = **NEGLIGIBLE** en el régimen de grados controlados probado; C1 no identifica un efecto puro de grado. Track A pasa a BACKLOG / DEPRIORITIZED, con máximo una tarea diagnóstica futura para la discordancia C1 si se justifica. Baseline IID `128×64` conservado. [Informe, tablas por seed y límites](EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md); [resultado JSON](../data/a1_e01_results.json).

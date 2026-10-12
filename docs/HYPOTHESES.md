@@ -16,9 +16,11 @@ Estados permitidos:
 
 ## H-A1-TOPOLOGY — organización del grafo sparse
 
-**Status:** UNTESTED.
+**Status:** NEGLIGIBLE dentro de A1-E01 para C2/C3/C4 con grados controlados; C1 = INCONCLUSIVE.
 
-Con H=128, K=64, 9610 parámetros, 9472 MAC principales, cobertura completa y vector de grados de input 352×11 + 432×10 controlados, la organización de overlap/topología de G cambia materialmente la calidad de PointSparse. Los contrastes A1→A2/A3 y A2→A3 son los que controlan todos esos factores. A0→A1 prueba el régimen IID frente a balanceado, con grados distintos. Criterios y límites en [A1-DESIGN](A1_POINTSPARSE_TOPOLOGY_DESIGN.md). No hay resultados de aprendizaje.
+Con H=128, K=64, 9610 parámetros, 9472 MAC principales, cobertura completa y vector de grados de input 352×11 + 432×10 controlados, la organización de overlap/topología de G cambia materialmente la calidad de PointSparse. Los contrastes A1→A2/A3 y A2→A3 son los que controlan todos esos factores. A0→A1 prueba el régimen IID frente a balanceado, con grados distintos. Criterios congelados en [A1-DESIGN](A1_POINTSPARSE_TOPOLOGY_DESIGN.md).
+
+**Resultado A1-E01 (2026-10-11):** C2 A2−A1 = +.037 ± .153 pp / +.003608 ± .004083 NLL; C3 A3−A1 = −.067 ± .091 pp / +.000517 ± .002134; C4 A3−A2 = −.103 ± .224 pp / −.003091 ± .005377. Todos son NEGLIGIBLE según los umbrales prefijados, aunque A2 redujo la cola y A3 la elevó claramente. C1 A1−A0 = +.027 ± .247 pp / −.007670 ± .004208 NLL: INCONCLUSIVE por discordancia accuracy/NLL; cambia régimen de grados y aristas. No se concluye que toda topología sea irrelevante ni que width sea la causa. [Informe](EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md).
 
 ---
 

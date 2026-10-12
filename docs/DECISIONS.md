@@ -266,3 +266,21 @@ S3-T11 dejó H-WIDTH-FANIN INCONCLUSIVE. A H/K fijos se puede estudiar cuánto c
 ### Consequence
 
 PointSparse IID `128×64` sigue siendo baseline. La siguiente tarea exacta es A1-E01 bajo gate propio, con validación de hashes y equivalencia histórica antes de reutilizar A0. Un efecto pequeño sólo acota las topologías ensayadas y no demuestra que width sea la causa.
+
+---
+
+## ADR-017 — Cerrar Track A como prioridad tras A1-E01
+
+**Status:** ACCEPTED (2026-10-11).
+
+### Decision
+
+Clasificar H-A1-TOPOLOGY como **NEGLIGIBLE** dentro de C2/C3/C4 con grados idénticos y Fashion-MNIST N=3/25 épocas. Clasificar C1 A0→A1 **INCONCLUSIVE** por accuracy casi igual y NLL menor para A1, sin atribución pura al grado de inputs. Ningún contraste cumple `MATERIAL`. Pasar Track A a **BACKLOG / DEPRIORITIZED**, mantener PointSparse IID `128×64` como baseline y no abrir una búsqueda general de G. Si alguna decisión futura exige resolver la discordancia C1, permitir como máximo una tarea diagnóstica específica, preregistrada por separado. La siguiente prioridad recomendada es B1-DESIGN; Line B/S4 no se inicia por esta decisión.
+
+### Reason
+
+A1-E01 regeneró exactamente las topologías congeladas y completó nueve corridas nuevas pareadas; A0 se reutilizó tras auditoría. C2=A2−A1, C3=A3−A1 y C4=A3−A2 mantuvieron vector de grados y presupuesto, alcanzaron los contrastes estructurales fijados y terminaron todos NEGLIGIBLE en accuracy/NLL. C1=A1−A0 obtuvo +.027 pp accuracy y −.007670 NLL de media, por lo que el criterio preregistrado lo deja INCONCLUSIVE. [Resultados](EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md).
+
+### Consequence
+
+Los datos sólo sostienen robustez relativa frente a las topologías ensayadas. No resuelven H-WIDTH-FANIN, no muestran que toda G sea equivalente y no justifican optimizar overlap para el baseline. Sprint 3 permanece CLOSED. El primer experimento de dinámica requerirá una tarea nueva con secuencias, reset, baseline y coste propios.
