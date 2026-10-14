@@ -19,6 +19,7 @@ data/*
 !data/s3_t10_pilot_results.json
 !data/s3_t11_preregistered_confirmation.json
 !data/s3_t11_confirmation_results.json
+!data/b1_e01_results.json
 checkpoints/
 *.pt
 *.pth

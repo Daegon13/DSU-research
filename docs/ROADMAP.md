@@ -123,6 +123,12 @@ Primer contraste futuro: PointSparse-static vs PointSparse-stateful en tarea tem
 
 **Siguiente tarea recomendada: B1-DESIGN**, preregistro separado del contraste temporal estático/stateful. A1-E01 no ejecutó Line B ni abrió S4.
 
+**B1-DESIGN / S4-T01: preregistro documental (2026-10-13).** [Diseño](B1_POINTSPARSE_TEMPORAL_DESIGN.md) de S0/S1 en delayed recall binario, con EMA fija, reset, presupuesto analítico y criterio adverso. H-B1-STATE = UNTESTED. No hubo entrenamiento ni benchmarks. B1-E01 requiere gate propio; DSU-T sigue reservado.
+
+**B1-E01: PASS técnico (2026-10-13).** [Informe](EXPERIMENT_B1_E01_STATEFUL_POINTSPARSE.md): 24 corridas, S0 50% frente a S1 100% en todos los delays/seeds EASY. H-B1-STATE = SUPPORTED dentro del endpoint Δ=16 congelado. Accuracy en techo no mide horizonte límite; B1-NOISE/B2 y DSU-T requieren gates propios.
+
+**B1-NOISE-DESIGN: preregistro documental (2026-10-13).** [Diseño](B1_NOISE_DESIGN.md) de distractores interiores IID con amplitud `.1` y arquitectura/λ fijos. H-B1-INTERFERENCE = UNTESTED. B1-E02 es la siguiente ejecución eventual, bajo gate nuevo; no se inició B2 ni DSU-T.
+
 ---
 
 ## Sprint 4 — DSU-T
