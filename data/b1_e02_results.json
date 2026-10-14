@@ -1,0 +1,370 @@
+{
+  "schema": "b1_e02_summary_v1",
+  "experiment_id": "B1-E02",
+  "hypothesis": "H-B1-INTERFERENCE",
+  "status": "SUPPORTED",
+  "primary_delay": 16,
+  "memory_curve": [
+    {
+      "delay": 4,
+      "theoretical_retention": 0.8408964152537147,
+      "seeds": [
+        {
+          "seed": 1,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932252049446106,
+          "stateful_nll": 0.0004091165550518781,
+          "delta_nll": -0.6928160883895588
+        },
+        {
+          "seed": 2,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6931481958389282,
+          "stateful_nll": 0.00040058506866917014,
+          "delta_nll": -0.692747610770259
+        },
+        {
+          "seed": 3,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932657956123353,
+          "stateful_nll": 0.0003517424838151783,
+          "delta_nll": -0.6929140531285201
+        }
+      ],
+      "static_accuracy_percent": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "stateful_accuracy_percent": {
+        "values": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "mean": 100.0,
+        "sample_sd": 0.0
+      },
+      "memory_advantage_pp": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "static_nll": {
+        "values": [
+          0.6932252049446106,
+          0.6931481958389282,
+          0.6932657956123353
+        ],
+        "mean": 0.6932130654652914,
+        "sample_sd": 5.973233542191662e-05
+      },
+      "stateful_nll": {
+        "values": [
+          0.0004091165550518781,
+          0.00040058506866917014,
+          0.0003517424838151783
+        ],
+        "mean": 0.00038714803584540886,
+        "sample_sd": 3.0957412697100596e-05
+      },
+      "delta_nll": {
+        "values": [
+          -0.6928160883895588,
+          -0.692747610770259,
+          -0.6929140531285201
+        ],
+        "mean": -0.692825917429446,
+        "sample_sd": 8.365537744042757e-05
+      }
+    },
+    {
+      "delay": 8,
+      "theoretical_retention": 0.7071067811865478,
+      "seeds": [
+        {
+          "seed": 1,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932252049446106,
+          "stateful_nll": 0.0007161963520571589,
+          "delta_nll": -0.6925090085925535
+        },
+        {
+          "seed": 2,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6931481958389282,
+          "stateful_nll": 0.0006786300257779658,
+          "delta_nll": -0.6924695658131502
+        },
+        {
+          "seed": 3,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932657956123353,
+          "stateful_nll": 0.0005278549031354487,
+          "delta_nll": -0.6927379407091998
+        }
+      ],
+      "static_accuracy_percent": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "stateful_accuracy_percent": {
+        "values": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "mean": 100.0,
+        "sample_sd": 0.0
+      },
+      "memory_advantage_pp": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "static_nll": {
+        "values": [
+          0.6932252049446106,
+          0.6931481958389282,
+          0.6932657956123353
+        ],
+        "mean": 0.6932130654652914,
+        "sample_sd": 5.973233542191662e-05
+      },
+      "stateful_nll": {
+        "values": [
+          0.0007161963520571589,
+          0.0006786300257779658,
+          0.0005278549031354487
+        ],
+        "mean": 0.0006408937603235244,
+        "sample_sd": 9.968021189442937e-05
+      },
+      "delta_nll": {
+        "values": [
+          -0.6925090085925535,
+          -0.6924695658131502,
+          -0.6927379407091998
+        ],
+        "mean": -0.6925721717049679,
+        "sample_sd": 0.0001449084375901113
+      }
+    },
+    {
+      "delay": 16,
+      "theoretical_retention": 0.5000000000000004,
+      "seeds": [
+        {
+          "seed": 1,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932252049446106,
+          "stateful_nll": 0.001687606928870082,
+          "delta_nll": -0.6915375980157406
+        },
+        {
+          "seed": 2,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6931481958389282,
+          "stateful_nll": 0.0012813398411497473,
+          "delta_nll": -0.6918668559977784
+        },
+        {
+          "seed": 3,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932657956123353,
+          "stateful_nll": 0.0009588996849954129,
+          "delta_nll": -0.6923068959273398
+        }
+      ],
+      "static_accuracy_percent": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "stateful_accuracy_percent": {
+        "values": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "mean": 100.0,
+        "sample_sd": 0.0
+      },
+      "memory_advantage_pp": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "static_nll": {
+        "values": [
+          0.6932252049446106,
+          0.6931481958389282,
+          0.6932657956123353
+        ],
+        "mean": 0.6932130654652914,
+        "sample_sd": 5.973233542191662e-05
+      },
+      "stateful_nll": {
+        "values": [
+          0.001687606928870082,
+          0.0012813398411497473,
+          0.0009588996849954129
+        ],
+        "mean": 0.0013092821516717474,
+        "sample_sd": 0.0003651563245472205
+      },
+      "delta_nll": {
+        "values": [
+          -0.6915375980157406,
+          -0.6918668559977784,
+          -0.6923068959273398
+        ],
+        "mean": -0.6919037833136196,
+        "sample_sd": 0.0003859760862918667
+      }
+    },
+    {
+      "delay": 32,
+      "theoretical_retention": 0.25000000000000044,
+      "seeds": [
+        {
+          "seed": 1,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932252049446106,
+          "stateful_nll": 0.005602799042314291,
+          "delta_nll": -0.6876224059022963
+        },
+        {
+          "seed": 2,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6931481958389282,
+          "stateful_nll": 0.005205647971481085,
+          "delta_nll": -0.6879425478674471
+        },
+        {
+          "seed": 3,
+          "static_accuracy": 0.5,
+          "stateful_accuracy": 1.0,
+          "memory_advantage_pp": 50.0,
+          "static_nll": 0.6932657956123353,
+          "stateful_nll": 0.003540671657770872,
+          "delta_nll": -0.6897251239545644
+        }
+      ],
+      "static_accuracy_percent": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "stateful_accuracy_percent": {
+        "values": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "mean": 100.0,
+        "sample_sd": 0.0
+      },
+      "memory_advantage_pp": {
+        "values": [
+          50.0,
+          50.0,
+          50.0
+        ],
+        "mean": 50.0,
+        "sample_sd": 0.0
+      },
+      "static_nll": {
+        "values": [
+          0.6932252049446106,
+          0.6931481958389282,
+          0.6932657956123353
+        ],
+        "mean": 0.6932130654652914,
+        "sample_sd": 5.973233542191662e-05
+      },
+      "stateful_nll": {
+        "values": [
+          0.005602799042314291,
+          0.005205647971481085,
+          0.003540671657770872
+        ],
+        "mean": 0.004783039557188749,
+        "sample_sd": 0.0010940935706757362
+      },
+      "delta_nll": {
+        "values": [
+          -0.6876224059022963,
+          -0.6879425478674471,
+          -0.6897251239545644
+        ],
+        "mean": -0.6884300259081026,
+        "sample_sd": 0.0011329527492020836
+      }
+    }
+  ],
+  "oracle_triggered": false,
+  "oracle_accuracy_percent_mean": null,
+  "total_primary_training_seconds": 1674.0753786000132,
+  "interpretation_scope": "delayed_recall_noise_v1 only; no LSTM/GRU/energy/runtime comparison",
+  "frozen_protocol_sha256": "3504f0fb9fa1f7a7d4f803697c5d065e0dd169b91761f9ff57e5246951a1539a",
+  "preregistered_design_sha256": "7b30db63056498e1c10d66bd84f6d639152cc21bd56363f8fce8a2e73c3c4191",
+  "historical_pairing_audit": {
+    "historical_pairs_checked": 24,
+    "matching_protocol_pairs": 24,
+    "different_dataset_fingerprint_pairs": 24,
+    "easy_result": "data/b1_e01_results.json",
+    "noise_result": "runs/b1_e02/summary.json"
+  }
+}

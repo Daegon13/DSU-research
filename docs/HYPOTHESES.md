@@ -16,9 +16,9 @@ Estados permitidos:
 
 ## H-B1-INTERFERENCE — estado EMA frente a distractores
 
-**Status:** UNTESTED. **Preregistro:** [B1-NOISE-DESIGN](B1_NOISE_DESIGN.md) (2026-10-13).
+**Status:** SUPPORTED sólo en `delayed_recall_noise_v1` con amplitud `.1`, B1-E02 (2026-10-13). **Preregistro:** [B1-NOISE-DESIGN](B1_NOISE_DESIGN.md). **Resultado:** [B1-E02](EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md).
 
-Con la unidad, λ y presupuesto de B1-E01, PointSparse-T v0 conserva ventaja sobre PointSparse estática cuando cada paso intermedio contiene ruido independiente del target de amplitud fija `.1`, incluso en canales de señal. El futuro B1-E02 tendrá endpoint Δ=16 y gates de fuga, reset y gradiente; no hay resultados de NOISE ni se ha ejecutado B1-E02.
+Con la unidad, λ y presupuesto de B1-E01, PointSparse-T v0 conservó ventaja sobre PointSparse estática cuando cada paso intermedio contenía ruido IID independiente del target de amplitud fija `.1`, incluso en canales de señal. En el endpoint preregistrado Δ=16, S0 obtuvo 50.00 ± 0.00%, S1 100.00 ± 0.00%, ventaja pareada +50.00 ± 0.00 pp en 3/3 seeds y ΔNLL −.691904 ± .000386. Cumple literalmente el criterio SUPPORTED. La accuracy de S1 quedó en techo en los cuatro delays; NLL aumentó frente a EASY. Este resultado no establece límite de memoria, tolerancia a ruido más fuerte o utilidad general del mecanismo.
 
 ---
 

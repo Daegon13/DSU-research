@@ -338,3 +338,21 @@ S1 tuvo accuracy en techo bajo delay cero de EASY. Una única condición de inte
 ### Consequence
 
 No se infiere resistencia a ruido hasta B1-E02. El diseño no abre B2, DSU-T, búsqueda de amplitud ni entrenamientos automáticos. Un resultado en techo con `.1` sólo acotaría esa amplitud.
+
+---
+
+## ADR-021 — Cierre acotado de B1-E02
+
+**Status:** ACCEPTED (2026-10-13).
+
+### Decision
+
+Clasificar H-B1-INTERFERENCE como **SUPPORTED** sólo para `delayed_recall_noise_v1` con ruido interior IID `Uniform(−.1,.1)` y el protocolo de [B1-NOISE-DESIGN](B1_NOISE_DESIGN.md). Mantener el endpoint Δ=16 y la clasificación fijada antes del test. Recomendar como única tarea siguiente **B2-DESIGN** documental: contraste preregistrado de una escala temporal fija frente a escalas heterogéneas fijas en una tarea que pueda revelar el tradeoff corto/largo. No iniciar B2, DSU-T ni modificar λ en B1-E02. [Informe](EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md).
+
+### Reason
+
+Las 24 corridas pareadas completaron 20 épocas; en Δ=16, S0 50%, S1 100%, ventaja +50 pp en 3/3 seeds y ΔNLL media −.691904. Los gates de fuga, estado, gradiente, reset y pareo pasaron. S1 quedó en techo en los cuatro delays, aunque su NLL aumentó frente a EASY en las 12 parejas. No se observó límite de memoria ni evidencia de que tiempos heterogéneos mejoren este benchmark.
+
+### Consequence
+
+La EMA fija conservó señal útil bajo esta única condición IID. No se extrapola a ruido más fuerte o estructurado, LSTM/GRU, tareas naturales, eficiencia de RAM/latencia/energía o beneficio dendrítico. B2-DESIGN requiere hipótesis, control de coste y gate propios; el resultado positivo de B1-E02 no autoriza implementación automática.

@@ -31,6 +31,8 @@ No borrar resultados por no coincidir con la hipótesis.
 | R-009 | Fixed-dANN / DSU-S paired | Sintético determinista, CPU float32 | 468874 / 10634 almacenados; 10634 efectivos ambos | max forward 1.19e-7; max grad 3.73e-9; max delta tras 5 Adam 3.35e-8 | no medida | no medida; máscaras/índices no contabilizados como RAM | COMPLETE (S3-T02 PASS) |
 | R-010 | dANN-R vs Fixed-dANN | Fashion-MNIST, 54000/6000/10000, N=5 paired | 468874 almacenados y 10634 efectivos ambos | A/B test loss 0.358606 / 0.359673; accuracy 87.216 / 87.174%; Δ B−A +0.001066 loss, −0.042 pp | no interpretar duraciones como performance | RAM no medida | COMPLETE (S3-T03 PASS; H-009 NOT SUPPORTED / NEGLIGIBLE) |
 | R-018 | PointSparse A0/A1/A2/A3 topología | Fashion-MNIST, 54000/6000/10000, N=3 paired | 9610 cada brazo | C1 INCONCLUSIVE; C2/C3/C4 NEGLIGIBLE; sin efecto MATERIAL | no comparada como latencia | RAM no medida; G int64 igual tamaño | COMPLETE (A1-E01 PASS; Track A BACKLOG) |
+| R-019 | PointSparse S0/S1, delay limpio EASY | Delayed recall EASY, 50000/10000/10000, 4 delays × 3 seeds | 706 cada brazo | Δ=16: S0 50%, S1 100%, ventaja +50.00 ± 0.00 pp | no medida | 6920 bytes payload/modelo; S1 +256 bytes estado/muestra | COMPLETE (B1-E01 PASS; H-B1-STATE SUPPORTED sólo en EASY) |
+| R-020 | PointSparse S0/S1, delay con NOISE `.1` | Delayed recall NOISE, 50000/10000/10000, 4 delays × 3 seeds | 706 cada brazo | Δ=16: S0 50%, S1 100%, ventaja +50.00 ± 0.00 pp; ΔNLL −.691904 ± .000386 | no medida | 6920 bytes payload/modelo; S1 +256 bytes estado/muestra | COMPLETE (B1-E02 PASS; H-B1-INTERFERENCE SUPPORTED sólo en NOISE `.1`) |
 
 ---
 
@@ -260,3 +262,15 @@ Effective rank raw queda **PROMISING sólo para cribado retrospectivo acotado**;
 ## R-018 — PointSparse topología con grados controlados (A1-E01)
 
 **Gate técnico: PASS (2026-10-11).** A0 S3-T07 se reutilizó tras auditoría; A1/A2/A3 completaron nueve corridas nuevas de 25 épocas, 225 epoch-equivalents. Las 12 G coincidieron con el preregistro A1-DESIGN; las topologías balanceadas conservaron vector 352×11 + 432×10, cobertura 784/784 y diferencias de overlap verificadas. Accuracy test A0/A1/A2/A3: **86.913 ± .125 / 86.940 ± .144 / 86.977 ± .047 / 86.873 ± .199 %**; NLL: **.372309 ± .001408 / .364639 ± .002804 / .368247 ± .001863 / .365156 ± .004636**. Deltas pareados C1=A1−A0 **+.027 ± .247 pp / −.007670 ± .004208 NLL, INCONCLUSIVE**; C2=A2−A1 **+.037 ± .153 pp / +.003608 ± .004083, NEGLIGIBLE**; C3=A3−A1 **−.067 ± .091 pp / +.000517 ± .002134, NEGLIGIBLE**; C4=A3−A2 **−.103 ± .224 pp / −.003091 ± .005377, NEGLIGIBLE**. Ningún efecto MATERIAL. H-A1-TOPOLOGY = **NEGLIGIBLE** en el régimen de grados controlados probado; C1 no identifica un efecto puro de grado. Track A pasa a BACKLOG / DEPRIORITIZED, con máximo una tarea diagnóstica futura para la discordancia C1 si se justifica. Baseline IID `128×64` conservado. [Informe, tablas por seed y límites](EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md); [resultado JSON](../data/a1_e01_results.json).
+
+---
+
+## R-019 — Primer contraste temporal PointSparse EASY (B1-E01)
+
+**Gate técnico: PASS (2026-10-13); H-B1-STATE = SUPPORTED sólo en EASY.** S0 obtuvo 50% y S1 100% de test accuracy en las 12 parejas de 3 seeds × 4 delays, con ventaja +50.00 ± 0.00 pp en Δ=16 y ΔNLL −.692323 ± .000190. Las 24 corridas llegaron a época 20; el oracle no se activó. La accuracy en techo no identifica horizonte límite ni robustez ante distractores. [Informe](EXPERIMENT_B1_E01_STATEFUL_POINTSPARSE.md); [JSON](../data/b1_e01_results.json).
+
+---
+
+## R-020 — Interferencia temporal PointSparse NOISE (B1-E02)
+
+**Gate técnico: PASS (2026-10-13); H-B1-INTERFERENCE = SUPPORTED sólo para ruido IID `.1`.** Las 24 corridas pareadas de 20 épocas terminaron; S0 obtuvo 50% y S1 100% de test accuracy en cada delay y seed. En el endpoint Δ=16, ventaja +50.00 ± 0.00 pp y ΔNLL −.691904 ± .000386. NLL S1 por delay: `.000387/.000641/.001309/.004783`, más alta (peor) que EASY en las 12 parejas. La accuracy en techo sigue sin mostrar límite; el oracle no se activó. Auditado pareo histórico 24/24 y resume 24/24. Tiempo acumulado train+validation 1674.08 s, no latencia. [Informe, tabla completa y límites](EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md); [JSON](../data/b1_e02_results.json).

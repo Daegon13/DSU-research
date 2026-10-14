@@ -129,6 +129,8 @@ Primer contraste futuro: PointSparse-static vs PointSparse-stateful en tarea tem
 
 **B1-NOISE-DESIGN: preregistro documental (2026-10-13).** [Diseño](B1_NOISE_DESIGN.md) de distractores interiores IID con amplitud `.1` y arquitectura/λ fijos. H-B1-INTERFERENCE = UNTESTED. B1-E02 es la siguiente ejecución eventual, bajo gate nuevo; no se inició B2 ni DSU-T.
 
+**B1-E02: PASS técnico (2026-10-13).** [Informe](EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md): 24 corridas NOISE `.1`, S0 50% y S1 100% en cuatro delays y tres seeds. H-B1-INTERFERENCE = SUPPORTED sólo bajo esta condición; S1 sigue en techo, aunque su NLL empeora frente a EASY. Siguiente tarea recomendada: **B2-DESIGN**, sólo preregistro de escala temporal fija frente a escalas heterogéneas fijas; B2 y DSU-T no iniciados.
+
 ---
 
 ## Sprint 4 — DSU-T

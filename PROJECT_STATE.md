@@ -1,18 +1,20 @@
 # PROJECT_STATE
 
 ## CURRENT PHASE
-Sprint 3 CLOSED. Track A permanece BACKLOG / DEPRIORITIZED. PointSparse IID `128×64` sigue como baseline histórico. Track B: B1-E01 completado, H-B1-STATE SUPPORTED sólo en delayed recall EASY; B1-NOISE-DESIGN preregistrado sin entrenamiento, H-B1-INTERFERENCE UNTESTED. B2 y DSU-T no iniciados.
+Sprint 3 CLOSED. Track A permanece BACKLOG / DEPRIORITIZED. PointSparse IID `128×64` sigue como baseline histórico. Track B: B1-E01 y B1-E02 completados; H-B1-STATE SUPPORTED sólo en EASY y H-B1-INTERFERENCE SUPPORTED sólo en NOISE `.1`. B2 y DSU-T no iniciados.
 
 ## CURRENT SPRINT
-Ningún sprint experimental activo; S3 = PASS / CLOSED. B1-E01 cerró el primer contraste acotado de Line B / S4; B1-NOISE-DESIGN es documental.
+Ningún sprint experimental activo; S3 = PASS / CLOSED. B1-E02 cerró el contraste preregistrado de interferencia de Line B. B2-DESIGN es la siguiente tarea recomendada, aún no iniciada.
 
 ## CURRENT TASK
-B1-NOISE-DESIGN completado: `docs/B1_NOISE_DESIGN.md`. H-B1-INTERFERENCE = UNTESTED; B1-E02 no iniciado.
+B1-E02 completado: PASS técnico y H-B1-INTERFERENCE = SUPPORTED en `delayed_recall_noise_v1` bajo amplitud `.1`. Informe en `docs/EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md`.
 
 ## LAST COMPLETED TASK
-B1-NOISE-DESIGN: preregistro de una condición de ruido interior IID `.1`, sin entrenamiento. B1-E01 sigue como último experimento: 24/24 corridas completas, S0 50% y S1 100% en los cuatro delays y tres seeds, H-B1-STATE SUPPORTED sólo en EASY. Sprint 3 sigue CLOSED; Track A continúa despriorizado.
+B1-E02: 24/24 corridas pareadas de 20 épocas bajo ruido interior IID `.1`; S0 50% y S1 100% en las tres seeds y cuatro delays. En Δ=16, +50.00 ± 0.00 pp y ΔNLL −.691904 ± .000386; criterio preregistrado SUPPORTED. La accuracy de S1 sigue en techo, con NLL peor que EASY. Oracle no activado. Sprint 3 sigue CLOSED y Track A despriorizado.
 
 ## LAST RESULT
+R-020: B1-E02: H-B1-INTERFERENCE = SUPPORTED sólo para `delayed_recall_noise_v1` `.1`. En Δ=4/8/16/32, S0 50% y S1 100% de test accuracy en las tres seeds; NLL S1 `.000387/.000641/.001309/.004783` de media, siempre peor que EASY. 24 corridas, 480 corridas-época, 1674.08 s acumulados de train+validation, resume 24/24. `docs/EXPERIMENT_B1_E02_STATEFUL_INTERFERENCE.md`, `data/b1_e02_results.json`.
+
 R-019: B1-E01: en Δ=4/8/16/32, S0 50% y S1 100% de test accuracy para las tres seeds; retención analítica .8409/.7071/.5/.25. En Δ=16, ΔNLL S1−S0 = −.692323 ± .000190 y H-B1-STATE = SUPPORTED según preregistro. 24 corridas, 480 corridas-época y 1281.48 s acumulados de train+validation. `docs/EXPERIMENT_B1_E01_STATEFUL_POINTSPARSE.md`, `data/b1_e01_results.json`.
 
 R-018: A1-E01: A0/A1/A2/A3 test accuracy `86.913 ± .125` / `86.940 ± .144` / `86.977 ± .047` / `86.873 ± .199` %, NLL `.372309 ± .001408` / `.364639 ± .002804` / `.368247 ± .001863` / `.365156 ± .004636`. C1 = INCONCLUSIVE; C2/C3/C4 = NEGLIGIBLE; ningún efecto material. Nueve corridas nuevas, 225 epoch-equivalents. `docs/EXPERIMENT_A1_E01_POINTSPARSE_TOPOLOGY.md`, `data/a1_e01_results.json`.
@@ -46,7 +48,7 @@ Sprint 0: MLP/ReLU 784→128→10 sobre MNIST diagnóstico, sin cambios. Sprint 
   - >= 1.25–1.5x de mejora de throughput o reducción equivalente de latencia.
 
 ## ACTIVE HYPOTHESIS
-La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. H-A1-TOPOLOGY = NEGLIGIBLE: a H/K y grados fijos, las reorganizaciones A2/A3 no cambiaron materialmente la calidad bajo A1-E01. C1 balance IID→regular queda INCONCLUSIVE por NLL/accuracy discordantes. H-WIDTH-FANIN sigue INCONCLUSIVE; no se atribuye el resultado a width. H-B1-STATE = SUPPORTED únicamente para retención en delayed recall EASY; H-B1-INTERFERENCE = UNTESTED bajo el diseño NOISE. No hubo prueba de distractores ni comparación de eficiencia física. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
+La hipótesis de trabajo futura, aún no demostrada causalmente, es que el ancho sparse y la conectividad restringida explican parte de la eficiencia paramétrica observada. H-A1-TOPOLOGY = NEGLIGIBLE: a H/K y grados fijos, las reorganizaciones A2/A3 no cambiaron materialmente la calidad bajo A1-E01. C1 balance IID→regular queda INCONCLUSIVE por NLL/accuracy discordantes. H-WIDTH-FANIN sigue INCONCLUSIVE; no se atribuye el resultado a width. H-B1-STATE = SUPPORTED únicamente para EASY; H-B1-INTERFERENCE = SUPPORTED únicamente para NOISE `.1`. Ambas tareas quedaron en techo de accuracy; no se identificó límite de memoria ni eficiencia física. Los estados de S3 están consolidados en `docs/SPRINT_3_REVIEW.md`.
 
 H-001 = SUPPORTED para Fashion-MNIST N=3 contra dANN-R de igual anchura. H-008 = SUPPORTED sólo dentro de la familia MLP densa y protocolo S2-T05/T06; el menor full match entre candidatos evaluados usó 1.553× parámetros entrenables y DSU-S mantuvo ventaja descriptiva de test. H-002 sigue UNTESTED para utilidad de memoria/runtime y cómputo físico; H-006 mantiene abierta la latencia real.
 H-009 = NOT SUPPORTED / NEGLIGIBLE dentro de Fashion-MNIST N=5 y el protocolo dense-mask pareado. H-010 = SUPPORTED en el alcance estructural y funcional CPU float32 de S3-T02. H-011 (partición dendrítica) = NEGLIGIBLE en S3-T05 N=3. H-012 (storage B/C) = SUPPORTED; H-013 (runtime B/C) = MIXED / NOT SUPPORTED como ventaja general.
@@ -82,13 +84,14 @@ H-ZEROCOST-ER = FAILED en la cohorte y piloto prospectivos S3-T10, sin borrar el
 - S3-T11 reutiliza resultados S3-T07 tras auditar equivalencia, pero T07 no congeló número de hilos CPU. Las curvas T10/T07 del anchor coinciden en accuracy y orden de minibatches; las pérdidas difieren levemente por aritmética. La shortlist sólo tiene tres brazos y todas sus medias de validation final son near-ties. No declarar predictor validado por correlaciones de tres puntos, ni ventaja global desde NLL, test accuracy o coste analítico aislados. El cálculo de ahorro incremental depende del trabajo histórico de 75 épocas del anchor.
 - A1-E01 reutiliza A0 S3-T07 con threads históricos no fijados frente a un thread en corridas nuevas. El contraste C1 mezcló régimen de grados y aristas concretas: +.027 pp de accuracy media pero −.007670 de NLL, por lo que es INCONCLUSIVE, no evidencia causal pura de balance. C2/C3/C4 NEGLIGIBLE sólo acotan las topologías y tres seeds probadas; no prueban equivalencia universal de G ni resuelven width. No se midieron RAM, latencia ni energía.
 - B1-E01 usa una tarea EASY con pasos de delay cero y último input idéntico para ambas clases. S0 tiene 50% por construcción, S1 alcanza 100% para todos los delays probados; ese techo impide inferir el horizonte límite. No se probó interferencia, otras tareas, LSTM/GRU, RAM pico, latencia de inferencia ni energía. Los 1281.48 s son duración acumulada de train+validation, no benchmark de inferencia.
+- B1-E02 añade sólo ruido IID interior de amplitud `.1`, incluso en canales 0/1, y conserva el 100% de accuracy S1; no identifica límite de memoria ni umbral de interferencia. La NLL sube frente a EASY en 12/12 parejas. No se probaron distractores estructurados, modelos recurrentes estándar, tareas naturales, RAM pico, latencia de inferencia ni energía. Los 1674.08 s son train+validation acumulados, no benchmark de inferencia.
 
 ## BLOCKERS
 Ninguno técnico.
 El proyecto debe mantenerse como prioridad lateral frente a Facultad, empleo y proyectos principales.
 
 ## NEXT TASK
-B1-E02 eventual: implementar el generador NOISE y los controles del preregistro `docs/B1_NOISE_DESIGN.md`, pasar gates de fuga/reset/gradiente y auditar presupuesto antes de cualquier entrenamiento. Requiere gate de ejecución propio; no iniciar B2/DSU-T ni reabrir Track A automáticamente.
+B2-DESIGN: preregistrar, en tarea separada y sin entrenamiento, un contraste entre escala temporal fija y escalas heterogéneas fijas con hipótesis que pueda revelar el tradeoff entre memoria corta y larga. Requiere gate propio; B1-E02 no autoriza implementar B2, DSU-T ni reabrir Track A.
 
 ## LAST UPDATE
 2026-10-13
