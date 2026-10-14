@@ -284,3 +284,57 @@ A1-E01 regeneró exactamente las topologías congeladas y completó nueve corrid
 ### Consequence
 
 Los datos sólo sostienen robustez relativa frente a las topologías ensayadas. No resuelven H-WIDTH-FANIN, no muestran que toda G sea equivalente y no justifican optimizar overlap para el baseline. Sprint 3 permanece CLOSED. El primer experimento de dinámica requerirá una tarea nueva con secuencias, reset, baseline y coste propios.
+
+---
+
+## ADR-018 — Preregistro del primer contraste temporal B1
+
+**Status:** ACCEPTED para diseño documental (2026-10-13); no autoriza entrenamiento.
+
+### Decision
+
+Preregistrar [B1-DESIGN / S4-T01](B1_POINTSPARSE_TEMPORAL_DESIGN.md): PointSparse-Static-Temporal frente a PointSparse-T v0 con el mismo grafo IID, 706 parámetros y pesos iniciales pareados, y un único estado EMA por unidad con λ global fijo `2^(−1/16)`. La tarea principal será delayed recall B1-EASY con señal inicial, delay cero y cue final independiente de la etiqueta. Endpoint primario Δ=16, otros delays 4/8/32 para curva de memoria. B1-E01 requiere gate propio, tests de fuga/reset y presupuesto antes de correr.
+
+### Reason
+
+El primer paso de Line B debe medir sólo si el estado aporta capacidad temporal, con λ y coste fijados antes de observar calidad. La mini arquitectura `D=32, H=64, K=8, C=2` conserva sparsity sin reutilizar el benchmark estático Fashion-MNIST ni cambiar el baseline histórico.
+
+### Consequence
+
+H-B1-STATE permanece UNTESTED. Se separan parámetros/payload de modelo, estado runtime, MAC analíticos y rendimiento físico. No se inicia DSU-T ni se promueve una conclusión de memoria útil hasta B1-E01.
+
+---
+
+## ADR-019 — Cierre acotado de B1-E01
+
+**Status:** ACCEPTED (2026-10-13).
+
+### Decision
+
+Clasificar H-B1-STATE como **SUPPORTED** sólo para `delayed_recall_easy_v1` bajo el criterio de Δ=16 preregistrado. Mantener PointSparse IID `128×64` como baseline histórico Fashion-MNIST; la mini arquitectura temporal `32→64→2` no lo reemplaza. No abrir B1-NOISE, B2 ni DSU-T mediante este cierre; cualquier contraste nuevo requiere preregistro y gate separados. [Informe B1-E01](EXPERIMENT_B1_E01_STATEFUL_POINTSPARSE.md).
+
+### Reason
+
+Veinticuatro corridas completas y pareadas dieron S0 50% y S1 100% de accuracy de test en las tres seeds de Δ=16, con ΔNLL favorable. Los controles de leakage/reset/gradiente y memoria analítica pasaron; el oracle no cumplió su gatillo. S1 tuvo accuracy en techo para todos los delays, por lo que la curva de accuracy no identifica un horizonte límite.
+
+### Consequence
+
+El estado EMA fijo mostró capacidad temporal mínima en EASY. No se infiere robustez a distractores ni ventaja de parámetros totales, RAM pico, latencia o energía; el estado añade 256 bytes por muestra y MAC por timestep. B1-NOISE queda como posible prueba de interferencia posterior, no como resultado de B1-E01.
+
+---
+
+## ADR-020 — Diseño de una sola condición de interferencia B1-NOISE
+
+**Status:** ACCEPTED para diseño documental (2026-10-13); H-B1-INTERFERENCE UNTESTED y entrenamiento pendiente de gate propio.
+
+### Decision
+
+Preregistrar [B1-NOISE-DESIGN](B1_NOISE_DESIGN.md): conservar PointSparse-T v0, λ global, arquitectura, seeds y protocolo de B1-E01, e intervenir sólo sobre los timesteps intermedios con ruido IID `Uniform(−0.1,0.1)` en canales no cue. Comparar S1 y S0 pareados en Δ=4/8/16/32, con Δ=16 primario. Tratar EASY histórico como referencia descriptiva auditable, no como selector del ruido.
+
+### Reason
+
+S1 tuvo accuracy en techo bajo delay cero de EASY. Una única condición de interferencia prueba si el estado retiene información cuando llegan nuevas entradas, antes de cambiar λ o añadir otros mecanismos.
+
+### Consequence
+
+No se infiere resistencia a ruido hasta B1-E02. El diseño no abre B2, DSU-T, búsqueda de amplitud ni entrenamientos automáticos. Un resultado en techo con `.1` sólo acotaría esa amplitud.

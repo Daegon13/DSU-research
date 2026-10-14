@@ -14,6 +14,22 @@ Estados permitidos:
 - FAILED (validación prospectiva de proxy)
 - WEAK (predictividad de piloto)
 
+## H-B1-INTERFERENCE — estado EMA frente a distractores
+
+**Status:** UNTESTED. **Preregistro:** [B1-NOISE-DESIGN](B1_NOISE_DESIGN.md) (2026-10-13).
+
+Con la unidad, λ y presupuesto de B1-E01, PointSparse-T v0 conserva ventaja sobre PointSparse estática cuando cada paso intermedio contiene ruido independiente del target de amplitud fija `.1`, incluso en canales de señal. El futuro B1-E02 tendrá endpoint Δ=16 y gates de fuga, reset y gradiente; no hay resultados de NOISE ni se ha ejecutado B1-E02.
+
+---
+
+## H-B1-STATE — estado temporal mínimo en PointSparse
+
+**Status:** SUPPORTED sólo en delayed recall EASY, B1-E01 (2026-10-13). **Preregistro:** [B1-DESIGN / S4-T01](B1_POINTSPARSE_TEMPORAL_DESIGN.md). **Resultado:** [B1-E01](EXPERIMENT_B1_E01_STATEFUL_POINTSPARSE.md).
+
+Con igual arquitectura sparse y número de parámetros entrenables, un estado temporal leaky permite retener información útil a través del tiempo que PointSparse estática no puede recuperar del timestep final. B1-E01 comparó S0/S1 en delayed recall binario con `D=32, H=64, K=8`, tres seeds pareadas y delays de 4/8/16/32 transiciones; λ fijo por vida media 16. En el endpoint Δ=16, S0 50.00 ± 0.00%, S1 100.00 ± 0.00%, delta pareado +50.00 ± 0.00 pp y ΔNLL −.692323 ± .000190. Cumple el criterio preregistrado. Todos los delays de EASY dieron accuracy en techo para S1; el horizonte límite, interferencia por ruido y eficiencia física siguen sin probarse.
+
+---
+
 ## H-A1-TOPOLOGY — organización del grafo sparse
 
 **Status:** NEGLIGIBLE dentro de A1-E01 para C2/C3/C4 con grados controlados; C1 = INCONCLUSIVE.
